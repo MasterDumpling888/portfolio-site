@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Technical skills of [Your Name] - Web Dev, AI/ML, Backend, DevOps"
+    />
+    <title>Skills - [Your Name]</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/components/navigation.css" />
+    <link rel="stylesheet" href="css/components/theme-switcher.css" />
+    <link rel="stylesheet" href="css/components/buttons.css" />
+    <link rel="stylesheet" href="css/components/skill-card.css" />
+    <link rel="stylesheet" href="css/pages/skills.css" />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body data-theme="dark">
+    <!-- Navigation -->
+    <nav id="main-navigation" class="navigation">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/images/logo.png" alt="Logo" class="logo-image" />
+        </a>
+
+        <button
+          class="mobile-menu-toggle"
+          id="mobile-menu-toggle"
+          aria-label="Toggle menu"
+        >
+          <i data-lucide="menu"></i>
+        </button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li>
+            <a href="index.html" class="nav-link">
+              <i data-lucide="home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="projects.html" class="nav-link">
+              <i data-lucide="folder"></i>
+              <span>Projects</span>
+            </a>
+          </li>
+          <li>
+            <a href="skills.html" class="nav-link active">
+              <i data-lucide="code-2"></i>
+              <span>Skills</span>
+            </a>
+          </li>
+          <li>
+            <a href="contact.html" class="nav-link">
+              <i data-lucide="mail"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle theme"
+        >
+          <i data-lucide="sun" class="theme-icon light"></i>
+          <i data-lucide="moon" class="theme-icon dark"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content skills-page">
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="header-container">
+          <h1 class="page-title animate-fade-in">
+            <span class="title-number">03.</span>
+            Technical Skills
+          </h1>
+          <p class="page-description">
+            Technologies and tools I work with across different domains
+          </p>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section class="skills-section">
+        <div class="section-container">
+          <!-- Web Development -->
+          <div class="skill-category-section">
+            <div class="category-header">
+              <div class="category-icon">
+                <i data-lucide="layout"></i>
+              </div>
+              <h2 class="category-title">Web Development</h2>
+            </div>
+            <div id="webdev-skills" class="skills-grid">
+              <!-- Dynamically loaded -->
+            </div>
+          </div>
+
+          <!-- AI/ML -->
+          <div class="skill-category-section">
+            <div class="category-header">
+              <div class="category-icon">
+                <i data-lucide="cpu"></i>
+              </div>
+              <h2 class="category-title">AI & Machine Learning</h2>
+            </div>
+            <div id="aiml-skills" class="skills-grid">
+              <!-- Dynamically loaded -->
+            </div>
+          </div>
+
+          <!-- Backend & Databases -->
+          <div class="skill-category-section">
+            <div class="category-header">
+              <div class="category-icon">
+                <i data-lucide="server"></i>
+              </div>
+              <h2 class="category-title">Backend & Databases</h2>
+            </div>
+            <div id="backend-skills" class="skills-grid">
+              <!-- Dynamically loaded -->
+            </div>
+          </div>
+
+          <!-- Tools & DevOps -->
+          <div class="skill-category-section">
+            <div class="category-header">
+              <div class="category-icon">
+                <i data-lucide="wrench"></i>
+              </div>
+              <h2 class="category-title">Tools & DevOps</h2>
+            </div>
+            <div id="tools-skills" class="skills-grid">
+              <!-- Dynamically loaded -->
+            </div>
+          </div>
+
+          <!-- Domain Expertise -->
+          <div class="skill-category-section">
+            <div class="category-header">
+              <div class="category-icon">
+                <i data-lucide="target"></i>
+              </div>
+              <h2 class="category-title">Domain Expertise</h2>
+            </div>
+            <div id="domain-skills" class="skills-grid">
+              <!-- Dynamically loaded -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="skills-cta">
+        <div class="cta-container">
+          <h2 class="cta-title">Interested in working together?</h2>
+          <p class="cta-description">
+            Let's discuss how these skills can bring value to your project
+          </p>
+          <div class="cta-buttons">
+            <a href="projects.html" class="btn btn-secondary">
+              <i data-lucide="folder"></i>
+              <span>View Projects</span>
+            </a>
+            <a href="contact.html" class="btn btn-primary">
+              <i data-lucide="mail"></i>
+              <span>Get In Touch</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <p class="footer-text">
+          Designed & Built by <span class="highlight">[Your Name]</span>
+        </p>
+        <p class="footer-subtext">© 2025 All rights reserved</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module" src="js/main.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,211 @@
+/* ========================================
+   Button Components
+   Reusable button styles with icons
+   ======================================== */
+
+/* Base Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: 1px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn i {
+  width: 18px;
+  height: 18px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 2px;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: linear-gradient(135deg,
+      var(--color-neon-blue),
+      var(--color-neon-magenta));
+  color: var(--color-text-primary);
+  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4),
+    0 0 30px rgba(255, 0, 128, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-light);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-hover);
+  border-color: var(--color-accent-1);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+/* Text Button */
+.btn-text {
+  background-color: transparent;
+  color: var(--color-accent-1);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.btn-text:hover {
+  background-color: var(--color-hover);
+}
+
+.btn-text i {
+  transition: transform var(--transition-base);
+}
+
+.btn-text:hover i {
+  transform: translateX(5px);
+}
+
+/* Icon Button */
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+.btn-icon i {
+  width: 20px;
+  height: 20px;
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+.btn-sm i {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-lg {
+  padding: var(--space-lg) var(--space-2xl);
+  font-size: var(--font-size-lg);
+}
+
+.btn-lg i {
+  width: 22px;
+  height: 22px;
+}
+
+/* Full Width */
+.btn.full-width {
+  width: 100%;
+}
+
+/* Button Group */
+.btn-group {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-base);
+}
+
+.social-link i {
+  width: 20px;
+  height: 20px;
+}
+
+.social-link:hover {
+  background-color: var(--color-hover);
+  border-color: var(--color-accent-1);
+  color: var(--color-accent-1);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--font-size-sm);
+  }
+
+  .btn-lg {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-base);
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+
+  .btn-group .btn {
+    width: 100%;
+  }
+}

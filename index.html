@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio of [Your Name] - Computer Science Student specializing in Web Development, AI/ML, FinTech, and MedTech"
+    />
+    <meta
+      name="keywords"
+      content="web development, AI, machine learning, fintech, medtech, portfolio"
+    />
+    <meta name="author" content="[Your Name]" />
+
+    <title>[Your Name] - Portfolio</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/components/navigation.css" />
+    <link rel="stylesheet" href="css/components/theme-switcher.css" />
+    <link rel="stylesheet" href="css/components/buttons.css" />
+    <link rel="stylesheet" href="css/pages/home.css" />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body data-theme="dark">
+    <!-- Navigation -->
+    <nav id="main-navigation" class="navigation">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <img src="assets/images/logo.png" alt="Logo" class="logo-image" />
+        </a>
+
+        <button
+          class="mobile-menu-toggle"
+          id="mobile-menu-toggle"
+          aria-label="Toggle menu"
+        >
+          <i data-lucide="menu"></i>
+        </button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li>
+            <a href="index.html" class="nav-link active">
+              <i data-lucide="home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="projects.html" class="nav-link">
+              <i data-lucide="folder"></i>
+              <span>Projects</span>
+            </a>
+          </li>
+          <li>
+            <a href="skills.html" class="nav-link">
+              <i data-lucide="code-2"></i>
+              <span>Skills</span>
+            </a>
+          </li>
+          <li>
+            <a href="contact.html" class="nav-link">
+              <i data-lucide="mail"></i>
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Toggle theme"
+        >
+          <i data-lucide="sun" class="theme-icon light"></i>
+          <i data-lucide="moon" class="theme-icon dark"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="hero-section" id="hero">
+        <div class="hero-container animate-fade-in">
+          <div class="hero-content">
+            <p class="hero-greeting">Hi, I'm</p>
+            <h1 class="hero-title">
+              <span class="name-text">[Your Name]</span>
+              <span class="cursor-blink">_</span>
+            </h1>
+            <h2 class="hero-subtitle">
+              <span class="typed-text">Computer Science Student</span>
+            </h2>
+            <p class="hero-description">
+              Crafting innovative solutions at the intersection of
+              <span class="highlight">Web Development</span>,
+              <span class="highlight">AI/ML</span>,
+              <span class="highlight">FinTech</span>, and
+              <span class="highlight">MedTech</span>
+            </p>
+
+            <div class="hero-cta">
+              <a href="projects.html" class="btn btn-primary">
+                <i data-lucide="folder"></i>
+                <span>View Projects</span>
+              </a>
+              <a
+                href="assets/resume/resume.pdf"
+                download
+                class="btn btn-secondary"
+              >
+                <i data-lucide="download"></i>
+                <span>Download Resume</span>
+              </a>
+            </div>
+
+            <div class="social-links">
+              <a
+                href="https://github.com/yourusername"
+                target="_blank"
+                rel="noopener"
+                class="social-link"
+                aria-label="GitHub"
+              >
+                <i data-lucide="github"></i>
+              </a>
+              <a
+                href="https://linkedin.com/in/yourusername"
+                target="_blank"
+                rel="noopener"
+                class="social-link"
+                aria-label="LinkedIn"
+              >
+                <i data-lucide="linkedin"></i>
+              </a>
+              <a
+                href="mailto:your.email@example.com"
+                class="social-link"
+                aria-label="Email"
+              >
+                <i data-lucide="mail"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="neon-box"></div>
+          </div>
+        </div>
+
+        <div class="scroll-indicator">
+          <i data-lucide="chevron-down"></i>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="about-section" id="about">
+        <div class="section-container">
+          <h2 class="section-title">
+            <span class="title-number">01.</span>
+            About Me
+          </h2>
+
+          <div class="about-content">
+            <div class="about-text">
+              <p>
+                I'm a Computer Science student with a passion for building
+                impactful technology. My journey spans across multiple domains,
+                from creating intuitive web applications to developing
+                AI-powered solutions that solve real-world problems.
+              </p>
+              <p>
+                With experience in <strong>medical technology</strong> and
+                <strong>financial systems</strong>, I bring a unique perspective
+                to software development, always considering the human impact
+                behind every line of code.
+              </p>
+              <p>
+                When I'm not coding, you'll find me exploring graphic design,
+                photography, and illustration — bringing a creative eye to
+                technical challenges.
+              </p>
+            </div>
+
+            <div class="about-skills-preview">
+              <h3>Quick Skills Overview</h3>
+              <div class="skills-grid">
+                <div class="skill-category">
+                  <i data-lucide="layout"></i>
+                  <span>Web Dev</span>
+                </div>
+                <div class="skill-category">
+                  <i data-lucide="cpu"></i>
+                  <span>AI/ML</span>
+                </div>
+                <div class="skill-category">
+                  <i data-lucide="trending-up"></i>
+                  <span>FinTech</span>
+                </div>
+                <div class="skill-category">
+                  <i data-lucide="heart-pulse"></i>
+                  <span>MedTech</span>
+                </div>
+              </div>
+              <a href="skills.html" class="btn btn-text">
+                <span>View All Skills</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Projects Preview -->
+      <section class="featured-projects" id="featured">
+        <div class="section-container">
+          <h2 class="section-title">
+            <span class="title-number">02.</span>
+            Featured Projects
+          </h2>
+
+          <div id="featured-projects-container" class="projects-preview-grid">
+            <!-- Projects will be dynamically loaded here -->
+          </div>
+
+          <div class="section-cta">
+            <a href="projects.html" class="btn btn-primary">
+              <span>View All Projects</span>
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <p class="footer-text">
+          Designed & Built by <span class="highlight">[Your Name]</span>
+        </p>
+        <p class="footer-subtext">© 2025 All rights reserved</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module" src="js/main.js"></script>
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

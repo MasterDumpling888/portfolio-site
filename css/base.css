@@ -1,0 +1,239 @@
+/* ========================================
+   Base Styles
+   Global typography and layout foundations
+   ======================================== */
+
+/* Body */
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  transition: background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+}
+
+h3 {
+  font-size: var(--font-size-3xl);
+}
+
+h4 {
+  font-size: var(--font-size-2xl);
+}
+
+h5 {
+  font-size: var(--font-size-xl);
+}
+
+h6 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-secondary);
+}
+
+strong,
+b {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 0.2em 0.4em;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  color: var(--color-neon-blue);
+}
+
+/* Links */
+a {
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-1);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Main Layout */
+.main-content {
+  min-height: calc(100vh - var(--nav-height) - var(--footer-height));
+  padding-top: var(--nav-height);
+}
+
+/* Container */
+.section-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--space-4xl) var(--container-padding);
+}
+
+/* Section Titles */
+.section-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.title-number {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-2xl);
+  color: var(--color-accent-1);
+  font-weight: var(--font-weight-normal);
+}
+
+/* Page Header */
+.page-header {
+  padding: var(--space-4xl) var(--container-padding);
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-title {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-extrabold);
+  margin-bottom: var(--space-lg);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.page-description {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Highlight Text */
+.highlight {
+  color: var(--color-accent-1);
+  position: relative;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+      var(--color-neon-blue),
+      var(--color-neon-magenta));
+  opacity: 0.5;
+}
+
+/* Footer */
+.site-footer {
+  height: var(--footer-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg-secondary);
+}
+
+.footer-container {
+  text-align: center;
+}
+
+.footer-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.footer-subtext {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Hidden utility */
+.hidden {
+  display: none !important;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .page-title {
+    font-size: var(--font-size-4xl);
+  }
+
+  .section-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .section-container {
+    padding: var(--space-3xl) var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .page-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .section-container {
+    padding: var(--space-2xl) var(--space-md);
+  }
+}

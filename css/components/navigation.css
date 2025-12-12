@@ -1,0 +1,200 @@
+/* ========================================
+   Navigation Component
+   Main site navigation with mobile menu
+   ======================================== */
+
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background-color: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+  z-index: var(--z-fixed);
+  transition: background-color var(--transition-base);
+}
+
+[data-theme="light"] .navigation {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Nav Container */
+.nav-container {
+  max-width: var(--container-max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  z-index: var(--z-fixed);
+}
+
+.logo-image {
+  height: 40px;
+  width: auto;
+  transition: transform var(--transition-base);
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
+}
+
+/* Nav Menu */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  margin: 0 auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.nav-link i {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-hover);
+}
+
+/* Active Link */
+.nav-link.active {
+  color: var(--color-accent-1);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 2px;
+  background: linear-gradient(90deg,
+      var(--color-neon-blue),
+      var(--color-neon-magenta));
+  border-radius: var(--radius-full);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none;
+  padding: var(--space-sm);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+  z-index: var(--z-fixed);
+}
+
+.mobile-menu-toggle:hover {
+  background-color: var(--color-hover);
+}
+
+.mobile-menu-toggle i {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===== Responsive - Mobile ===== */
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background-color: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform var(--transition-base),
+      opacity var(--transition-base),
+      visibility var(--transition-base);
+  }
+
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-menu li {
+    width: 100%;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: var(--space-md) var(--container-padding);
+    justify-content: flex-start;
+    border-radius: 0;
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+
+  .nav-link.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 50%;
+    background: linear-gradient(180deg,
+        var(--color-neon-blue),
+        var(--color-neon-magenta));
+  }
+}
+
+/* ===== Tablet Adjustments ===== */
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: var(--space-md);
+  }
+
+  .nav-link {
+    font-size: var(--font-size-xs);
+    padding: var(--space-xs) var(--space-sm);
+  }
+}
+
+/* ===== Scroll Effect ===== */
+.navigation.scrolled {
+  box-shadow: var(--shadow-lg);
+  background-color: rgba(10, 10, 10, 0.98);
+}
+
+[data-theme="light"] .navigation.scrolled {
+  background-color: rgba(255, 255, 255, 0.98);
+}

@@ -1,0 +1,83 @@
+/* ========================================
+   Theme Switcher Component
+   Dark/Light mode toggle button
+   ======================================== */
+
+.theme-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-hover);
+  border-color: var(--color-border-light);
+  transform: scale(1.05);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Theme Icons */
+.theme-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transition: all var(--transition-base);
+}
+
+/* Dark theme - show sun icon */
+[data-theme="dark"] .theme-icon.light {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .theme-icon.dark {
+  opacity: 0;
+  transform: rotate(180deg) scale(0);
+}
+
+/* Light theme - show moon icon */
+[data-theme="light"] .theme-icon.light {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0);
+}
+
+[data-theme="light"] .theme-icon.dark {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Glow effect on hover */
+.theme-toggle:hover .theme-icon {
+  filter: drop-shadow(0 0 8px var(--color-accent-1));
+}
+
+/* Focus state */
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 2px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .theme-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
