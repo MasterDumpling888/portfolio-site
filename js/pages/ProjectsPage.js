@@ -1,6 +1,6 @@
 /* ========================================
-   SkillsPage Controller
-   Manages skills page display
+   ProjectsPage Controller
+   Manages projects page with filtering
    ======================================== */
 
 import Page from '../core/Page.js';
@@ -8,9 +8,10 @@ import contentService from '../services/ContentService.js';
 import { log } from '../config.js';
 import domHelper from '../utils/DOMHelper.js';
 
-class SkillsPage extends Page {
+class ProjectsPage extends Page {
   constructor() {
-    super('skills');
+    super('projects');
+    this.currentFilter = 'all';
   }
 
   /**
@@ -22,35 +23,59 @@ class SkillsPage extends Page {
       await contentService.init();
     }
 
-    // Get all skills
-    this.state.skills = contentService.getSkills();
+    // Get all projects
+    this.state.projects = contentService.getProjects();
+    this.state.filteredProjects = this.state.projects;
 
-    log('SkillsPage data loaded:', this.state.skills.length, 'categories');
+    log('ProjectsPage data loaded:', this.state.projects.length, 'projects');
   }
 
   /**
    * Set up page components
    */
   setupComponents() {
-    this.renderSkills();
+    this.renderProjects();
+    this.setupFilterButtons();
   }
 
   /**
-   * Render all skills by category
+   * Render all projects
    */
-  renderSkills() {
-    const categories = this.state.skills;
+  renderProjects() {
+    const container = domHelper.$('#projects-container');
+    const emptyState = domHelper.$('#empty-state');
 
-    if (!categories || categories.length === 0) {
-      log('No skills data available');
+    if (!container) return;
+
+    const projects = this.state.filteredProjects;
+
+    if (!projects || projects.length === 0) {
+      container.innerHTML = '';
+      if (emptyState) {
+        emptyState.classList.remove('hidden');
+      }
       return;
     }
 
-    categories.forEach(category => {
-      this.renderSkillCategory(category);
+    // Hide empty state
+    if (emptyState) {
+      emptyState.classList.add('hidden');
+    }
+
+    // Clear container
+    container.innerHTML = '';
+
+    // Render each project
+    projects.forEach((project, index) => {
+      const projectCard = this.createProjectCard(project);
+
+      // Add stagger animation delay
+      projectCard.style.animationDelay = `${index * 0.1}s`;
+
+      container.appendChild(projectCard);
     });
 
-    log(`Rendered ${categories.length} skill categories`);
+    log(`Rendered ${projects.length} projects`);
 
     // Reinitialize Lucide icons
     if (window.lucide) {
@@ -59,89 +84,209 @@ class SkillsPage extends Page {
   }
 
   /**
-   * Render a single skill category
-   * @param {Object} category - Category data
+   * Create project card element
+   * @param {Object} project - Project data
+   * @returns {HTMLElement} Project card element
    */
-  renderSkillCategory(category) {
-    const containerId = `${category.id}-skills`;
-    const container = domHelper.$(`#${containerId}`);
-
-    if (!container) {
-      log(`Container not found: ${containerId}`);
-      return;
-    }
-
-    // Clear container
-    container.innerHTML = '';
-
-    // Render each skill in the category
-    if (category.skills && category.skills.length > 0) {
-      category.skills.forEach((skill, index) => {
-        const skillCard = this.createSkillCard(skill, index);
-        container.appendChild(skillCard);
-      });
-
-      log(`Rendered ${category.skills.length} skills in ${category.name}`);
-    }
-  }
-
-  /**
-   * Create skill card element
-   * @param {Object} skill - Skill data
-   * @param {number} index - Skill index for animation delay
-   * @returns {HTMLElement} Skill card element
-   */
-  createSkillCard(skill, index) {
+  createProjectCard(project) {
     const card = document.createElement('div');
-    card.className = 'skill-card scroll-reveal';
-    card.style.animationDelay = `${index * 0.05}s`;
+    card.className = 'project-card scroll-reveal';
+    card.setAttribute('data-project-id', project.id);
+    card.setAttribute('data-categories', project.categories.join(','));
 
-    // Skill icon
-    const icon = document.createElement('div');
-    icon.className = 'skill-icon';
-    icon.innerHTML = `<i data-lucide="${skill.icon || 'code'}"></i>`;
-    card.appendChild(icon);
+    // Create image section
+    const imageSection = this.createProjectImage(project);
 
-    // Skill name
-    const name = document.createElement('div');
-    name.className = 'skill-name';
-    name.textContent = skill.name;
-    card.appendChild(name);
+    // Create content section
+    const contentSection = this.createProjectContent(project);
 
-    // Skill level (optional)
-    if (skill.level) {
-      const level = document.createElement('div');
-      level.className = 'skill-level';
-      level.textContent = this.formatLevel(skill.level);
-      card.appendChild(level);
-    }
+    card.appendChild(imageSection);
+    card.appendChild(contentSection);
 
     return card;
   }
 
   /**
-   * Format skill level
-   * @param {string} level - Level identifier
-   * @returns {string} Formatted level
+   * Create project image section
+   * @param {Object} project - Project data
+   * @returns {HTMLElement} Image element
    */
-  formatLevel(level) {
-    const levelMap = {
-      'beginner': 'Beginner',
-      'intermediate': 'Intermediate',
-      'advanced': 'Advanced',
-      'expert': 'Expert'
-    };
+  createProjectImage(project) {
+    const imageDiv = document.createElement('div');
+    imageDiv.className = 'project-image';
 
-    return levelMap[level] || level;
+    if (project.image) {
+      const img = document.createElement('img');
+      img.src = project.image;
+      img.alt = project.title;
+      img.loading = 'lazy';
+
+      img.onerror = () => {
+        imageDiv.innerHTML = `
+          <div class="project-image-placeholder">
+            <i data-lucide="folder"></i>
+          </div>
+        `;
+        if (window.lucide) window.lucide.createIcons();
+      };
+
+      imageDiv.appendChild(img);
+    } else {
+      imageDiv.innerHTML = `
+        <div class="project-image-placeholder">
+          <i data-lucide="folder"></i>
+        </div>
+      `;
+    }
+
+    if (project.featured) {
+      const badge = document.createElement('div');
+      badge.className = 'featured-badge';
+      badge.textContent = 'Featured';
+      imageDiv.appendChild(badge);
+    }
+
+    return imageDiv;
   }
 
   /**
-   * Get level class for styling
-   * @param {string} level - Level identifier
-   * @returns {string} CSS class name
+   * Create project content section
+   * @param {Object} project - Project data
+   * @returns {HTMLElement} Content element
    */
-  getLevelClass(level) {
-    return `level-${level}`;
+  createProjectContent(project) {
+    const content = document.createElement('div');
+    content.className = 'project-content';
+
+    // Category tags
+    const categoryDiv = document.createElement('div');
+    categoryDiv.className = 'project-category';
+
+    const categoryNames = project.categories.map(cat => this.formatCategory(cat));
+    categoryDiv.textContent = categoryNames.join(' • ');
+    content.appendChild(categoryDiv);
+
+    // Title
+    const title = document.createElement('h3');
+    title.className = 'project-title';
+    title.textContent = project.title;
+    content.appendChild(title);
+
+    // Description
+    const description = document.createElement('p');
+    description.className = 'project-description';
+    description.textContent = project.description;
+    content.appendChild(description);
+
+    // Technologies
+    if (project.technologies && project.technologies.length > 0) {
+      const techDiv = document.createElement('div');
+      techDiv.className = 'project-tech';
+
+      project.technologies.forEach(tech => {
+        const tag = document.createElement('span');
+        tag.className = 'tech-tag';
+        tag.textContent = tech;
+        techDiv.appendChild(tag);
+      });
+
+      content.appendChild(techDiv);
+    }
+
+    // Links
+    if (project.links) {
+      const linksDiv = document.createElement('div');
+      linksDiv.className = 'project-links';
+
+      if (project.links.github) {
+        linksDiv.appendChild(this.createProjectLink('GitHub', project.links.github, 'github'));
+      }
+
+      if (project.links.demo) {
+        linksDiv.appendChild(this.createProjectLink('Live Demo', project.links.demo, 'external-link'));
+      }
+
+      content.appendChild(linksDiv);
+    }
+
+    return content;
+  }
+
+  /**
+   * Create project link
+   * @param {string} text - Link text
+   * @param {string} url - Link URL
+   * @param {string} icon - Icon name
+   * @returns {HTMLElement} Link element
+   */
+  createProjectLink(text, url, icon) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.className = 'project-link';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+
+    link.innerHTML = `
+      <i data-lucide="${icon}"></i>
+      <span>${text}</span>
+    `;
+
+    return link;
+  }
+
+  /**
+   * Format category name
+   * @param {string} category - Category ID
+   * @returns {string} Formatted category name
+   */
+  formatCategory(category) {
+    const categoryMap = {
+      'webdev': 'Web Dev',
+      'ai': 'AI/ML',
+      'fintech': 'FinTech',
+      'medtech': 'MedTech'
+    };
+
+    return categoryMap[category] || category;
+  }
+
+  /**
+   * Set up filter button event listeners
+   */
+  setupFilterButtons() {
+    const filterButtons = domHelper.$$('#filter-buttons .filter-btn');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const filter = button.getAttribute('data-filter');
+        this.filterProjects(filter);
+
+        // Update active state
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+      });
+    });
+  }
+
+  /**
+   * Filter projects by category
+   * @param {string} category - Category to filter by
+   */
+  filterProjects(category) {
+    this.currentFilter = category;
+
+    if (category === 'all') {
+      this.state.filteredProjects = this.state.projects;
+    } else {
+      this.state.filteredProjects = contentService.getProjectsByCategory(category);
+    }
+
+    log(`Filtered projects by ${category}:`, this.state.filteredProjects.length);
+
+    // Re-render projects
+    this.renderProjects();
   }
 
   /**
@@ -157,4 +302,4 @@ class SkillsPage extends Page {
   }
 }
 
-export default SkillsPage;
+export default ProjectsPage;

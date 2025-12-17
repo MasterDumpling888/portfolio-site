@@ -32,7 +32,11 @@ class App {
       this.updatePageMetadata(contentService);
 
       // Initialize global components
-      this.initGlobalComponents();
+      log('Initializing global components...');
+      await this.initNavigationComponent();
+      await this.initFooterComponent();
+      this.setupThemeToggle();
+      log('Global components initialization complete');
 
       // Set up global event listeners
       this.setupGlobalEvents();
@@ -90,70 +94,40 @@ class App {
   }
 
   /**
-   * Initialize global components (navigation, theme switcher)
+   * Initialize Navigation component
    */
-  initGlobalComponents() {
-    log('Initializing global components...');
+  async initNavigationComponent() {
+    try {
+      log('Loading Navigation component...');
+      const { default: Navigation } = await import('./components/Navigation.js');
 
-    // These will be implemented in the next phase
-    // For now, we'll set up basic functionality
+      const pageName = this.getPageNameFromPath(window.location.pathname);
+      const navigation = new Navigation(pageName);
+      navigation.init();
 
-    // Mobile menu toggle
-    this.setupMobileMenu();
-
-    // Theme switcher
-    this.setupThemeToggle();
-
-    // Scroll effects
-    this.setupScrollEffects();
+      this.registerComponent('navigation', navigation);
+      log('Navigation component initialized');
+    } catch (error) {
+      console.error('Failed to initialize Navigation:', error);
+    }
   }
 
   /**
-   * Set up mobile menu
+   * Initialize Footer component
    */
-  setupMobileMenu() {
-    const menuToggle = document.getElementById('mobile-menu-toggle');
-    const navMenu = document.getElementById('nav-menu');
+  async initFooterComponent() {
+    try {
+      log('Loading Footer component...');
+      const { default: Footer } = await import('./components/Footer.js');
 
-    if (!menuToggle || !navMenu) return;
+      const footer = new Footer();
+      await footer.init();
 
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      const isOpen = navMenu.classList.contains('active');
-
-      // Update icon
-      const icon = menuToggle.querySelector('i');
-      if (icon) {
-        icon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
-        if (window.lucide) {
-          window.lucide.createIcons();
-        }
-      }
-
-      log('Mobile menu toggled:', isOpen ? 'open' : 'closed');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('active');
-        const icon = menuToggle.querySelector('i');
-        if (icon) {
-          icon.setAttribute('data-lucide', 'menu');
-          if (window.lucide) {
-            window.lucide.createIcons();
-          }
-        }
-      }
-    });
-
-    // Close menu when nav link is clicked
-    const navLinks = navMenu.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
-    });
+      this.registerComponent('footer', footer);
+      log('Footer component initialized');
+    } catch (error) {
+      console.error('Failed to initialize Footer:', error);
+    }
   }
 
   /**
@@ -197,29 +171,6 @@ class App {
     }
 
     eventBus.emit('theme:changed', { theme });
-  }
-
-  /**
-   * Set up scroll effects
-   */
-  setupScrollEffects() {
-    const nav = document.querySelector('.navigation');
-    if (!nav) return;
-
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-
-      // Add scrolled class when scrolled down
-      if (currentScroll > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-
-      lastScroll = currentScroll;
-    });
   }
 
   /**

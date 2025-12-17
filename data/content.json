@@ -1,14 +1,14 @@
 {
   "site": {
-    "title": "Your Name - Portfolio",
+    "title": "Danica's Portfolio",
     "description": "Computer Science student specializing in Web Development, AI/ML, FinTech, and MedTech",
-    "author": "Your Name",
+    "author": "Danica",
     "email": "your.email@example.com",
     "location": "Makati City, Metro Manila, PH"
   },
   "hero": {
     "greeting": "Hi, I'm",
-    "name": "Your Name",
+    "name": "Danica",
     "title": "Computer Science Student",
     "subtitle": "Developer & Designer",
     "description": "Crafting innovative solutions at the intersection of Web Development, AI/ML, FinTech, and MedTech. Passionate about building technology that makes a difference."
