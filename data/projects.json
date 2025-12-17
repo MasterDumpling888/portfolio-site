@@ -1,0 +1,94 @@
+{
+  "projects": [
+    {
+      "id": "project-1",
+      "title": "AI-Powered Medical Diagnosis System",
+      "category": "medtech",
+      "categories": ["ai", "medtech"],
+      "description": "Developed a machine learning system for early disease detection using medical imaging. Achieved 92% accuracy on validation datasets while maintaining HIPAA compliance standards.",
+      "longDescription": "A comprehensive medical diagnosis platform utilizing deep learning models trained on medical imaging data. The system assists healthcare professionals in identifying potential health issues early, improving patient outcomes through timely intervention.",
+      "technologies": ["Python", "TensorFlow", "Keras", "React", "Node.js", "Docker"],
+      "image": "assets/images/projects/medical-ai.jpg",
+      "links": {
+        "github": "https://github.com/yourusername/medical-ai",
+        "demo": "https://medical-ai-demo.com",
+        "case_study": ""
+      },
+      "featured": true,
+      "date": "2024-11-15",
+      "status": "completed"
+    },
+    {
+      "id": "project-2",
+      "title": "Real-Time Financial Analytics Dashboard",
+      "category": "fintech",
+      "categories": ["webdev", "fintech", "ai"],
+      "description": "Built a full-stack analytics platform with real-time market data visualization, AI-powered insights, and portfolio tracking capabilities for retail investors.",
+      "longDescription": "A sophisticated financial dashboard that aggregates data from multiple sources, provides real-time analysis, and uses machine learning to identify market trends and investment opportunities.",
+      "technologies": ["Next.js", "TypeScript", "Firebase", "Python", "Scikit-learn", "Vercel"],
+      "image": "assets/images/projects/fintech-dashboard.jpg",
+      "links": {
+        "github": "https://github.com/yourusername/fintech-dashboard",
+        "demo": "https://fintech-dashboard-demo.com",
+        "case_study": ""
+      },
+      "featured": true,
+      "date": "2024-09-20",
+      "status": "completed"
+    },
+    {
+      "id": "project-3",
+      "title": "Smart Healthcare Appointment System",
+      "category": "medtech",
+      "categories": ["webdev", "medtech"],
+      "description": "Created an intuitive scheduling platform connecting patients with healthcare providers, featuring real-time availability, automated reminders, and telemedicine integration.",
+      "longDescription": "A comprehensive healthcare management system that streamlines the appointment booking process, reduces no-shows through intelligent reminders, and integrates video consultation capabilities.",
+      "technologies": ["React", "Node.js", "Firebase", "Twilio API", "Tailwind CSS", "Jest"],
+      "image": "assets/images/projects/healthcare-app.jpg",
+      "links": {
+        "github": "https://github.com/yourusername/healthcare-system",
+        "demo": "https://healthcare-demo.com",
+        "case_study": ""
+      },
+      "featured": false,
+      "date": "2024-07-10",
+      "status": "completed"
+    },
+    {
+      "id": "project-4",
+      "title": "Fraud Detection ML Pipeline",
+      "category": "fintech",
+      "categories": ["ai", "fintech"],
+      "description": "Implemented an anomaly detection system for identifying suspicious financial transactions using machine learning algorithms and real-time data processing.",
+      "longDescription": "An enterprise-grade fraud detection system that analyzes transaction patterns in real-time, flags suspicious activities, and continuously learns from new data to improve accuracy.",
+      "technologies": ["Python", "PyTorch", "Docker", "NoSQL", "Jupyter", "Cypress"],
+      "image": "assets/images/projects/fraud-detection.jpg",
+      "links": {
+        "github": "https://github.com/yourusername/fraud-detection",
+        "demo": "",
+        "case_study": ""
+      },
+      "featured": true,
+      "date": "2024-05-18",
+      "status": "completed"
+    },
+    {
+      "id": "project-5",
+      "title": "Interactive Data Visualization Platform",
+      "category": "webdev",
+      "categories": ["webdev", "ai"],
+      "description": "Developed a web-based platform for creating interactive data visualizations with real-time collaboration features and AI-assisted chart recommendations.",
+      "longDescription": "A powerful data visualization tool that helps users create compelling visual stories from complex datasets, with intelligent suggestions for the best chart types and layouts.",
+      "technologies": ["Vanilla JS", "TypeScript", "Next.js", "TensorFlow", "Vercel"],
+      "image": "assets/images/projects/data-viz.jpg",
+      "links": {
+        "github": "https://github.com/yourusername/data-viz-platform",
+        "demo": "https://dataviz-demo.com",
+        "case_study": ""
+      },
+      "featured": false,
+      "date": "2024-03-25",
+      "status": "completed"
+    }
+  ]
+}

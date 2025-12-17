@@ -1,89 +1,92 @@
 /* ========================================
    Configuration
-   Global configuration constants
+   Application-wide configuration constants
    ======================================== */
 
 export const CONFIG = {
-  // Site Information
-  site: {
-    name: '[Your Name]',
-    title: 'Portfolio',
-    description: 'Computer Science Student specializing in Web Development, AI/ML, FinTech, and MedTech',
-  },
-
-  // API Endpoints (if needed in future)
+  // API endpoints (if needed in future)
   api: {
-    baseUrl: '',
+    base: '',
   },
 
-  // Data Paths
+  // Data file paths
   data: {
     content: './data/content.json',
     projects: './data/projects.json',
     skills: './data/skills.json',
   },
 
-  // Theme Settings
+  // Theme configuration
   theme: {
     default: 'dark',
     storageKey: 'portfolio-theme',
+    attribute: 'data-theme',
   },
 
-  // Animation Settings
-  animations: {
-    scrollRevealThreshold: 0.15, // Percentage of element visible before reveal
-    scrollRevealDelay: 100, // Delay between multiple reveals (ms)
+  // Animation configuration
+  animation: {
+    scrollRevealThreshold: 0.15,
+    scrollRevealDelay: 100,
   },
 
-  // Project Filters
-  projectFilters: {
-    all: 'all',
-    webdev: 'webdev',
-    ai: 'ai',
-    fintech: 'fintech',
-    medtech: 'medtech',
-  },
-
-  // Skill Categories
-  skillCategories: {
-    webdev: 'Web Development',
-    aiml: 'AI & Machine Learning',
-    backend: 'Backend & Databases',
-    tools: 'Tools & DevOps',
-    domain: 'Domain Expertise',
-  },
-
-  // Featured Projects Limit (for home page)
-  featuredProjectsLimit: 3,
-
-  // Breakpoints (for reference in JS)
+  // Breakpoints (for JavaScript)
   breakpoints: {
-    sm: 640,
-    md: 768,
-    lg: 1024,
-    xl: 1280,
-    xxl: 1536,
+    mobile: 480,
+    tablet: 768,
+    desktop: 1024,
+    wide: 1280,
   },
 
-  // Social Links
-  social: {
-    github: 'https://github.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourusername',
-    twitter: 'https://twitter.com/yourusername',
-    email: 'your.email@example.com',
+  // Navigation
+  navigation: {
+    mobileBreakpoint: 768,
+  },
+
+  // Projects
+  projects: {
+    featuredCount: 3,
+    filters: ['all', 'webdev', 'ai', 'fintech', 'medtech'],
   },
 
   // Contact
   contact: {
     email: 'your.email@example.com',
-    availableForWork: true,
-    responseTime: '24-48 hours',
+    github: 'https://github.com/yourusername',
+    linkedin: 'https://linkedin.com/in/yourusername',
+    twitter: 'https://twitter.com/yourusername',
   },
 
-  // Assets
-  assets: {
-    logo: './assets/images/logo.png',
-    resume: './assets/resume/resume.pdf',
-    projectImagesPath: './assets/images/projects/',
-  },
+  // Debug mode
+  debug: true,
+
+  // Cache control (set to false during development to always fetch fresh data)
+  useCache: false,
 };
+
+// Helper function to get current breakpoint
+export function getCurrentBreakpoint() {
+  const width = window.innerWidth;
+  if (width < CONFIG.breakpoints.mobile) return 'mobile';
+  if (width < CONFIG.breakpoints.tablet) return 'tablet';
+  if (width < CONFIG.breakpoints.desktop) return 'desktop';
+  return 'wide';
+}
+
+// Helper function to check if mobile
+export function isMobile() {
+  return window.innerWidth < CONFIG.breakpoints.tablet;
+}
+
+// Log helper for debugging
+export function log(...args) {
+  if (CONFIG.debug) {
+    console.log('[Portfolio]', ...args);
+  }
+}
+
+// Error log helper
+export function logError(...args) {
+  if (CONFIG.debug) {
+    console.error('[Portfolio Error]', ...args);
+  }
+}
