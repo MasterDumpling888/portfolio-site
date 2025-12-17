@@ -1,0 +1,46 @@
+{
+  "site": {
+    "title": "Your Name - Portfolio",
+    "description": "Computer Science student specializing in Web Development, AI/ML, FinTech, and MedTech",
+    "author": "Your Name",
+    "email": "your.email@example.com",
+    "location": "Makati City, Metro Manila, PH"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Your Name",
+    "title": "Computer Science Student",
+    "subtitle": "Developer & Designer",
+    "description": "Crafting innovative solutions at the intersection of Web Development, AI/ML, FinTech, and MedTech. Passionate about building technology that makes a difference."
+  },
+  "about": {
+    "title": "About Me",
+    "paragraphs": [
+      "I'm a Computer Science student with a passion for building impactful technology. My journey spans across multiple domains, from creating intuitive web applications to developing AI-powered solutions that solve real-world problems.",
+      "With experience in medical technology and financial systems, I bring a unique perspective to software development, always considering the human impact behind every line of code.",
+      "When I'm not coding, you'll find me exploring graphic design, photography, and illustration — bringing a creative eye to technical challenges."
+    ]
+  },
+  "social": {
+    "github": {
+      "url": "https://github.com/yourusername",
+      "username": "@yourusername"
+    },
+    "linkedin": {
+      "url": "https://linkedin.com/in/yourusername",
+      "username": "@yourusername"
+    },
+    "email": {
+      "address": "your.email@example.com"
+    },
+    "twitter": {
+      "url": "https://twitter.com/yourusername",
+      "username": "@yourusername"
+    }
+  },
+  "contact": {
+    "availability": "Currently available for freelance work",
+    "responseTime": "Typical response time: 24-48 hours",
+    "cta": "Let's create something amazing together"
+  }
+}

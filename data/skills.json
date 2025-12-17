@@ -1,0 +1,229 @@
+{
+  "categories": [
+    {
+      "id": "webdev",
+      "name": "Web Development",
+      "icon": "layout",
+      "skills": [
+        {
+          "name": "Vanilla JavaScript",
+          "level": "advanced",
+          "icon": "code"
+        },
+        {
+          "name": "TypeScript",
+          "level": "advanced",
+          "icon": "file-code"
+        },
+        {
+          "name": "React",
+          "level": "intermediate",
+          "icon": "component"
+        },
+        {
+          "name": "Next.js",
+          "level": "advanced",
+          "icon": "zap"
+        },
+        {
+          "name": "HTML5",
+          "level": "advanced",
+          "icon": "file-text"
+        },
+        {
+          "name": "CSS3",
+          "level": "advanced",
+          "icon": "palette"
+        },
+        {
+          "name": "Tailwind CSS",
+          "level": "advanced",
+          "icon": "wind"
+        },
+        {
+          "name": "Responsive Design",
+          "level": "advanced",
+          "icon": "smartphone"
+        }
+      ]
+    },
+    {
+      "id": "aiml",
+      "name": "AI & Machine Learning",
+      "icon": "cpu",
+      "skills": [
+        {
+          "name": "Python",
+          "level": "advanced",
+          "icon": "terminal"
+        },
+        {
+          "name": "TensorFlow",
+          "level": "advanced",
+          "icon": "brain"
+        },
+        {
+          "name": "PyTorch",
+          "level": "advanced",
+          "icon": "flame"
+        },
+        {
+          "name": "Scikit-learn",
+          "level": "intermediate",
+          "icon": "trending-up"
+        },
+        {
+          "name": "Keras",
+          "level": "intermediate",
+          "icon": "layers"
+        },
+        {
+          "name": "Jupyter Notebook",
+          "level": "advanced",
+          "icon": "book-open"
+        },
+        {
+          "name": "Data Analysis",
+          "level": "advanced",
+          "icon": "bar-chart"
+        },
+        {
+          "name": "Neural Networks",
+          "level": "intermediate",
+          "icon": "network"
+        }
+      ]
+    },
+    {
+      "id": "backend",
+      "name": "Backend & Databases",
+      "icon": "server",
+      "skills": [
+        {
+          "name": "Node.js",
+          "level": "advanced",
+          "icon": "hexagon"
+        },
+        {
+          "name": "Firebase",
+          "level": "advanced",
+          "icon": "database"
+        },
+        {
+          "name": "NoSQL",
+          "level": "intermediate",
+          "icon": "hard-drive"
+        },
+        {
+          "name": "REST APIs",
+          "level": "advanced",
+          "icon": "share-2"
+        },
+        {
+          "name": "Authentication",
+          "level": "advanced",
+          "icon": "lock"
+        },
+        {
+          "name": "Server Architecture",
+          "level": "intermediate",
+          "icon": "box"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "name": "Tools & DevOps",
+      "icon": "wrench",
+      "skills": [
+        {
+          "name": "Git",
+          "level": "advanced",
+          "icon": "git-branch"
+        },
+        {
+          "name": "GitHub",
+          "level": "advanced",
+          "icon": "github"
+        },
+        {
+          "name": "Docker",
+          "level": "intermediate",
+          "icon": "package"
+        },
+        {
+          "name": "Vercel",
+          "level": "advanced",
+          "icon": "triangle"
+        },
+        {
+          "name": "Jest",
+          "level": "intermediate",
+          "icon": "check-circle"
+        },
+        {
+          "name": "Cypress",
+          "level": "intermediate",
+          "icon": "shield"
+        },
+        {
+          "name": "VS Code",
+          "level": "advanced",
+          "icon": "code-2"
+        },
+        {
+          "name": "Command Line",
+          "level": "advanced",
+          "icon": "terminal"
+        }
+      ]
+    },
+    {
+      "id": "domain",
+      "name": "Domain Expertise",
+      "icon": "target",
+      "skills": [
+        {
+          "name": "HIPAA Compliance",
+          "level": "intermediate",
+          "icon": "shield-check"
+        },
+        {
+          "name": "Medical Imaging",
+          "level": "intermediate",
+          "icon": "scan"
+        },
+        {
+          "name": "Financial Systems",
+          "level": "intermediate",
+          "icon": "dollar-sign"
+        },
+        {
+          "name": "AI Finance",
+          "level": "intermediate",
+          "icon": "trending-up"
+        },
+        {
+          "name": "Healthcare Tech",
+          "level": "intermediate",
+          "icon": "heart-pulse"
+        },
+        {
+          "name": "Data Privacy",
+          "level": "intermediate",
+          "icon": "eye-off"
+        },
+        {
+          "name": "Graphic Design",
+          "level": "advanced",
+          "icon": "pen-tool"
+        },
+        {
+          "name": "Photography",
+          "level": "advanced",
+          "icon": "camera"
+        }
+      ]
+    }
+  ]
+}
