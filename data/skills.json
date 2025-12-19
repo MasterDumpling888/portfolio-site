@@ -12,7 +12,7 @@
         },
         {
           "name": "TypeScript",
-          "level": "advanced",
+          "level": "intermediate",
           "icon": "file-code"
         },
         {
@@ -59,12 +59,12 @@
         },
         {
           "name": "TensorFlow",
-          "level": "advanced",
+          "level": "intermediate",
           "icon": "brain"
         },
         {
           "name": "PyTorch",
-          "level": "advanced",
+          "level": "intermediate",
           "icon": "flame"
         },
         {
@@ -116,12 +116,12 @@
         },
         {
           "name": "REST APIs",
-          "level": "advanced",
+          "level": "intermediate",
           "icon": "share-2"
         },
         {
           "name": "Authentication",
-          "level": "advanced",
+          "level": "intermediate",
           "icon": "lock"
         },
         {
@@ -170,11 +170,6 @@
           "name": "VS Code",
           "level": "advanced",
           "icon": "code-2"
-        },
-        {
-          "name": "Command Line",
-          "level": "advanced",
-          "icon": "terminal"
         }
       ]
     },
@@ -183,11 +178,6 @@
       "name": "Domain Expertise",
       "icon": "target",
       "skills": [
-        {
-          "name": "HIPAA Compliance",
-          "level": "intermediate",
-          "icon": "shield-check"
-        },
         {
           "name": "Medical Imaging",
           "level": "intermediate",
@@ -212,6 +202,11 @@
           "name": "Data Privacy",
           "level": "intermediate",
           "icon": "eye-off"
+        },
+        {
+          "name": "UI/UX Design",
+          "level": "advanced",
+          "icon": "paint-roller"
         },
         {
           "name": "Graphic Design",

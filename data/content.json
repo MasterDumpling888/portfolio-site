@@ -1,14 +1,14 @@
 {
   "site": {
-    "title": "Danica's Portfolio",
-    "description": "Computer Science student specializing in Web Development, AI/ML, FinTech, and MedTech",
-    "author": "Danica",
-    "email": "your.email@example.com",
-    "location": "Makati City, Metro Manila, PH"
+    "title": "Rachel's Portfolio",
+    "description": "Incoming Graduate - AI & Full-Stack Engineer",
+    "author": "Rachel",
+    "email": "drachel.lim@gmail.com",
+    "location": "Pasay City, Metro Manila, PH"
   },
   "hero": {
     "greeting": "Hi, I'm",
-    "name": "Danica",
+    "name": "Rachel",
     "title": "Computer Science Student",
     "subtitle": "Developer & Designer",
     "description": "Crafting innovative solutions at the intersection of Web Development, AI/ML, FinTech, and MedTech. Passionate about building technology that makes a difference."
@@ -23,19 +23,15 @@
   },
   "social": {
     "github": {
-      "url": "https://github.com/yourusername",
-      "username": "@yourusername"
+      "url": "https://github.com/MasterDumpling888",
+      "username": "@MasterDumpling"
     },
     "linkedin": {
-      "url": "https://linkedin.com/in/yourusername",
-      "username": "@yourusername"
+      "url": "www.linkedin.com/in/danica-rachel-lim-b37634231",
+      "username": "Danica Rachel Lim"
     },
     "email": {
-      "address": "your.email@example.com"
-    },
-    "twitter": {
-      "url": "https://twitter.com/yourusername",
-      "username": "@yourusername"
+      "address": "drachel.lim@gmail.com"
     }
   },
   "contact": {

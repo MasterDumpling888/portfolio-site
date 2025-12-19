@@ -211,7 +211,7 @@ class HomePage extends Page {
     const imageDiv = document.createElement('div');
     imageDiv.className = 'project-image';
 
-    // Check if image exists (you can add actual image checking logic)
+    // Check if image exists
     if (project.image) {
       const img = document.createElement('img');
       img.src = project.image;
