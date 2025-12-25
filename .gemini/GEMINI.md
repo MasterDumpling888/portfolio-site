@@ -1,13 +1,3 @@
-this project is for my portfolio website. currently i have create the basic structure and a very basic template of a working website. but i need to stylize and make it more "me". in this document below, i have outline the design specifications and requirements.
-
-GEMINI model specifications:
-
-- make to change things slowly, always checking in with the user to confirm the design
-- follow the code structure currently on the project
-- ensure that the design of the website strictily follows the design specifications of the user.
-- before making any design adjustments confirm with the user
-- if making big changes in the design, first show the user the "look" by temporarily changing one element and have the user confirm if your design interpretation is correct
-
 ## Goals:
 
 - primary
@@ -38,7 +28,6 @@ tech design:
   - have folder for js, css, assets, pages, etc
   - use json to store content data
     - page content automaticaly updatess base on json content
-  - we must strictly keep a modularized method
 
 ## Features
 
