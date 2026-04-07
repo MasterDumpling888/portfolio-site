@@ -1,6 +1,6 @@
 /* ========================================
    HomePage Controller
-   Manages home page logic and content
+   Manages cosmic intro, avatar selection, and parallax
    ======================================== */
 
 import Page from '../core/Page.js';
@@ -11,23 +11,21 @@ import domHelper from '../utils/DOMHelper.js';
 class HomePage extends Page {
   constructor() {
     super('home');
+    this.avatar = localStorage.getItem('portfolio-avatar') || null;
+    this.narratorStep = 0;
   }
 
   /**
    * Load page data
    */
   async loadData() {
-    // Ensure content service is initialized
     if (!contentService.isReady()) {
       await contentService.init();
     }
 
-    // Get content
-    this.state.hero = contentService.getHeroContent();
-    this.state.about = contentService.getAboutContent();
+    this.state.narrative = contentService.getContent()?.narrative || {};
     this.state.featuredProjects = contentService.getFeaturedProjects(3);
-    this.state.social = contentService.getSocialLinks();
-
+    
     log('HomePage data loaded');
   }
 
@@ -35,375 +33,215 @@ class HomePage extends Page {
    * Set up page components
    */
   setupComponents() {
-    // Update ALL dynamic content from JSON
-    this.updateHeroContent();
-    this.updateAboutContent();
-    this.updateSocialLinks();
-
-    // Render featured projects
-    this.renderFeaturedProjects();
-  }
-
-  /**
-   * Update hero content with data from JSON
-   */
-  updateHeroContent() {
-    const hero = this.state.hero;
-    if (!hero) return;
-
-    // Update greeting
-    const greetingEl = domHelper.$('.hero-greeting');
-    if (greetingEl && hero.greeting) {
-      greetingEl.textContent = hero.greeting;
-    }
-
-    // Update name
-    const nameEl = domHelper.$('.name-text');
-    if (nameEl && hero.name) {
-      nameEl.textContent = hero.name;
-    }
-
-    // Update subtitle/title
-    const subtitleEl = domHelper.$('.typed-text');
-    if (subtitleEl && hero.title) {
-      subtitleEl.textContent = hero.title;
-    }
-
-    // Update description
-    const descEl = domHelper.$('.hero-description');
-    if (descEl && hero.description) {
-      descEl.innerHTML = hero.description;
-    }
-
-    log('Hero content updated from JSON');
-  }
-
-  /**
-   * Update about section content
-   */
-  updateAboutContent() {
-    const about = this.state.about;
-    if (!about) return;
-
-    // Update about section title
-    const titleEl = domHelper.$('.about-section .section-title');
-    if (titleEl && about.title) {
-      const titleNumber = titleEl.querySelector('.title-number');
-      const numberText = titleNumber ? titleNumber.textContent : '01.';
-      titleEl.innerHTML = `<span class="title-number">${numberText}</span>${about.title}`;
-    }
-
-    // Update about paragraphs
-    const textContainer = domHelper.$('.about-text');
-    if (textContainer && about.paragraphs && about.paragraphs.length > 0) {
-      textContainer.innerHTML = '';
-
-      about.paragraphs.forEach(paragraph => {
-        const p = document.createElement('p');
-        p.textContent = paragraph;
-        textContainer.appendChild(p);
-      });
-
-      log('About content updated from JSON');
+    if (!this.avatar) {
+      this.startIntro();
+    } else {
+      this.startJourney();
     }
   }
 
   /**
-   * Update social links
+   * Start the narrator introduction sequence
    */
-  updateSocialLinks() {
-    const social = this.state.social;
-    if (!social) return;
-
-    // Update GitHub link
-    if (social.github && social.github.url) {
-      const githubLinks = domHelper.$$('a[href*="github.com"]');
-      githubLinks.forEach(link => {
-        link.href = social.github.url;
-      });
-    }
-
-    // Update LinkedIn link
-    if (social.linkedin && social.linkedin.url) {
-      const linkedinLinks = domHelper.$$('a[href*="linkedin.com"]');
-      linkedinLinks.forEach(link => {
-        link.href = social.linkedin.url;
-      });
-    }
-
-    // Update Email link
-    if (social.email && social.email.address) {
-      const emailLinks = domHelper.$$('a[href^="mailto"]');
-      emailLinks.forEach(link => {
-        link.href = `mailto:${social.email.address}`;
-      });
-    }
-
-    // Update Twitter link (if exists)
-    if (social.twitter && social.twitter.url) {
-      const twitterLinks = domHelper.$$('a[href*="twitter.com"]');
-      twitterLinks.forEach(link => {
-        link.href = social.twitter.url;
-      });
-    }
-
-    log('Social links updated from JSON');
-  }
-
-  /**
-   * Render featured projects
-   */
-  renderFeaturedProjects() {
-    const container = domHelper.$('#featured-projects-container');
+  startIntro() {
+    const container = domHelper.$('#narrator-container');
     if (!container) return;
 
-    const projects = this.state.featuredProjects;
-
-    if (!projects || projects.length === 0) {
-      container.innerHTML = `
-        <div class="empty-state">
-          <p>No featured projects available</p>
+    const introText = this.state.narrative.intro || [];
+    
+    container.innerHTML = `
+      <div class="narrator-sprite">
+        <div class="sprite-pulse">
+          <i data-lucide="auto-awesome" class="text-primary"></i>
         </div>
-      `;
-      return;
-    }
-
-    // Clear container
-    container.innerHTML = '';
-
-    // Render each project
-    projects.forEach(project => {
-      const projectCard = this.createProjectCard(project);
-      container.appendChild(projectCard);
-    });
-
-    log(`Rendered ${projects.length} featured projects`);
-  }
-
-  /**
-   * Create project card element
-   * @param {Object} project - Project data
-   * @returns {HTMLElement} Project card element
-   */
-  createProjectCard(project) {
-    const card = document.createElement('div');
-    card.className = 'project-card scroll-reveal';
-    card.setAttribute('data-project-id', project.id);
-
-    // Create image section
-    const imageSection = this.createProjectImage(project);
-
-    // Create content section
-    const contentSection = this.createProjectContent(project);
-
-    card.appendChild(imageSection);
-    card.appendChild(contentSection);
-
-    return card;
-  }
-
-  /**
-   * Create project image section
-   * @param {Object} project - Project data
-   * @returns {HTMLElement} Image element
-   */
-  createProjectImage(project) {
-    const imageDiv = document.createElement('div');
-    imageDiv.className = 'project-image';
-
-    // Check if image exists
-    if (project.image) {
-      const img = document.createElement('img');
-      img.src = project.image;
-      img.alt = project.title;
-      img.loading = 'lazy';
-
-      // Add error handler for missing images
-      img.onerror = () => {
-        imageDiv.innerHTML = `
-          <div class="project-image-placeholder">
-            <i data-lucide="folder"></i>
-          </div>
-        `;
-        if (window.lucide) window.lucide.createIcons();
-      };
-
-      imageDiv.appendChild(img);
-    } else {
-      imageDiv.innerHTML = `
-        <div class="project-image-placeholder">
-          <i data-lucide="folder"></i>
+      </div>
+      <div class="dialogue-box">
+        <div class="dialogue-tag">VOID_NARRATOR</div>
+        <p id="dialogue-text" class="dialogue-text"></p>
+        <div class="dialogue-next">
+          <i data-lucide="chevron-down"></i>
         </div>
-      `;
-    }
-
-    // Add featured badge if applicable
-    if (project.featured) {
-      const badge = document.createElement('div');
-      badge.className = 'featured-badge';
-      badge.textContent = 'Featured';
-      imageDiv.appendChild(badge);
-    }
-
-    return imageDiv;
-  }
-
-  /**
-   * Create project content section
-   * @param {Object} project - Project data
-   * @returns {HTMLElement} Content element
-   */
-  createProjectContent(project) {
-    const content = document.createElement('div');
-    content.className = 'project-content';
-
-    // Category
-    const category = document.createElement('div');
-    category.className = 'project-category';
-    category.textContent = this.formatCategory(project.category);
-    content.appendChild(category);
-
-    // Title
-    const title = document.createElement('h3');
-    title.className = 'project-title';
-    title.textContent = project.title;
-    content.appendChild(title);
-
-    // Description
-    const description = document.createElement('p');
-    description.className = 'project-description';
-    description.textContent = project.description;
-    content.appendChild(description);
-
-    // Technologies
-    if (project.technologies && project.technologies.length > 0) {
-      const techDiv = document.createElement('div');
-      techDiv.className = 'project-tech';
-
-      project.technologies.forEach(tech => {
-        const tag = document.createElement('span');
-        tag.className = 'tech-tag';
-        tag.textContent = tech;
-        techDiv.appendChild(tag);
-      });
-
-      content.appendChild(techDiv);
-    }
-
-    // Links
-    if (project.links) {
-      const linksDiv = document.createElement('div');
-      linksDiv.className = 'project-links';
-
-      if (project.links.github) {
-        linksDiv.appendChild(this.createProjectLink('GitHub', project.links.github, 'github'));
-      }
-
-      if (project.links.demo) {
-        linksDiv.appendChild(this.createProjectLink('Live Demo', project.links.demo, 'external-link'));
-      }
-
-      content.appendChild(linksDiv);
-    }
-
-    return content;
-  }
-
-  /**
-   * Create project link
-   * @param {string} text - Link text
-   * @param {string} url - Link URL
-   * @param {string} icon - Icon name
-   * @returns {HTMLElement} Link element
-   */
-  createProjectLink(text, url, icon) {
-    const link = document.createElement('a');
-    link.href = url;
-    link.className = 'project-link';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-
-    link.innerHTML = `
-      ${domHelper.getIconHTML(icon)}
-      <span>${text}</span>
+      </div>
     `;
 
-    return link;
+    if (window.lucide) window.lucide.createIcons();
+
+    this.typeWriter(introText[0], '#dialogue-text', () => {
+      container.addEventListener('click', () => this.nextNarratorStep(), { once: true });
+    });
   }
 
   /**
-   * Format category name
-   * @param {string} category - Category ID
-   * @returns {string} Formatted category name
+   * Handle narrator steps
    */
-  formatCategory(category) {
-    const categoryMap = {
-      'webdev': 'Web Development',
-      'ai': 'AI/ML',
-      'fintech': 'FinTech',
-      'medtech': 'MedTech'
-    };
+  nextNarratorStep() {
+    this.narratorStep++;
+    const introText = this.state.narrative.intro || [];
 
-    return categoryMap[category] || category;
-  }
-
-  /**
-   * Set up event listeners
-   */
-  setupEventListeners() {
-    // Smooth scroll to about section
-    const scrollIndicator = domHelper.$('.scroll-indicator');
-    if (scrollIndicator) {
-      scrollIndicator.addEventListener('click', () => {
-        const aboutSection = domHelper.$('#about');
-        if (aboutSection) {
-          aboutSection.scrollIntoView({ behavior: 'smooth' });
-        }
+    if (this.narratorStep < introText.length) {
+      this.typeWriter(introText[this.narratorStep], '#dialogue-text', () => {
+        domHelper.$('#narrator-container').addEventListener('click', () => this.nextNarratorStep(), { once: true });
       });
+    } else {
+      this.showAvatarSelection();
     }
-
-    // Setup parallax/tilt effect for hero visual
-    this.setupParallaxEffect();
   }
 
   /**
-   * Setup 3D parallax effect for hero visual
+   * Show avatar selection cards
    */
-  setupParallaxEffect() {
-    const heroSection = domHelper.$('.hero-section');
-    const container = domHelper.$('.duality-container');
+  showAvatarSelection() {
+    domHelper.hide('#narrator-container');
+    const selection = domHelper.$('#avatar-selection');
+    selection.classList.remove('hidden');
+
+    selection.innerHTML = `
+      <div class="avatar-card dino" data-avatar="dino">
+        <div class="avatar-sprite-container">
+          <div class="avatar-glow"></div>
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAqBea91XN1O0DpsH7EoAVHJRURn5YsBA00SeH3ynjuvRZTiKctlcxiGUihLMYhXavEZiDR3_wOkXa9uIvWTAUtdcAWDUwlLmi4-VU4xerAC45Rmg_fI4ERoBv0Sp4QnuSnzxcqlLaQSYOZ6gFnCIA1kUxxGVD0LmO1KDicxk2BGhsFtSL8T1rtOFxsAqS_DS-HLq6y8gApA-LesZXDu8GkhmKtqfnBrrpKNRs-7s41IH_mnBsWuJrO688UZZtirocbDfDa3aE-Gk" alt="Dino" class="avatar-img">
+        </div>
+        <h3 class="avatar-name">DINO_EXPLORER</h3>
+        <p class="avatar-desc">A robust data-scavenger. Specialized in logic and architecture.</p>
+        <div class="avatar-stats">
+          <span class="stat-badge">STR: 08</span>
+          <span class="stat-badge">INT: 05</span>
+          <span class="stat-badge">HP: 12</span>
+        </div>
+        <button class="select-btn">SELECT_UNIT</button>
+      </div>
+
+      <div class="avatar-card onigiri" data-avatar="onigiri">
+        <div class="avatar-sprite-container">
+          <div class="avatar-glow"></div>
+          <img src="assets/images/onigiri sprite.png" alt="Onigiri" class="avatar-img">
+        </div>
+        <h3 class="avatar-name">ONIGIRI_NODE</h3>
+        <p class="avatar-desc">A lightweight signal-relay. Optimized for swift communication and art.</p>
+        <div class="avatar-stats">
+          <span class="stat-badge">STR: 03</span>
+          <span class="stat-badge">INT: 10</span>
+          <span class="stat-badge">HP: 06</span>
+        </div>
+        <button class="select-btn">SELECT_UNIT</button>
+      </div>
+    `;
+
+    const cards = domHelper.$$('.avatar-card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const choice = card.getAttribute('data-avatar');
+        this.selectAvatar(choice);
+      });
+    });
+  }
+
+  /**
+   * Select avatar and start journey
+   */
+  selectAvatar(choice) {
+    this.avatar = choice;
+    localStorage.setItem('portfolio-avatar', choice);
     
-    if (!heroSection || !container) return;
+    // Jump to hyperspace animation
+    document.body.classList.add('hyperspace');
+    
+    setTimeout(() => {
+      domHelper.hide('#avatar-selection');
+      document.body.classList.remove('hyperspace');
+      this.startJourney();
+    }, 1000);
+  }
 
-    heroSection.addEventListener('mousemove', (e) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      
-      // Calculate rotation (max 15 degrees)
-      const xRot = ((clientY - innerHeight / 2) / innerHeight) * 15; // Rotate around X axis (up/down)
-      const yRot = ((clientX - innerWidth / 2) / innerWidth) * 15;   // Rotate around Y axis (left/right)
-      
-      // Apply transform
-      // Note: We invert xRot to make it feel natural (mouse up -> look up)
-      container.style.transform = `rotateX(${-xRot}deg) rotateY(${yRot}deg)`;
-    });
+  /**
+   * Initialize the parallax journey
+   */
+  startJourney() {
+    domHelper.show('#journey-content');
+    log('Journey started as:', this.avatar);
+    
+    // Update side stats with choice
+    const coordX = domHelper.$('#coord-x');
+    if (coordX) coordX.textContent = this.avatar === 'dino' ? 'D_01' : 'O_01';
 
-    // Reset on mouse leave
-    heroSection.addEventListener('mouseleave', () => {
-      container.style.transform = 'rotateX(0) rotateY(0)';
+    this.renderJourneySections();
+    this.setupParallax();
+  }
+
+  /**
+   * Render sections for the journey
+   */
+  renderJourneySections() {
+    const container = domHelper.$('#journey-content');
+    container.innerHTML = `
+      <section class="journey-hero">
+        <div class="character-vessel animate-float">
+          <img src="${this.avatar === 'dino' ? 'https://lh3.googleusercontent.com/aida-public/AB6AXuCAqBea91XN1O0DpsH7EoAVHJRURn5YsBA00SeH3ynjuvRZTiKctlcxiGUihLMYhXavEZiDR3_wOkXa9uIvWTAUtdcAWDUwlLmi4-VU4xerAC45Rmg_fI4ERoBv0Sp4QnuSnzxcqlLaQSYOZ6gFnCIA1kUxxGVD0LmO1KDicxk2BGhsFtSL8T1rtOFxsAqS_DS-HLq6y8gApA-LesZXDu8GkhmKtqfnBrrpKNRs-7s41IH_mnBsWuJrO688UZZtirocbDfDa3aE-Gk' : 'assets/images/onigiri sprite.png'}" class="journey-sprite">
+        </div>
+        <div class="hero-titles">
+          <h1 class="journey-title">RACHEL_LIM</h1>
+          <p class="journey-subtitle">CS_STUDENT // ART_ENTHUSIAST</p>
+        </div>
+      </section>
+
+      <section class="parallax-divider">
+        <div class="divider-line"></div>
+      </section>
+
+      <section class="about-journey container">
+        <h2 class="section-heading">LORE_ENTRY</h2>
+        <div class="about-text-grid">
+          ${contentService.getAboutContent().paragraphs.map(p => `<p class="narrative-p">${p}</p>`).join('')}
+        </div>
+      </section>
+    `;
+  }
+
+  /**
+   * Setup parallax effects
+   */
+  setupParallax() {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const sprite = domHelper.$('.character-vessel');
+      const stars = domHelper.$('.starfield');
+      
+      if (sprite) {
+        sprite.style.transform = `translateY(${scrolled * 0.1}px) rotate(${scrolled * 0.05}deg)`;
+      }
+      
+      if (stars) {
+        stars.style.backgroundPosition = `0 ${scrolled * 0.5}px`;
+      }
+
+      // Update coords
+      const coordY = domHelper.$('#coord-y');
+      if (coordY) coordY.textContent = Math.floor(scrolled);
     });
   }
 
   /**
-   * Called when page becomes active
+   * Helper: Typewriter effect
    */
+  typeWriter(text, selector, callback) {
+    const el = domHelper.$(selector);
+    if (!el) return;
+    
+    el.textContent = '';
+    let i = 0;
+    const interval = setInterval(() => {
+      el.textContent += text.charAt(i);
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        if (callback) callback();
+      }
+    }, 40);
+  }
+
   onActivate() {
     super.onActivate();
-
-    // Reinitialize Lucide icons after rendering
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
+    if (window.lucide) window.lucide.createIcons();
   }
 }
 

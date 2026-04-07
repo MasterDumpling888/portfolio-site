@@ -91,16 +91,16 @@
   0%,
   100% {
     text-shadow:
-      0 0 10px var(--color-neon-blue-glow),
-      0 0 20px var(--color-neon-blue-glow),
-      0 0 30px var(--color-neon-blue-glow);
+      0 0 10px var(--color-primary-glow),
+      0 0 20px var(--color-primary-glow),
+      0 0 30px var(--color-primary-glow);
   }
 
   50% {
     text-shadow:
-      0 0 20px var(--color-neon-blue-glow),
-      0 0 30px var(--color-neon-blue-glow),
-      0 0 40px var(--color-neon-blue-glow);
+      0 0 20px var(--color-primary-glow),
+      0 0 30px var(--color-primary-glow),
+      0 0 40px var(--color-primary-glow);
   }
 }
 
@@ -109,15 +109,15 @@
   0%,
   100% {
     box-shadow:
-      0 0 10px var(--color-neon-blue-glow),
-      0 0 20px var(--color-neon-blue-glow);
+      0 0 10px var(--color-primary-glow),
+      0 0 20px var(--color-primary-glow);
   }
 
   50% {
     box-shadow:
-      0 0 20px var(--color-neon-blue-glow),
-      0 0 30px var(--color-neon-blue-glow),
-      0 0 40px var(--color-neon-blue-glow);
+      0 0 20px var(--color-primary-glow),
+      0 0 30px var(--color-primary-glow),
+      0 0 40px var(--color-primary-glow);
   }
 }
 
@@ -318,7 +318,7 @@
 }
 
 .hover-glow:hover {
-  box-shadow: var(--shadow-neon-blue);
+  box-shadow: var(--shadow-glow-primary);
 }
 
 /* ===== Loading Animation ===== */
@@ -332,7 +332,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid var(--color-border);
-  border-top-color: var(--color-accent-1);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -354,9 +354,9 @@
 
 .animate-gradient {
   background: linear-gradient(-45deg,
-      var(--color-neon-blue),
-      var(--color-neon-magenta),
-      var(--color-accent-3));
+      var(--color-primary),
+      var(--color-secondary),
+      var(--color-tertiary));
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
 }

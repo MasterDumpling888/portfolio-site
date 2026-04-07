@@ -1,163 +1,152 @@
 /* ========================================
-   Skills Page Styles - RPG Stats Menu
+   Skills Page Styles
+   Character Stats Screen
    ======================================== */
 
 .skills-page {
-  background-color: var(--color-bg-primary);
-  background-image:
-    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
+  padding-top: var(--spacing-xxl);
+  min-height: 100vh;
 }
 
-/* Page Header Override */
-.skills-page .page-header {
-  position: relative;
+.stats-screen {
+  padding: var(--spacing-xl) var(--spacing-lg);
 }
 
-.skills-page .page-header::after {
-  content: 'STATUS_MENU';
-  position: absolute;
-  right: var(--container-padding);
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--font-mono);
-  color: var(--color-text-tertiary);
-  opacity: 0.2;
-  font-size: var(--font-size-4xl);
-  pointer-events: none;
+.stats-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--spacing-xl);
+  align-items: start;
 }
 
-/* Skills Section */
-.skills-section {
-  min-height: 60vh;
-  padding: var(--space-xl) var(--container-padding);
+@media (max-width: 992px) {
+  .stats-layout { grid-template-columns: 1fr; }
 }
 
-.section-container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3xl);
+/* --- Character Preview --- */
+.character-preview {
+  position: sticky;
+  top: 120px;
 }
 
-/* Category Groups */
-.skill-category-group {
-  background: rgba(17, 17, 17, 0.8);
+.preview-box {
+  background: rgba(22, 26, 33, 0.4);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  position: relative;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
   backdrop-filter: blur(10px);
 }
 
-.skill-category-group::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 20px;
-  right: 20px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-accent-1), transparent);
-}
-
-.skill-category-title {
-  font-family: var(--font-display);
-  font-size: var(--font-size-xl);
-  color: var(--color-text-primary);
-  margin-bottom: var(--space-xl);
+.active-character-sprite {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto var(--spacing-lg);
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  justify-content: center;
+  filter: drop-shadow(0 0 15px var(--color-primary-glow));
 }
 
-.skill-category-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--color-border);
+.active-character-sprite img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: float 4s ease-in-out infinite;
 }
 
-/* Skill Cards Grid Override */
-.skills-grid {
+.character-name {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.05em;
+}
+
+.character-class {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.2em;
+}
+
+/* --- Skill Modules --- */
+.modules-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.skill-category-block {
+  margin-bottom: var(--spacing-xl);
+}
+
+.category-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--color-primary-dim);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.category-label i { width: 14px; height: 14px; }
+
+.skills-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: var(--space-lg);
+  gap: var(--spacing-md);
 }
 
-/* Call to Action Section */
-.skills-cta {
-  padding: var(--space-4xl) var(--container-padding);
-  background-color: var(--color-bg-secondary);
-  border-top: 1px solid var(--color-border);
-  text-align: center;
-  position: relative;
+.skill-module {
+  background: rgba(34, 38, 47, 0.4);
+  border-left: 2px solid var(--color-primary-dim);
+  padding: var(--spacing-md);
+  transition: var(--transition-base);
+}
+
+.skill-module:hover {
+  background: rgba(143, 245, 255, 0.05);
+  transform: translateX(5px);
+}
+
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.module-name {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.module-level {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--color-primary);
+}
+
+.module-bar-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
   overflow: hidden;
 }
 
-.skills-cta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg,
-      var(--color-tech-primary),
-      var(--color-art-primary));
+.module-bar {
+  height: 100%;
+  background: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary-glow);
+  transition: width 1s ease-out;
 }
 
-.cta-container {
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-xl);
-  position: relative;
-  z-index: 1;
-}
-
-.cta-title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-}
-
-.cta-description {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-relaxed);
-}
-
-.cta-buttons {
-  display: flex;
-  gap: var(--space-md);
-  margin-top: var(--space-md);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .skills-page .page-header::after {
-    display: none;
-  }
-
-  .skills-cta {
-    padding: var(--space-3xl) var(--space-lg);
-  }
-
-  .cta-title {
-    font-size: var(--font-size-2xl);
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .cta-buttons .btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
+/* Level Widths */
+.level-beginner { width: 33%; }
+.level-intermediate { width: 66%; }
+.level-advanced { width: 90%; }
+.level-expert { width: 100%; }

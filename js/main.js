@@ -5,6 +5,7 @@
 
 import { CONFIG, log } from './config.js';
 import eventBus from './core/EventBus.js';
+import themeManager from './services/ThemeManager.js';
 
 class App {
   constructor() {
@@ -24,6 +25,9 @@ class App {
     log('Initializing application...');
 
     try {
+      // Initialize theme early
+      themeManager.init();
+
       // Initialize content service first
       const contentService = (await import('./services/ContentService.js')).default;
       await contentService.init();
@@ -35,7 +39,6 @@ class App {
       log('Initializing global components...');
       await this.initNavigationComponent();
       await this.initFooterComponent();
-      this.setupThemeToggle();
       log('Global components initialization complete');
 
       // Set up global event listeners
@@ -43,9 +46,6 @@ class App {
 
       // Initialize Lucide icons
       this.initIcons();
-
-      // Set initial theme
-      this.initTheme();
 
       // Initialize current page
       await this.initCurrentPage();
@@ -128,49 +128,6 @@ class App {
     } catch (error) {
       console.error('Failed to initialize Footer:', error);
     }
-  }
-
-  /**
-   * Set up theme toggle
-   */
-  setupThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle) return;
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.body.getAttribute('data-theme') || 'dark';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-      this.setTheme(newTheme);
-      log('Theme toggled to:', newTheme);
-    });
-  }
-
-  /**
-   * Initialize theme
-   */
-  initTheme() {
-    // Try to load saved theme from localStorage
-    const savedTheme = localStorage.getItem(CONFIG.theme.storageKey);
-    const theme = savedTheme || CONFIG.theme.default;
-
-    this.setTheme(theme, false);
-    log('Theme initialized:', theme);
-  }
-
-  /**
-   * Set theme
-   * @param {string} theme - Theme name ('dark' or 'light')
-   * @param {boolean} save - Whether to save to localStorage
-   */
-  setTheme(theme, save = true) {
-    document.body.setAttribute(CONFIG.theme.attribute, theme);
-
-    if (save) {
-      localStorage.setItem(CONFIG.theme.storageKey, theme);
-    }
-
-    eventBus.emit('theme:changed', { theme });
   }
 
   /**

@@ -1,6 +1,6 @@
 /* ========================================
    SkillsPage Controller
-   Manages skills page display
+   Manages character stats and skill modules
    ======================================== */
 
 import Page from '../core/Page.js';
@@ -11,149 +11,125 @@ import domHelper from '../utils/DOMHelper.js';
 class SkillsPage extends Page {
   constructor() {
     super('skills');
+    this.avatar = localStorage.getItem('portfolio-avatar') || 'dino';
   }
 
   /**
    * Load page data
    */
   async loadData() {
-    // Ensure content service is initialized
     if (!contentService.isReady()) {
       await contentService.init();
     }
 
-    // Get all skills
     this.state.skills = contentService.getSkills();
-
-    log('SkillsPage data loaded:', this.state.skills.length, 'categories');
+    log('Skills data loaded');
   }
 
   /**
    * Set up page components
    */
   setupComponents() {
-    this.renderSkills();
+    this.renderCharacterPreview();
+    this.renderSkillModules();
   }
 
   /**
-   * Render all skills by category
+   * Render the chosen character preview
    */
-  renderSkills() {
-    const categories = this.state.skills;
+  renderCharacterPreview() {
+    const container = domHelper.$('#active-character');
+    const nameEl = domHelper.$('#character-name');
+    const classEl = domHelper.$('#character-class');
 
-    if (!categories || categories.length === 0) {
-      log('No skills data available');
-      return;
-    }
+    if (!container || !nameEl || !classEl) return;
 
-    categories.forEach(category => {
-      this.renderSkillCategory(category);
-    });
-
-    log(`Rendered ${categories.length} skill categories`);
-
-    // Reinitialize Lucide icons
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
-  }
-
-  /**
-   * Render a single skill category
-   * @param {Object} category - Category data
-   */
-  renderSkillCategory(category) {
-    const containerId = `${category.id}-skills`;
-    const container = domHelper.$(`#${containerId}`);
-
-    if (!container) {
-      log(`Container not found: ${containerId}`);
-      return;
-    }
-
-    // Clear container
-    container.innerHTML = '';
-
-    // Render each skill in the category
-    if (category.skills && category.skills.length > 0) {
-      category.skills.forEach((skill, index) => {
-        const skillCard = this.createSkillCard(skill, index);
-        container.appendChild(skillCard);
-      });
-
-      log(`Rendered ${category.skills.length} skills in ${category.name}`);
-    }
-  }
-
-  /**
-   * Create skill card element
-   * @param {Object} skill - Skill data
-   * @param {number} index - Skill index for animation delay
-   * @returns {HTMLElement} Skill card element
-   */
-  createSkillCard(skill, index) {
-    const card = document.createElement('div');
-    card.className = 'skill-card scroll-reveal';
-    card.style.animationDelay = `${index * 0.05}s`;
-
-    // Skill icon
-    const icon = document.createElement('div');
-    icon.className = 'skill-icon';
-    icon.innerHTML = domHelper.getIconHTML(skill.icon || 'code');
-    card.appendChild(icon);
-
-    // Skill name
-    const name = document.createElement('div');
-    name.className = 'skill-name';
-    name.textContent = skill.name;
-    card.appendChild(name);
-
-    // Skill level (optional)
-    if (skill.level) {
-      const level = document.createElement('div');
-      level.className = 'skill-level';
-      level.textContent = this.formatLevel(skill.level);
-      card.appendChild(level);
-    }
-
-    return card;
-  }
-
-  /**
-   * Format skill level
-   * @param {string} level - Level identifier
-   * @returns {string} Formatted level
-   */
-  formatLevel(level) {
-    const levelMap = {
-      'beginner': 'Beginner',
-      'intermediate': 'Intermediate',
-      'advanced': 'Advanced',
-      'expert': 'Expert'
+    const characterData = {
+      dino: {
+        name: 'DINO_EXPLORER',
+        class: 'DATA_SCAVENGER_V1',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCAqBea91XN1O0DpsH7EoAVHJRURn5YsBA00SeH3ynjuvRZTiKctlcxiGUihLMYhXavEZiDR3_wOkXa9uIvWTAUtdcAWDUwlLmi4-VU4xerAC45Rmg_fI4ERoBv0Sp4QnuSnzxcqlLaQSYOZ6gFnCIA1kUxxGVD0LmO1KDicxk2BGhsFtSL8T1rtOFxsAqS_DS-HLq6y8gApA-LesZXDu8GkhmKtqfnBrrpKNRs-7s41IH_mnBsWuJrO688UZZtirocbDfDa3aE-Gk'
+      },
+      onigiri: {
+        name: 'ONIGIRI_NODE',
+        class: 'SIGNAL_RELAY_V2',
+        img: 'assets/images/onigiri sprite.png'
+      }
     };
 
-    return levelMap[level] || level;
+    const active = characterData[this.avatar] || characterData.dino;
+
+    container.innerHTML = `<img src="${active.img}" alt="${active.name}">`;
+    nameEl.textContent = active.name;
+    classEl.textContent = active.class;
+    
+    // Apply theme color
+    if (this.avatar === 'onigiri') {
+      nameEl.style.color = 'var(--color-secondary)';
+      container.style.filter = 'drop-shadow(0 0 15px var(--color-secondary-glow))';
+    }
   }
 
   /**
-   * Get level class for styling
-   * @param {string} level - Level identifier
-   * @returns {string} CSS class name
+   * Render skill categories as modules
    */
-  getLevelClass(level) {
-    return `level-${level}`;
+  renderSkillModules() {
+    const container = domHelper.$('#skills-container');
+    if (!container) return;
+
+    const categories = this.state.skills;
+    container.innerHTML = '';
+
+    categories.forEach(category => {
+      const categoryBlock = document.createElement('div');
+      categoryBlock.className = 'skill-category-block';
+      
+      categoryBlock.innerHTML = `
+        <div class="category-label">
+          ${domHelper.getIconHTML(category.icon || 'box')}
+          <span>${category.name.toUpperCase().replace(/ /g, '_')}</span>
+        </div>
+        <div class="skills-list">
+          ${category.skills.map(skill => `
+            <div class="skill-module scroll-reveal">
+              <div class="module-header">
+                <span class="module-name">${skill.name}</span>
+                <span class="module-level">${this.formatLevel(skill.level)}</span>
+              </div>
+              <div class="module-bar-container">
+                <div class="module-bar level-${skill.level.toLowerCase()}" style="width: 0;"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      container.appendChild(categoryBlock);
+    });
+
+    // Animate bars after a short delay
+    setTimeout(() => {
+      const bars = domHelper.$$('.module-bar');
+      bars.forEach(bar => {
+        const levelClass = Array.from(bar.classList).find(c => c.startsWith('level-'));
+        if (levelClass) {
+          // Width is handled by CSS, we just need to trigger the change if it wasn't automatic
+          // Actually, our CSS has the widths, so we just ensure they're visible
+        }
+      });
+    }, 100);
+
+    if (window.lucide) window.lucide.createIcons();
+    this.setupScrollAnimations();
   }
 
-  /**
-   * Called when page becomes active
-   */
+  formatLevel(level) {
+    return level.toUpperCase();
+  }
+
   onActivate() {
     super.onActivate();
-
-    // Reinitialize Lucide icons
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
+    log('Skills page activated');
   }
 }
 

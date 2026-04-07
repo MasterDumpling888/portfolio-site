@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Projects by [Your Name] - Web Development, AI/ML, FinTech, and MedTech projects"
+      content="Project Logs - Exploration of the Digital Nebula"
     />
-    <title>Projects - [Your Name]</title>
+    <title>Rachel's Quest - Explore Void</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/variables.css" />
@@ -24,133 +24,84 @@
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body data-theme="dark">
-    <!-- Navigation -->
-    <nav id="main-navigation" class="navigation">
-      <div class="nav-container">
-        <a href="index.html" class="nav-logo">
-          <img src="assets/images/logo.png" alt="Logo" class="logo-image" />
-        </a>
+    <!-- Global Effects -->
+    <div class="starfield"></div>
+    <div class="scanline"></div>
 
-        <button
-          class="mobile-menu-toggle"
-          id="mobile-menu-toggle"
-          aria-label="Toggle menu"
-        >
-          <i data-lucide="menu"></i>
-        </button>
+    <!-- Cosmic Terminal Header -->
+    <header class="fixed-header">
+      <div class="header-container">
+        <div class="terminal-logo">
+          <i data-lucide="terminal" class="text-primary"></i>
+          <h1 class="terminal-title">COSMIC_TERMINAL_V1.0</h1>
+        </div>
+        
+        <nav class="desktop-nav">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="index.html" class="nav-link">SYSTEM_BOOT</a></li>
+            <li><a href="projects.html" class="nav-link active">EXPLORE_VOID</a></li>
+            <li><a href="skills.html" class="nav-link">SKILL_LOG</a></li>
+            <li><a href="contact.html" class="nav-link">SIGNAL_LOG</a></li>
+          </ul>
+        </nav>
 
-        <ul class="nav-menu" id="nav-menu">
-          <li>
-            <a href="index.html" class="nav-link">
-              <i data-lucide="home"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li>
-            <a href="projects.html" class="nav-link active">
-              <i data-lucide="folder"></i>
-              <span>Projects</span>
-            </a>
-          </li>
-          <li>
-            <a href="skills.html" class="nav-link">
-              <i data-lucide="code-2"></i>
-              <span>Skills</span>
-            </a>
-          </li>
-          <li>
-            <a href="contact.html" class="nav-link">
-              <i data-lucide="mail"></i>
-              <span>Contact</span>
-            </a>
-          </li>
-        </ul>
-
-        <button
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Toggle theme"
-        >
-          <i data-lucide="sun" class="theme-icon light"></i>
-          <i data-lucide="moon" class="theme-icon dark"></i>
-        </button>
+        <div class="header-actions">
+          <button id="theme-toggle" class="icon-btn"><i data-lucide="settings-2"></i></button>
+          <button id="mobile-menu-toggle" class="icon-btn mobile-only"><i data-lucide="menu"></i></button>
+        </div>
       </div>
-    </nav>
+    </header>
 
     <!-- Main Content -->
     <main id="main-content" class="main-content projects-page">
-      <!-- Page Header -->
-      <section class="page-header">
-        <div class="header-container">
-          <h1 class="page-title animate-fade-in">
-            <span class="title-number">02.</span>
-            Projects
-          </h1>
-          <p class="page-description">
-            A collection of projects spanning Web Development, AI/ML, FinTech,
-            and MedTech
-          </p>
-        </div>
-      </section>
-
       <!-- Filter Section -->
-      <section class="projects-filter">
+      <section class="projects-filter container">
+        <div class="filter-header">
+          <h2 class="section-heading">DATA_QUERY_FILTERS</h2>
+        </div>
         <div class="filter-container">
           <div class="filter-buttons" id="filter-buttons">
             <button class="filter-btn active" data-filter="all">
-              <i data-lucide="grid-3x3"></i>
-              <span>All Projects</span>
+              <span>ALL_DATA</span>
             </button>
             <button class="filter-btn" data-filter="webdev">
-              <i data-lucide="layout"></i>
-              <span>Web Dev</span>
+              <span>WEB_NODES</span>
             </button>
             <button class="filter-btn" data-filter="ai">
-              <i data-lucide="cpu"></i>
-              <span>AI/ML</span>
+              <span>AI_CORES</span>
             </button>
             <button class="filter-btn" data-filter="fintech">
-              <i data-lucide="trending-up"></i>
-              <span>FinTech</span>
+              <span>FIN_LOGIC</span>
             </button>
             <button class="filter-btn" data-filter="medtech">
-              <i data-lucide="heart-pulse"></i>
-              <span>MedTech</span>
+              <span>MED_SIGNALS</span>
             </button>
           </div>
         </div>
       </section>
 
       <!-- Projects Grid -->
-      <section class="projects-section">
-        <div class="section-container">
-          <div id="projects-container" class="projects-grid">
-            <!-- Projects will be dynamically loaded here -->
-          </div>
+      <section class="projects-section container">
+        <div id="projects-container" class="projects-grid">
+          <!-- Projects will be dynamically loaded here -->
+        </div>
 
-          <!-- Empty State -->
-          <div id="empty-state" class="empty-state hidden">
-            <i data-lucide="folder-x"></i>
-            <p>No projects found for this filter</p>
-          </div>
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state hidden">
+          <p>ERROR: NO_DATA_MATCHES_QUERY</p>
         </div>
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-container">
-        <p class="footer-text">
-          Designed & Built by <span class="highlight">[Your Name]</span>
-        </p>
-        <p class="footer-subtext">© 2025 All rights reserved</p>
-      </div>
-    </footer>
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav mobile-only">
+      <a href="index.html" class="nav-link"><i data-lucide="rocket"></i><span>DECK</span></a>
+      <a href="projects.html" class="nav-link active"><i data-lucide="database"></i><span>DATA</span></a>
+      <a href="skills.html" class="nav-link"><i data-lucide="palette"></i><span>ART</span></a>
+      <a href="contact.html" class="nav-link"><i data-lucide="dialpad"></i><span>COMMS</span></a>
+    </nav>
 
     <!-- JavaScript -->
     <script type="module" src="js/main.js"></script>
-    <script>
-      lucide.createIcons();
-    </script>
   </body>
 </html>

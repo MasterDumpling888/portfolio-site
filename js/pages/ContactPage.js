@@ -1,6 +1,6 @@
 /* ========================================
    ContactPage Controller
-   Manages contact page
+   Manages cosmic keypad and signal transmission
    ======================================== */
 
 import Page from '../core/Page.js';
@@ -11,258 +11,128 @@ import domHelper from '../utils/DOMHelper.js';
 class ContactPage extends Page {
   constructor() {
     super('contact');
+    this.dialedMethod = null;
+    this.dialedValue = '';
   }
 
   /**
    * Load page data
    */
   async loadData() {
-    // Ensure content service is initialized
     if (!contentService.isReady()) {
       await contentService.init();
     }
 
-    // Get contact and social data
-    this.state.contact = contentService.getContactInfo();
     this.state.social = contentService.getSocialLinks();
-
-    log('ContactPage data loaded');
+    this.state.narrative = contentService.getContent()?.narrative || {};
+    log('Contact data loaded');
   }
 
   /**
    * Set up page components
    */
   setupComponents() {
-    this.updatePageHeader();
-    this.updateContactInfo();
+    this.renderNarrator();
+    this.setupKeypad();
   }
 
   /**
-   * Update page header from JSON
+   * Render narrator text
    */
-  updatePageHeader() {
-    const contact = this.state.contact;
-    const site = contentService.getSiteInfo();
-
-    // Update main page title if available
-    const pageTitle = domHelper.$('.page-title');
-    if (pageTitle && site.author) {
-      // Keep the number, update the text
-      const titleNumber = pageTitle.querySelector('.title-number');
-      const numberText = titleNumber ? titleNumber.outerHTML : '<span class="title-number">04.</span>';
-      pageTitle.innerHTML = `${numberText} Get In Touch`;
-    }
-
-    // Update page description
-    const pageDesc = domHelper.$('.page-description');
-    if (pageDesc) {
-      pageDesc.textContent = "Let's create something amazing together";
+  renderNarrator() {
+    const container = domHelper.$('#contact-narrator');
+    if (container && this.state.narrative.contact) {
+      container.textContent = this.state.narrative.contact;
     }
   }
 
   /**
-   * Update contact information from JSON
+   * Set up keypad event listeners
    */
-  updateContactInfo() {
-    const contact = this.state.contact;
-    const social = this.state.social;
+  setupKeypad() {
+    const keys = domHelper.$$('.key-btn[data-key]');
+    const display = domHelper.$('#dial-display');
+    const callBtn = domHelper.$('#call-btn');
+    const clearBtn = domHelper.$('#clear-btn');
 
-    // Update CTA button text (the "Send Email" button)
-    if (contact.cta) {
-      const ctaButtons = domHelper.$$('.contact-visual .btn-primary span');
-      ctaButtons.forEach(btn => {
-        btn.textContent = contact.cta;
-      });
-    }
-
-    // Update availability status
-    if (contact.availability) {
-      const statusElements = domHelper.$$('.availability-status');
-      statusElements.forEach(el => {
-        // Keep the status indicator, update text
-        const indicator = el.querySelector('.status-indicator');
-        const indicatorHTML = indicator ? indicator.outerHTML : '<span class="status-indicator"></span>';
-        el.innerHTML = `${indicatorHTML} ${contact.availability}`;
-      });
-    }
-
-    // Update response time
-    if (contact.responseTime) {
-      const responseElements = domHelper.$$('.response-time');
-      responseElements.forEach(el => {
-        el.innerHTML = `
-          <i data-lucide="clock"></i>
-          <span>${contact.responseTime}</span>
-        `;
-      });
-      // Reinitialize icons if lucide is available
-      if (window.lucide) window.lucide.createIcons();
-    }
-
-    // Update email in all contact methods and links
-    if (social.email && social.email.address) {
-      const email = social.email.address;
-
-      // Update all mailto links (href)
-      const emailLinks = domHelper.$$('a[href^="mailto:"]');
-      emailLinks.forEach(link => {
-        // Preserving existing subject/body if they exist in the HTML
-        const currentHref = link.getAttribute('href');
-        if (currentHref.includes('?')) {
-          const params = currentHref.split('?')[1];
-          link.href = `mailto:${email}?${params}`;
+    keys.forEach(key => {
+      key.addEventListener('click', () => {
+        const method = key.getAttribute('data-method');
+        const num = key.getAttribute('data-key');
+        
+        if (method) {
+          this.dialedMethod = method;
+          this.updateDisplay(method.toUpperCase());
         } else {
-          link.href = `mailto:${email}`;
+          this.updateDisplay(`SIGNAL_CH_${num}`);
         }
       });
+    });
 
-      // Update displayed email text (any element with class method-value inside an email link)
-      const emailTexts = domHelper.$$('.contact-method[href^="mailto:"] .method-value');
-      emailTexts.forEach(el => {
-        el.textContent = email;
-      });
-    }
+    clearBtn.addEventListener('click', () => {
+      this.dialedMethod = null;
+      this.updateDisplay('READY_FOR_INPUT');
+    });
 
-    // Update social links
-    this.updateSocialLinks();
-
-    log('Contact info updated from JSON');
+    callBtn.addEventListener('click', () => {
+      this.initiateTransmission();
+    });
   }
 
   /**
-   * Update social media links
+   * Update the dial display
+   * @param {string} val - Value to display
    */
-  updateSocialLinks() {
-    const social = this.state.social;
-
-    // Update GitHub links
-    if (social.github) {
-      const githubLinks = domHelper.$$('a[href*="github"]');
-      githubLinks.forEach(link => {
-        link.href = social.github.url;
-
-        const username = link.querySelector('.method-value');
-        if (username) {
-          username.textContent = social.github.username;
-        }
-      });
-    }
-
-    // Update LinkedIn links
-    if (social.linkedin) {
-      const linkedinLinks = domHelper.$$('a[href*="linkedin"]');
-      linkedinLinks.forEach(link => {
-        link.href = social.linkedin.url;
-
-        const username = link.querySelector('.method-value');
-        if (username) {
-          username.textContent = social.linkedin.username;
-        }
-      });
-    }
-
-    // Update Twitter links (if any)
-    if (social.twitter) {
-      const twitterLinks = domHelper.$$('a[href*="twitter"]');
-      twitterLinks.forEach(link => {
-        link.href = social.twitter.url;
-      });
+  updateDisplay(val) {
+    const display = domHelper.$('#dial-display');
+    if (display) {
+      display.textContent = val;
+      display.classList.add('animate-pulse');
+      setTimeout(() => display.classList.remove('animate-pulse'), 500);
     }
   }
 
   /**
-   * Set up event listeners
+   * Initiate the "Call" / Transmission
    */
-  setupEventListeners() {
-    // Add copy email functionality
-    this.setupCopyEmail();
-  }
-
-  /**
-   * Set up copy email to clipboard functionality
-   */
-  setupCopyEmail() {
-    const emailMethod = domHelper.$('.contact-method[href*="mailto"]');
-
-    if (emailMethod && this.state.social?.email) {
-      // Add click handler for copying
-      emailMethod.addEventListener('click', (e) => {
-        // If user holds Ctrl/Cmd, copy instead of opening email client
-        if (e.ctrlKey || e.metaKey) {
-          e.preventDefault();
-          this.copyToClipboard(this.state.social.email.address);
-        }
-      });
-
-      // Add tooltip hint
-      const tooltip = document.createElement('span');
-      tooltip.className = 'email-tooltip';
-      tooltip.textContent = 'Ctrl+Click to copy';
-      tooltip.style.cssText = 'font-size: 0.75rem; color: var(--color-text-muted); display: block;';
-
-      const methodDetails = emailMethod.querySelector('.method-details');
-      if (methodDetails) {
-        methodDetails.appendChild(tooltip);
-      }
+  initiateTransmission() {
+    if (!this.dialedMethod) {
+      this.updateDisplay('ERROR:NO_TARGET');
+      return;
     }
-  }
 
-  /**
-   * Copy text to clipboard
-   * @param {string} text - Text to copy
-   */
-  async copyToClipboard(text) {
-    try {
-      await navigator.clipboard.writeText(text);
-      this.showCopyNotification('Email copied to clipboard!');
-      log('Email copied to clipboard');
-    } catch (error) {
-      log('Failed to copy email:', error);
-      this.showCopyNotification('Failed to copy email', 'error');
-    }
-  }
-
-  /**
-   * Show copy notification
-   * @param {string} message - Notification message
-   * @param {string} type - Notification type ('success' or 'error')
-   */
-  showCopyNotification(message, type = 'success') {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `copy-notification ${type}`;
-    notification.textContent = message;
-    notification.style.cssText = `
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      padding: 1rem 1.5rem;
-      background: var(--color-bg-secondary);
-      border: 1px solid var(--color-accent-1);
-      border-radius: var(--radius-lg);
-      z-index: 1000;
-      animation: slideInUp 0.3s ease;
-    `;
-
-    document.body.appendChild(notification);
-
-    // Remove after 3 seconds
+    this.updateDisplay('CONNECTING...');
+    
     setTimeout(() => {
-      notification.style.animation = 'fadeOut 0.3s ease';
-      setTimeout(() => notification.remove(), 300);
-    }, 3000);
+      const social = this.state.social;
+      let url = '';
+
+      switch (this.dialedMethod) {
+        case 'email':
+          url = `mailto:${social.email.address}`;
+          break;
+        case 'github':
+          url = social.github.url;
+          break;
+        case 'linkedin':
+          url = social.linkedin.url;
+          break;
+      }
+
+      if (url) {
+        this.updateDisplay('SIGNAL_ESTABLISHED');
+        setTimeout(() => {
+          window.location.href = url;
+        }, 1000);
+      } else {
+        this.updateDisplay('ERROR:LINK_NOT_FOUND');
+      }
+    }, 1500);
   }
 
-  /**
-   * Called when page becomes active
-   */
   onActivate() {
     super.onActivate();
-
-    // Reinitialize Lucide icons
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
+    if (window.lucide) window.lucide.createIcons();
   }
 }
 

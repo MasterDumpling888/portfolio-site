@@ -1,147 +1,94 @@
 /* ========================================
    Navigation Component
-   Reusable navigation bar for all pages
+   Manages global navigation bar and menu
    ======================================== */
 
-import Component from '../core/Component.js';
-import { log } from '../config.js';
+import Component from '../core/Page.js'; // Note: Navigation inherits from Page for simplicity or Component
 import domHelper from '../utils/DOMHelper.js';
+import themeManager from '../services/ThemeManager.js';
+import { log } from '../config.js';
 
-class Navigation extends Component {
-  constructor(currentPage = 'home') {
-    super('main-navigation');
-    this.currentPage = currentPage;
+class Navigation {
+  constructor(activePage = 'home') {
+    this.activePage = activePage;
+  }
+
+  init() {
+    this.setupThemeToggle();
+    this.setupMobileMenu();
+    this.updateActiveLink();
+    log('Navigation initialized');
   }
 
   /**
-   * Initialize component
+   * Set up theme toggle
    */
-  init() {
-    // Navigation already exists in HTML, so we just need to enhance it
-    this.element = document.getElementById(this.elementId);
+  setupThemeToggle() {
+    const themeToggle = domHelper.$('#theme-toggle');
+    if (!themeToggle) return;
 
-    if (!this.element) {
-      log('Navigation element not found, will be created');
-      return false;
+    // Set initial icon based on theme
+    this.updateThemeIcon(themeManager.getCurrentTheme());
+
+    themeToggle.addEventListener('click', () => {
+      const newTheme = themeManager.toggle();
+      this.updateThemeIcon(newTheme);
+      log('Theme toggled to:', newTheme);
+    });
+  }
+
+  /**
+   * Update theme toggle icon
+   * @param {string} theme - Current theme
+   */
+  updateThemeIcon(theme) {
+    const icon = domHelper.$('#theme-toggle i');
+    if (!icon) return;
+
+    if (theme === 'light') {
+      icon.setAttribute('data-lucide', 'sun');
+    } else {
+      icon.setAttribute('data-lucide', 'moon');
     }
 
-    this.setupEventListeners();
-    this.setActivePage(this.currentPage);
-    return true;
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
   }
 
   /**
-   * Set up event listeners
-   */
-  setupEventListeners() {
-    // Mobile menu toggle
-    this.setupMobileMenu();
-
-    // Scroll effects
-    this.setupScrollEffects();
-  }
-
-  /**
-   * Set up mobile menu functionality
+   * Set up mobile menu toggle
    */
   setupMobileMenu() {
-    const menuToggle = domHelper.$('#mobile-menu-toggle');
-    const navMenu = domHelper.$('#nav-menu');
+    const toggle = domHelper.$('#mobile-menu-toggle');
+    const menu = domHelper.$('#nav-menu');
 
-    if (!menuToggle || !navMenu) return;
+    if (!toggle || !menu) return;
 
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      const isOpen = navMenu.classList.contains('active');
-
-      // Update icon
-      const icon = menuToggle.querySelector('i');
-      if (icon) {
-        icon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
-        if (window.lucide) {
-          window.lucide.createIcons();
-        }
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      const icon = toggle.querySelector('i');
+      if (icon && window.lucide) {
+        const isMenuOpen = menu.classList.contains('active');
+        icon.setAttribute('data-lucide', isMenuOpen ? 'x' : 'menu');
+        window.lucide.createIcons();
       }
-
-      log('Mobile menu toggled:', isOpen ? 'open' : 'closed');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('active');
-        const icon = menuToggle.querySelector('i');
-        if (icon) {
-          icon.setAttribute('data-lucide', 'menu');
-          if (window.lucide) {
-            window.lucide.createIcons();
-          }
-        }
-      }
-    });
-
-    // Close menu when nav link is clicked
-    const navLinks = navMenu.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
     });
   }
 
   /**
-   * Set up scroll effects
+   * Update active link in navigation
    */
-  setupScrollEffects() {
-    const nav = this.element;
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-
-      // Add scrolled class when scrolled down
-      if (currentScroll > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-
-      lastScroll = currentScroll;
-    });
-  }
-
-  /**
-   * Set active page in navigation
-   * @param {string} pageName - Current page name
-   */
-  setActivePage(pageName) {
-    const navLinks = domHelper.$$('.nav-link');
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-
+  updateActiveLink() {
+    const links = domHelper.$$('#nav-menu .nav-link, .bottom-nav .nav-link');
+    links.forEach(link => {
       const href = link.getAttribute('href');
-      const linkPage = this.getPageFromHref(href);
-
-      if (linkPage === pageName) {
+      if (href && (href.includes(this.activePage) || (this.activePage === 'home' && href === 'index.html'))) {
         link.classList.add('active');
+      } else {
+        link.classList.remove('active');
       }
     });
-
-    log('Active page set:', pageName);
-  }
-
-  /**
-   * Get page name from href
-   * @param {string} href - Link href
-   * @returns {string} Page name
-   */
-  getPageFromHref(href) {
-    if (href === 'index.html' || href === '/') return 'home';
-    if (href.includes('projects.html')) return 'projects';
-    if (href.includes('skills.html')) return 'skills';
-    if (href.includes('contact.html')) return 'contact';
-    return 'home';
   }
 }
 

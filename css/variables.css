@@ -1,195 +1,88 @@
 /* ========================================
-   CSS Custom Properties (Variables)
+   Variables
+   Global CSS variables and design tokens
    ======================================== */
 
-@import url('https://api.fontshare.com/v2/css?f[]=bevellier@400,500,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-
 :root {
-  /* ===== Color Palette - Dark Theme ===== */
-  /* Backgrounds */
-  --color-bg-primary: #0B0E14;
-  --color-bg-secondary: #191C22;
-  --color-bg-tertiary: #252830;
+  /* --- Cosmic Terminal Palette --- */
+  /* Tech/Cosmic (Cyan/Dark Blue) */
+  --color-primary: #8ff5ff;
+  --color-primary-glow: rgba(143, 245, 255, 0.6);
+  --color-primary-dim: #00deec;
+  --color-bg: #0b0e14;
+  --color-surface: #161a21;
+  --color-surface-variant: #22262f;
+  
+  /* Art/Narrative (Magenta/Gold) */
+  --color-secondary: #ff59e3;
+  --color-secondary-glow: rgba(255, 89, 227, 0.6);
+  --color-tertiary: #fdd400;
+  --color-tertiary-glow: rgba(253, 212, 0, 0.6);
+  
+  /* System/Neutral */
+  --color-text: #ecedf6;
+  --color-text-muted: #a9abb3;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-error: #ff6e84;
+  --color-success: #00deec;
 
-  /* Tech Path Colors (Blues, Cyans, Magentas) */
-  --color-tech-primary: #00f0ff;
-  /* Cyan */
-  --color-tech-secondary: #ff0080;
-  /* Magenta */
-  --color-tech-tertiary: #7000ff;
-  /* Purple */
-  --color-tech-glow: rgba(0, 240, 255, 0.5);
+  /* --- Fonts --- */
+  --font-headline: 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'Space Grotesk', monospace; /* Using Space Grotesk for mono feel */
 
-  /* Art Path Colors (Reds, Oranges, Yellows, Greens) */
-  --color-art-primary: #ff4d4d;
-  /* Red */
-  --color-art-secondary: #ffa600;
-  /* Orange */
-  --color-art-tertiary: #4caf50;
-  /* Green */
-  --color-art-glow: rgba(255, 77, 77, 0.5);
+  /* --- Spacing --- */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  --spacing-xxl: 8rem;
 
-  /* Text Colors */
-  --color-text-primary: #00f0ff;
-  --color-text-secondary: #dddddd;
-  --color-text-tertiary: #aaaaaa;
-  --color-text-muted: #666666;
-
-  /* UI Colors */
-  --color-border: #333333;
-  --color-border-light: #444444;
-  --color-hover: #222222;
-  --color-active: #2a2a2a;
-
-  /* Status Colors */
-  --color-success: #00ff88;
-  --color-warning: #ffaa00;
-  --color-error: #ff3366;
-  --color-info: var(--color-tech-primary);
-
-  /* ===== Typography ===== */
-  /* Headings & Titles */
-  --font-display: 'Space Grotesk', 'Times New Roman', serif;
-  /* Body Text & Buttons */
-  --font-primary: 'Space Grotesk', sans-serif;
-  /* Code */
-  --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-
-  /* Font Sizes */
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 3rem;
-  --font-size-6xl: 3.75rem;
-  --font-size-7xl: 4.5rem;
-
-  /* Font Weights */
-  --font-weight-light: 300;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
-
-  /* Line Heights */
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
-  --line-height-loose: 2;
-
-  /* ===== Spacing ===== */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
-  --space-4xl: 6rem;
-  --space-5xl: 8rem;
-
-  /* ===== Layout ===== */
-  --container-max-width: 1200px;
-  --container-padding: var(--space-xl);
-  --nav-height: 80px;
-  --footer-height: 100px;
-  --z-fixed: 1000;
-
-  /* ===== Border Radius ===== */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-full: 9999px;
-
-  /* ===== Shadows ===== */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
-
-  /* Path Glows */
-  --shadow-tech: 0 0 20px var(--color-tech-glow), 0 0 40px var(--color-tech-glow);
-  --shadow-art: 0 0 20px var(--color-art-glow), 0 0 40px var(--color-art-glow);
-
-  /* ===== Transitions ===== */
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 350ms ease;
-  --transition-slower: 500ms ease;
+  /* --- Transitions --- */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
   --transition-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* --- Shadows & Glows --- */
+  --shadow-glow-primary: 0 0 15px var(--color-primary-glow);
+  --shadow-glow-secondary: 0 0 15px var(--color-secondary-glow);
+  --shadow-glow-tertiary: 0 0 15px var(--color-tertiary-glow);
+  
+  /* --- Radius --- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+  
+  /* --- Z-Index --- */
+  --z-background: -10;
+  --z-starfield: -5;
+  --z-base: 1;
+  --z-nav: 100;
+  --z-overlay: 200;
+  --z-scanline: 300;
 }
 
-/* ===== Light Theme ===== */
+/* --- Light Theme Overrides --- */
 [data-theme="light"] {
-  /* Background Colors */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8f8f8;
-  --color-bg-tertiary: #f0f0f0;
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-surface-variant: #e1e4e8;
+  --color-text: #1a1c22;
+  --color-text-muted: #586069;
+  --color-border: rgba(0, 0, 0, 0.1);
+  
+  /* Primary becomes a bit more saturated for light bg */
+  --color-primary: #008fa0;
+  --color-primary-glow: rgba(0, 143, 160, 0.2);
+  
+  --color-primary-dim: #007a8a;
 
-  /* Text Colors */
-  --color-text-primary: #0a0a0a;
-  --color-text-secondary: #444444;
-  --color-text-tertiary: #666666;
-  --color-text-muted: #888888;
-
-  /* UI Colors */
-  --color-border: #e0e0e0;
-  --color-border-light: #cccccc;
-  --color-hover: #f5f5f5;
-  --color-active: #eeeeee;
-
-  /* Tech Colors (Darker for light mode visibility) */
-  --color-tech-primary: #0099cc;
-  --color-tech-secondary: #cc0066;
-  --color-tech-tertiary: #5500aa;
-  --color-tech-glow: rgba(0, 153, 204, 0.3);
-
-  /* Art Colors */
-  --color-art-primary: #cc0000;
-  --color-art-secondary: #e69500;
-  --color-art-tertiary: #2e7d32;
-  --color-art-glow: rgba(204, 0, 0, 0.3);
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
-
-  --shadow-tech: 0 0 10px var(--color-tech-glow), 0 0 20px var(--color-tech-glow);
-  --shadow-art: 0 0 10px var(--color-art-glow), 0 0 20px var(--color-art-glow);
+  /* Secondary/Tertiary adjustments */
+  --color-secondary: #d112b3;
+  --color-tertiary: #b39600;
 }
 
-/* ===== Utility Classes for Quick Access ===== */
-.text-tech {
-  color: var(--color-tech-primary);
-}
-
-.text-art {
-  color: var(--color-art-primary);
-}
-
-.glow-tech {
-  box-shadow: var(--shadow-tech);
-}
-
-.glow-art {
-  box-shadow: var(--shadow-art);
-}
-
-.font-display {
-  font-family: var(--font-display);
-}
-
-.font-body {
-  font-family: var(--font-primary);
-}

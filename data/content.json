@@ -1,14 +1,24 @@
 {
   "site": {
-    "title": "Danica's Quest",
+    "title": "Rachel's Quest",
     "description": "A journey through Tech and Art",
-    "author": "Danica",
+    "author": "Rachel",
     "email": "drachel.lim@gmail.com",
     "location": "Pasay City, Metro Manila, PH"
   },
+  "narrative": {
+    "intro": [
+      "Welcome, traveler...",
+      "You seem lost in the vastness of the internet space.",
+      "Choose your companion to begin your journey through the digital nebula."
+    ],
+    "tech_path": "You've entered the Sector of Logic. Every pixel here obeys the laws of the machine.",
+    "art_path": "You've drifted into the Nebula of Expression. Here, rules are merely suggestions.",
+    "contact": "Transmission incoming... Dial the coordinates to reach the source."
+  },
   "hero": {
     "greeting": "Welcome, Player One",
-    "name": "Danica",
+    "name": "Rachel",
     "title": "Select Your Character Class",
     "subtitle": "Developer & Designer",
     "description": "Embark on a journey to discover the intersection of logic and creativity. Choose your path: The structured world of Tech or the expressive realm of Art."
@@ -37,6 +47,6 @@
   "contact": {
     "availability": "Quest Log: Open for new missions",
     "responseTime": "Ping: 24-48 hours",
-    "cta": "Start a New Game (Collaboration)"
+    "cta": "INITIATE_TRANSMISSION"
   }
 }
