@@ -1,1 +1,9 @@
-.gemini
+.DS_Store
+.gemini/
+.env
+node_modules/
+dist/
+build/
+.vscode/
+.idea/
+*.log
