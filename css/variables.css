@@ -1,6 +1,5 @@
 /* ========================================
    CSS Custom Properties (Variables)
-   Theme: Neon Minimalism 2025
    ======================================== */
 
 :root {
@@ -174,8 +173,8 @@
   --color-text-tertiary: #666666;
   --color-text-muted: #888888;
 
-  /* Neon Colors (dimmed for light mode) */
-  --color-neon-blue: #0099cc;
+  /* Neon Colors */
+  --color-neon-blue: #12586f;
   --color-neon-blue-glow: rgba(0, 153, 204, 0.3);
   --color-neon-magenta: #cc0066;
   --color-neon-magenta-glow: rgba(204, 0, 102, 0.3);
@@ -192,7 +191,7 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
 
-  /* Neon Shadows (subtle in light mode) */
+  /* Neon Shadows */
   --shadow-neon-blue: 0 0 10px var(--color-neon-blue-glow),
     0 0 20px var(--color-neon-blue-glow);
   --shadow-neon-magenta: 0 0 10px var(--color-neon-magenta-glow),

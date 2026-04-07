@@ -9,7 +9,7 @@
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Rachel",
-    "title": "Computer Science Student",
+    "title": "Incoming Computer Science Graduate",
     "subtitle": "Developer & Designer",
     "description": "Crafting innovative solutions at the intersection of Web Development, AI/ML, FinTech, and MedTech. Passionate about building technology that makes a difference."
   },
@@ -27,7 +27,7 @@
       "username": "@MasterDumpling"
     },
     "linkedin": {
-      "url": "www.linkedin.com/in/danica-rachel-lim-b37634231",
+      "url": "https://www.linkedin.com/in/danica-rachel-lim-b37634231/",
       "username": "Danica Rachel Lim"
     },
     "email": {

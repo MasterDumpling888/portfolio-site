@@ -33,7 +33,7 @@
 
 .hero-greeting {
   font-size: var(--font-size-lg);
-  color: var(--color-accent-1);
+  color: var(--color-neon-blue);
   font-weight: var(--font-weight-medium);
   animation: fadeInLeft 0.6s var(--transition-cubic);
 }
