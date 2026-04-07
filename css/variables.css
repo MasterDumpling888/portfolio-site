@@ -2,29 +2,39 @@
    CSS Custom Properties (Variables)
    ======================================== */
 
+@import url('https://api.fontshare.com/v2/css?f[]=bevellier@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   /* ===== Color Palette - Dark Theme ===== */
-  /* Primary Colors */
+  /* Backgrounds */
   --color-bg-primary: #0a0a0a;
   --color-bg-secondary: #111111;
   --color-bg-tertiary: #1a1a1a;
 
-  /* Neon Colors */
-  --color-neon-blue: #00f0ff;
-  --color-neon-blue-glow: rgba(0, 240, 255, 0.5);
-  --color-neon-magenta: #ff0080;
-  --color-neon-magenta-glow: rgba(255, 0, 128, 0.5);
+  /* Tech Path Colors (Blues, Cyans, Magentas) */
+  --color-tech-primary: #00f0ff;
+  /* Cyan */
+  --color-tech-secondary: #ff0080;
+  /* Magenta */
+  --color-tech-tertiary: #7000ff;
+  /* Purple */
+  --color-tech-glow: rgba(0, 240, 255, 0.5);
+
+  /* Art Path Colors (Reds, Oranges, Yellows, Greens) */
+  --color-art-primary: #ff4d4d;
+  /* Red */
+  --color-art-secondary: #ffa600;
+  /* Orange */
+  --color-art-tertiary: #4caf50;
+  /* Green */
+  --color-art-glow: rgba(255, 77, 77, 0.5);
 
   /* Text Colors */
   --color-text-primary: #ffffff;
-  --color-text-secondary: #aaaaaa;
-  --color-text-tertiary: #888888;
+  --color-text-secondary: #dddddd;
+  --color-text-tertiary: #aaaaaa;
   --color-text-muted: #666666;
-
-  /* Accent Colors */
-  --color-accent-1: var(--color-neon-blue);
-  --color-accent-2: var(--color-neon-magenta);
-  --color-accent-3: #9d4edd;
 
   /* UI Colors */
   --color-border: #333333;
@@ -36,36 +46,28 @@
   --color-success: #00ff88;
   --color-warning: #ffaa00;
   --color-error: #ff3366;
-  --color-info: var(--color-neon-blue);
+  --color-info: var(--color-tech-primary);
 
   /* ===== Typography ===== */
-  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  /* Headings & Titles */
+  --font-display: 'Bevellier', 'Times New Roman', serif;
+  /* Body Text & Buttons */
+  --font-primary: 'Raleway', sans-serif;
+  /* Code */
   --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
 
   /* Font Sizes */
   --font-size-xs: 0.75rem;
-  /* 12px */
   --font-size-sm: 0.875rem;
-  /* 14px */
   --font-size-base: 1rem;
-  /* 16px */
   --font-size-lg: 1.125rem;
-  /* 18px */
   --font-size-xl: 1.25rem;
-  /* 20px */
   --font-size-2xl: 1.5rem;
-  /* 24px */
   --font-size-3xl: 1.875rem;
-  /* 30px */
   --font-size-4xl: 2.25rem;
-  /* 36px */
   --font-size-5xl: 3rem;
-  /* 48px */
   --font-size-6xl: 3.75rem;
-  /* 60px */
   --font-size-7xl: 4.5rem;
-  /* 72px */
 
   /* Font Weights */
   --font-weight-light: 300;
@@ -83,42 +85,28 @@
 
   /* ===== Spacing ===== */
   --space-xs: 0.25rem;
-  /* 4px */
   --space-sm: 0.5rem;
-  /* 8px */
   --space-md: 1rem;
-  /* 16px */
   --space-lg: 1.5rem;
-  /* 24px */
   --space-xl: 2rem;
-  /* 32px */
   --space-2xl: 3rem;
-  /* 48px */
   --space-3xl: 4rem;
-  /* 64px */
   --space-4xl: 6rem;
-  /* 96px */
   --space-5xl: 8rem;
-  /* 128px */
 
   /* ===== Layout ===== */
   --container-max-width: 1200px;
   --container-padding: var(--space-xl);
-
-  --nav-height: 70px;
+  --nav-height: 80px;
   --footer-height: 100px;
+  --z-fixed: 1000;
 
   /* ===== Border Radius ===== */
   --radius-sm: 0.25rem;
-  /* 4px */
   --radius-md: 0.5rem;
-  /* 8px */
   --radius-lg: 0.75rem;
-  /* 12px */
   --radius-xl: 1rem;
-  /* 16px */
   --radius-2xl: 1.5rem;
-  /* 24px */
   --radius-full: 9999px;
 
   /* ===== Shadows ===== */
@@ -127,37 +115,16 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
 
-  /* Neon Shadows */
-  --shadow-neon-blue: 0 0 20px var(--color-neon-blue-glow),
-    0 0 40px var(--color-neon-blue-glow);
-  --shadow-neon-magenta: 0 0 20px var(--color-neon-magenta-glow),
-    0 0 40px var(--color-neon-magenta-glow);
+  /* Path Glows */
+  --shadow-tech: 0 0 20px var(--color-tech-glow), 0 0 40px var(--color-tech-glow);
+  --shadow-art: 0 0 20px var(--color-art-glow), 0 0 40px var(--color-art-glow);
 
   /* ===== Transitions ===== */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 350ms ease;
   --transition-slower: 500ms ease;
-
   --transition-cubic: cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* ===== Z-Index Scale ===== */
-  --z-negative: -1;
-  --z-base: 0;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-fixed: 300;
-  --z-modal-backdrop: 400;
-  --z-modal: 500;
-  --z-popover: 600;
-  --z-tooltip: 700;
-
-  /* ===== Breakpoints (for reference) ===== */
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
 }
 
 /* ===== Light Theme ===== */
@@ -173,17 +140,23 @@
   --color-text-tertiary: #666666;
   --color-text-muted: #888888;
 
-  /* Neon Colors */
-  --color-neon-blue: #12586f;
-  --color-neon-blue-glow: rgba(0, 153, 204, 0.3);
-  --color-neon-magenta: #cc0066;
-  --color-neon-magenta-glow: rgba(204, 0, 102, 0.3);
-
   /* UI Colors */
   --color-border: #e0e0e0;
   --color-border-light: #cccccc;
   --color-hover: #f5f5f5;
   --color-active: #eeeeee;
+
+  /* Tech Colors (Darker for light mode visibility) */
+  --color-tech-primary: #0099cc;
+  --color-tech-secondary: #cc0066;
+  --color-tech-tertiary: #5500aa;
+  --color-tech-glow: rgba(0, 153, 204, 0.3);
+
+  /* Art Colors */
+  --color-art-primary: #cc0000;
+  --color-art-secondary: #e69500;
+  --color-art-tertiary: #2e7d32;
+  --color-art-glow: rgba(204, 0, 0, 0.3);
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -191,29 +164,31 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
 
-  /* Neon Shadows */
-  --shadow-neon-blue: 0 0 10px var(--color-neon-blue-glow),
-    0 0 20px var(--color-neon-blue-glow);
-  --shadow-neon-magenta: 0 0 10px var(--color-neon-magenta-glow),
-    0 0 20px var(--color-neon-magenta-glow);
+  --shadow-tech: 0 0 10px var(--color-tech-glow), 0 0 20px var(--color-tech-glow);
+  --shadow-art: 0 0 10px var(--color-art-glow), 0 0 20px var(--color-art-glow);
 }
 
 /* ===== Utility Classes for Quick Access ===== */
-.neon-text-blue {
-  color: var(--color-neon-blue);
-  text-shadow: var(--shadow-neon-blue);
+.text-tech {
+  color: var(--color-tech-primary);
 }
 
-.neon-text-magenta {
-  color: var(--color-neon-magenta);
-  text-shadow: var(--shadow-neon-magenta);
+.text-art {
+  color: var(--color-art-primary);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg,
-      var(--color-neon-blue),
-      var(--color-neon-magenta));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.glow-tech {
+  box-shadow: var(--shadow-tech);
+}
+
+.glow-art {
+  box-shadow: var(--shadow-art);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-primary);
 }

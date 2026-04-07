@@ -324,7 +324,7 @@ class HomePage extends Page {
     link.rel = 'noopener noreferrer';
 
     link.innerHTML = `
-      <i data-lucide="${icon}"></i>
+      ${domHelper.getIconHTML(icon)}
       <span>${text}</span>
     `;
 
@@ -361,6 +361,37 @@ class HomePage extends Page {
         }
       });
     }
+
+    // Setup parallax/tilt effect for hero visual
+    this.setupParallaxEffect();
+  }
+
+  /**
+   * Setup 3D parallax effect for hero visual
+   */
+  setupParallaxEffect() {
+    const heroSection = domHelper.$('.hero-section');
+    const container = domHelper.$('.duality-container');
+    
+    if (!heroSection || !container) return;
+
+    heroSection.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      
+      // Calculate rotation (max 15 degrees)
+      const xRot = ((clientY - innerHeight / 2) / innerHeight) * 15; // Rotate around X axis (up/down)
+      const yRot = ((clientX - innerWidth / 2) / innerWidth) * 15;   // Rotate around Y axis (left/right)
+      
+      // Apply transform
+      // Note: We invert xRot to make it feel natural (mouse up -> look up)
+      container.style.transform = `rotateX(${-xRot}deg) rotateY(${yRot}deg)`;
+    });
+
+    // Reset on mouse leave
+    heroSection.addEventListener('mouseleave', () => {
+      container.style.transform = 'rotateX(0) rotateY(0)';
+    });
   }
 
   /**

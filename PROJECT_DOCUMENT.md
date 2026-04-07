@@ -1,6 +1,6 @@
 this project is for my portfolio website. currently i have create the basic structure and a very basic template of a working website. but i need to stylize and make it more "me". in this document below, i have outline the design specifications and requirements.
 
-GEMINI model specifications:
+AI model specifications:
 
 - make to change things slowly, always checking in with the user to confirm the design
 - follow the code structure currently on the project
@@ -21,6 +21,7 @@ GEMINI model specifications:
 ## Design specifications
 
 - design should match my personality: funny, quirky, messy, artitistic but professional, and serious and deep when it comes to work (can reflect this by the division between the tech path and the art path)
+- follow a pixelated design 16-bit to create this game style but fun aesthetic
 - take the user on a journey of discorvering who i am (game paths, user can follow a mini character as it journeys)
   - fonts:
     - title, headings - bevellier (source: fontshare)

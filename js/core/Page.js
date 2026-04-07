@@ -102,6 +102,11 @@ class Page extends Component {
    * Set up scroll animations using Intersection Observer
    */
   setupScrollAnimations() {
+    // Disconnect existing observer if it exists
+    if (this.scrollObserver) {
+      this.scrollObserver.disconnect();
+    }
+
     const observerOptions = {
       threshold: 0.15,
       rootMargin: '0px 0px -50px 0px'

@@ -33,22 +33,30 @@ class ContactPage extends Page {
    * Set up page components
    */
   setupComponents() {
+    this.updatePageHeader();
     this.updateContactInfo();
-    this.updatePageTitle();
   }
 
   /**
-   * Update page title and description from JSON
+   * Update page header from JSON
    */
-  updatePageTitle() {
+  updatePageHeader() {
     const contact = this.state.contact;
+    const site = contentService.getSiteInfo();
 
-    // Update CTA text if available
-    if (contact.cta) {
-      const ctaEl = domHelper.$('.contact-subtitle');
-      if (ctaEl) {
-        ctaEl.textContent = contact.cta;
-      }
+    // Update main page title if available
+    const pageTitle = domHelper.$('.page-title');
+    if (pageTitle && site.author) {
+      // Keep the number, update the text
+      const titleNumber = pageTitle.querySelector('.title-number');
+      const numberText = titleNumber ? titleNumber.outerHTML : '<span class="title-number">04.</span>';
+      pageTitle.innerHTML = `${numberText} Get In Touch`;
+    }
+
+    // Update page description
+    const pageDesc = domHelper.$('.page-description');
+    if (pageDesc) {
+      pageDesc.textContent = "Let's create something amazing together";
     }
   }
 
@@ -59,56 +67,59 @@ class ContactPage extends Page {
     const contact = this.state.contact;
     const social = this.state.social;
 
+    // Update CTA button text (the "Send Email" button)
+    if (contact.cta) {
+      const ctaButtons = domHelper.$$('.contact-visual .btn-primary span');
+      ctaButtons.forEach(btn => {
+        btn.textContent = contact.cta;
+      });
+    }
+
     // Update availability status
     if (contact.availability) {
-      const statusEl = domHelper.$('.availability-status');
-      if (statusEl) {
+      const statusElements = domHelper.$$('.availability-status');
+      statusElements.forEach(el => {
         // Keep the status indicator, update text
-        const statusHTML = `
-          <span class="status-indicator"></span>
-          ${contact.availability}
-        `;
-        statusEl.innerHTML = statusHTML;
-      }
+        const indicator = el.querySelector('.status-indicator');
+        const indicatorHTML = indicator ? indicator.outerHTML : '<span class="status-indicator"></span>';
+        el.innerHTML = `${indicatorHTML} ${contact.availability}`;
+      });
     }
 
     // Update response time
     if (contact.responseTime) {
-      const responseEl = domHelper.$('.response-time');
-      if (responseEl) {
-        responseEl.innerHTML = `
+      const responseElements = domHelper.$$('.response-time');
+      responseElements.forEach(el => {
+        el.innerHTML = `
           <i data-lucide="clock"></i>
           <span>${contact.responseTime}</span>
         `;
-        // Reinitialize icon
-        if (window.lucide) window.lucide.createIcons();
-      }
+      });
+      // Reinitialize icons if lucide is available
+      if (window.lucide) window.lucide.createIcons();
     }
 
-    // Update email in contact methods
+    // Update email in all contact methods and links
     if (social.email && social.email.address) {
-      // Update all mailto links
-      const emailLinks = domHelper.$('a[href*="mailto"]');
+      const email = social.email.address;
+
+      // Update all mailto links (href)
+      const emailLinks = domHelper.$$('a[href^="mailto:"]');
       emailLinks.forEach(link => {
-        link.href = `mailto:${social.email.address}`;
-      });
-
-      // Update displayed email addresses
-      const emailValues = domHelper.$('.method-value');
-      emailValues.forEach(el => {
-        if (el.closest('a[href*="mailto"]')) {
-          el.textContent = social.email.address;
+        // Preserving existing subject/body if they exist in the HTML
+        const currentHref = link.getAttribute('href');
+        if (currentHref.includes('?')) {
+          const params = currentHref.split('?')[1];
+          link.href = `mailto:${email}?${params}`;
+        } else {
+          link.href = `mailto:${email}`;
         }
       });
 
-      // Update email in contact methods specifically
-      const contactMethods = domHelper.$('.contact-method[href*="mailto"]');
-      contactMethods.forEach(method => {
-        method.href = `mailto:${social.email.address}`;
-        const valueEl = method.querySelector('.method-value');
-        if (valueEl) {
-          valueEl.textContent = social.email.address;
-        }
+      // Update displayed email text (any element with class method-value inside an email link)
+      const emailTexts = domHelper.$$('.contact-method[href^="mailto:"] .method-value');
+      emailTexts.forEach(el => {
+        el.textContent = email;
       });
     }
 

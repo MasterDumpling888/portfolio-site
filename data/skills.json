@@ -167,6 +167,11 @@
           "icon": "shield"
         },
         {
+          "name": "Figma",
+          "level": "advanced",
+          "icon": "figma"
+        },
+        {
           "name": "VS Code",
           "level": "advanced",
           "icon": "code-2"

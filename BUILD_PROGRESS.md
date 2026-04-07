@@ -53,6 +53,15 @@
 
 ## ✅ COMPLETED
 
+### Phase 2.5: Design Transition (Game Path Theme) ✅
+
+**Design Overhaul**
+- [x] **Typography:** Implemented Bevellier (Display) and Raleway (Body) fonts.
+- [x] **Color System:** Defined "Tech Path" (Cyan/Magenta) and "Art Path" (Red/Orange) palettes.
+- [x] **Hero Section:** Created interactive 3D "Duality Container" with parallax mouse effect.
+- [x] **About Section:** Implemented "Two Paths" layout with split design and character token.
+- [x] **Content:** Updated narrative to "Choose Your Path" / "Game Quest" theme.
+
 ### Phase 1: Foundation ✅
 
 **HTML Files (4/4)**

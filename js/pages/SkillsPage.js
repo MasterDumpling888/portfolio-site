@@ -99,7 +99,7 @@ class SkillsPage extends Page {
     // Skill icon
     const icon = document.createElement('div');
     icon.className = 'skill-icon';
-    icon.innerHTML = `<i data-lucide="${skill.icon || 'code'}"></i>`;
+    icon.innerHTML = domHelper.getIconHTML(skill.icon || 'code');
     card.appendChild(icon);
 
     // Skill name

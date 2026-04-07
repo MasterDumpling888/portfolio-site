@@ -35,7 +35,6 @@ class ProjectsPage extends Page {
    */
   setupComponents() {
     this.renderProjects();
-    this.setupFilterButtons();
   }
 
   /**
@@ -76,6 +75,9 @@ class ProjectsPage extends Page {
     });
 
     log(`Rendered ${projects.length} projects`);
+
+    // Re-initialize scroll animations for new elements
+    this.setupScrollAnimations();
 
     // Reinitialize Lucide icons
     if (window.lucide) {
@@ -227,7 +229,7 @@ class ProjectsPage extends Page {
     link.rel = 'noopener noreferrer';
 
     link.innerHTML = `
-      <i data-lucide="${icon}"></i>
+      ${domHelper.getIconHTML(icon)}
       <span>${text}</span>
     `;
 
@@ -294,6 +296,7 @@ class ProjectsPage extends Page {
    */
   onActivate() {
     super.onActivate();
+    this.setupFilterButtons();
 
     // Reinitialize Lucide icons
     if (window.lucide) {

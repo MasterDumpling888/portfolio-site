@@ -1,24 +1,24 @@
 {
   "site": {
-    "title": "Rachel's Portfolio",
-    "description": "Incoming Graduate - AI & Full-Stack Engineer",
+    "title": "Rachel's Quest",
+    "description": "A journey through Tech and Art",
     "author": "Rachel",
     "email": "drachel.lim@gmail.com",
     "location": "Pasay City, Metro Manila, PH"
   },
   "hero": {
-    "greeting": "Hi, I'm",
+    "greeting": "Welcome, Player One",
     "name": "Rachel",
-    "title": "Incoming Computer Science Graduate",
+    "title": "Select Your Character Class",
     "subtitle": "Developer & Designer",
-    "description": "Crafting innovative solutions at the intersection of Web Development, AI/ML, FinTech, and MedTech. Passionate about building technology that makes a difference."
+    "description": "Embark on a journey to discover the intersection of logic and creativity. Choose your path: The structured world of Tech or the expressive realm of Art."
   },
   "about": {
-    "title": "About Me",
+    "title": "The Lore",
     "paragraphs": [
-      "I'm a Computer Science student with a passion for building impactful technology. My journey spans across multiple domains, from creating intuitive web applications to developing AI-powered solutions that solve real-world problems.",
-      "With experience in medical technology and financial systems, I bring a unique perspective to software development, always considering the human impact behind every line of code.",
-      "When I'm not coding, you'll find me exploring graphic design, photography, and illustration — bringing a creative eye to technical challenges."
+      "Every good game needs a backstory. My character build is unique—a dual-class specialist balancing the rigorous logic of Computer Science with the boundless creativity of the Arts.",
+      "On the **Tech Path**, I engineer solutions in FinTech and MedTech, wielding code to solve complex problems. On the **Art Path**, I craft visual narratives through design and illustration.",
+      "Navigate through this world to see how these two distinct paths converge into one versatile developer."
     ]
   },
   "social": {
@@ -35,8 +35,8 @@
     }
   },
   "contact": {
-    "availability": "Currently available for freelance work",
-    "responseTime": "Typical response time: 24-48 hours",
-    "cta": "Let's create something amazing together"
+    "availability": "Quest Log: Open for new missions",
+    "responseTime": "Ping: 24-48 hours",
+    "cta": "Start a New Game (Collaboration)"
   }
 }
