@@ -280,7 +280,7 @@
 }
 
 /* Hyperspace Transition */
-.hyperspace .starfield {
+.hyperspace #particles-js {
   animation: warp 1s ease-in forwards;
 }
 

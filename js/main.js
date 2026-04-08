@@ -6,6 +6,7 @@
 import { CONFIG, log } from './config.js';
 import eventBus from './core/EventBus.js';
 import themeManager from './services/ThemeManager.js';
+import { getParticlesConfig } from './utils/ParticlesConfig.js';
 
 class App {
   constructor() {
@@ -46,6 +47,8 @@ class App {
 
       // Initialize Lucide icons
       this.initIcons();
+
+      this.initParticles();
 
       // Initialize current page
       await this.initCurrentPage();
@@ -141,9 +144,29 @@ class App {
   }
 
   /**
+   * Initialize particles.js
+   */
+  initParticles() {
+    if (window.particlesJS) {
+      const currentTheme = themeManager.getCurrentTheme();
+      const config = getParticlesConfig(currentTheme);
+      window.particlesJS('particles-js', config);
+      log('Particles.js initialized with config for:', currentTheme);
+    } else {
+      log('Particles.js not found on window, retrying in 100ms...');
+      setTimeout(() => this.initParticles(), 100);
+    }
+  }
+
+  /**
    * Set up global event listeners
    */
   setupGlobalEvents() {
+    // Handle theme changes
+    eventBus.on('theme:changed', ({ theme }) => {
+      this.initParticles();
+    });
+
     // Handle window resize
     let resizeTimeout;
     window.addEventListener('resize', () => {

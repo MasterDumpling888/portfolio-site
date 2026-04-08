@@ -25,7 +25,7 @@ class HomePage extends Page {
 
     this.state.narrative = contentService.getContent()?.narrative || {};
     this.state.featuredProjects = contentService.getFeaturedProjects(3);
-    
+
     log('HomePage data loaded');
   }
 
@@ -48,7 +48,7 @@ class HomePage extends Page {
     if (!container) return;
 
     const introText = this.state.narrative.intro || [];
-    
+
     container.innerHTML = `
       <div class="narrator-sprite">
         <div class="sprite-pulse">
@@ -142,10 +142,10 @@ class HomePage extends Page {
   selectAvatar(choice) {
     this.avatar = choice;
     localStorage.setItem('portfolio-avatar', choice);
-    
+
     // Jump to hyperspace animation
     document.body.classList.add('hyperspace');
-    
+
     setTimeout(() => {
       domHelper.hide('#avatar-selection');
       document.body.classList.remove('hyperspace');
@@ -159,7 +159,7 @@ class HomePage extends Page {
   startJourney() {
     domHelper.show('#journey-content');
     log('Journey started as:', this.avatar);
-    
+
     // Update side stats with choice
     const coordX = domHelper.$('#coord-x');
     if (coordX) coordX.textContent = this.avatar === 'dino' ? 'D_01' : 'O_01';
@@ -204,14 +204,15 @@ class HomePage extends Page {
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY;
       const sprite = domHelper.$('.character-vessel');
-      const stars = domHelper.$('.starfield');
-      
+      const particles = domHelper.$('#particles-js');
+
       if (sprite) {
         sprite.style.transform = `translateY(${scrolled * 0.1}px) rotate(${scrolled * 0.05}deg)`;
       }
-      
-      if (stars) {
-        stars.style.backgroundPosition = `0 ${scrolled * 0.5}px`;
+
+      if (particles) {
+        // Subtle shift effect for particles
+        particles.style.transform = `translateY(${scrolled * 0.02}px)`;
       }
 
       // Update coords
@@ -226,7 +227,7 @@ class HomePage extends Page {
   typeWriter(text, selector, callback) {
     const el = domHelper.$(selector);
     if (!el) return;
-    
+
     el.textContent = '';
     let i = 0;
     const interval = setInterval(() => {

@@ -19,7 +19,8 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background-color: transparent;
+  /* Transparent to see particles */
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
@@ -27,26 +28,28 @@ body {
 
 /* --- Global Background Effects --- */
 
-/* Starfield with radial gradients */
-.starfield {
+.global-bg {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-bg);
+  z-index: var(--z-background);
+  pointer-events: none;
+}
+
+/* Particles Background */
+#particles-js {
   position: fixed;
   inset: 0;
   z-index: var(--z-starfield);
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    radial-gradient(circle at 40% 80%, rgba(143, 245, 255, 0.05) 1px, transparent 1px);
-  background-size: 400px 400px;
-  pointer-events: none;
 }
 
 /* Retro Scanline Effect */
 .scanline {
   position: fixed;
   inset: 0;
-  z-index: var(--z-scanline);
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: var(--z-fixed);
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
   opacity: 0.3;
@@ -71,7 +74,12 @@ section {
 
 /* --- Typography --- */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-headline);
   font-weight: 700;
   line-height: 1.2;
@@ -95,16 +103,33 @@ ul {
   padding: 0 var(--spacing-lg);
 }
 
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
-.text-tertiary { color: var(--color-tertiary); }
+.text-primary {
+  color: var(--color-primary);
+}
 
-.glow-text-primary { text-shadow: var(--shadow-glow-primary); }
-.glow-text-secondary { text-shadow: var(--shadow-glow-secondary); }
+.text-secondary {
+  color: var(--color-secondary);
+}
 
-.bg-surface { background-color: var(--color-surface); }
+.text-tertiary {
+  color: var(--color-tertiary);
+}
 
-.hidden { display: none !important; }
+.glow-text-primary {
+  text-shadow: var(--shadow-glow-primary);
+}
+
+.glow-text-secondary {
+  text-shadow: var(--shadow-glow-secondary);
+}
+
+.bg-surface {
+  background-color: var(--color-surface);
+}
+
+.hidden {
+  display: none !important;
+}
 
 /* Selection Style */
 ::selection {

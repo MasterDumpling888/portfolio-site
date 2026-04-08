@@ -1,12 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Signal Transmission - Contact Rachel"
-    />
+    <meta name="description" content="Signal Transmission - Contact Rachel" />
     <title>Rachel's Quest - Signal Log</title>
 
     <!-- CSS -->
@@ -15,6 +12,7 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/components/navigation.css" />
+    <link rel="stylesheet" href="css/components/footer.css" />
     <link rel="stylesheet" href="css/components/theme-switcher.css" />
     <link rel="stylesheet" href="css/components/buttons.css" />
     <link rel="stylesheet" href="css/pages/contact.css" />
@@ -24,32 +22,12 @@
   </head>
   <body data-theme="dark">
     <!-- Global Effects -->
-    <div class="starfield"></div>
+    <div class="global-bg"></div>
+    <div id="particles-js"></div>
     <div class="scanline"></div>
 
-    <!-- Cosmic Terminal Header -->
-    <header class="fixed-header">
-      <div class="header-container">
-        <div class="terminal-logo">
-          <i data-lucide="terminal" class="text-primary"></i>
-          <h1 class="terminal-title">COSMIC_TERMINAL_V1.0</h1>
-        </div>
-        
-        <nav class="desktop-nav">
-          <ul class="nav-menu" id="nav-menu">
-            <li><a href="index.html" class="nav-link">SYSTEM_BOOT</a></li>
-            <li><a href="projects.html" class="nav-link">EXPLORE_VOID</a></li>
-            <li><a href="skills.html" class="nav-link">SKILL_LOG</a></li>
-            <li><a href="contact.html" class="nav-link active">SIGNAL_LOG</a></li>
-          </ul>
-        </nav>
-
-        <div class="header-actions">
-          <button id="theme-toggle" class="icon-btn"><i data-lucide="settings-2"></i></button>
-          <button id="mobile-menu-toggle" class="icon-btn mobile-only"><i data-lucide="menu"></i></button>
-        </div>
-      </div>
-    </header>
+    <!-- Navigation Root -->
+    <div id="header-root"></div>
 
     <!-- Main Content -->
     <main id="main-content" class="main-content contact-page">
@@ -123,15 +101,12 @@
       </section>
     </main>
 
-    <!-- Bottom Navigation (Mobile) -->
-    <nav class="bottom-nav mobile-only">
-      <a href="index.html" class="nav-link"><i data-lucide="rocket"></i><span>DECK</span></a>
-      <a href="projects.html" class="nav-link"><i data-lucide="database"></i><span>DATA</span></a>
-      <a href="skills.html" class="nav-link"><i data-lucide="palette"></i><span>ART</span></a>
-      <a href="contact.html" class="nav-link active"><i data-lucide="dialpad"></i><span>COMMS</span></a>
-    </nav>
+    <!-- Footer Root -->
+    <div id="footer-root"></div>
 
     <!-- JavaScript -->
+    <!-- particles.js by Vincent Garreau: https://github.com/VincentGarreau/particles.js/ -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="module" src="js/main.js"></script>
   </body>
 </html>

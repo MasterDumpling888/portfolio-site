@@ -16,7 +16,7 @@
 }
 
 [data-theme="dark"] .fixed-header {
-  background: rgba(10, 14, 20, 0.8);
+  background: var(--color-surface);
   box-shadow: 0 4px 20px rgba(143, 245, 255, 0.1);
 }
 
@@ -59,7 +59,8 @@
   position: relative;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--color-primary);
   text-shadow: var(--shadow-glow-primary);
 }
@@ -130,7 +131,9 @@
   color: var(--color-primary);
 }
 
-.bottom-nav .nav-link.active::after { display: none; }
+.bottom-nav .nav-link.active::after {
+  display: none;
+}
 
 /* Side Stats (Desktop Decoration) */
 .side-stats {
@@ -145,17 +148,19 @@
 }
 
 .stats-box {
-  background: rgba(22, 26, 33, 0.6);
+  background: var(--color-stats-bg);
   backdrop-filter: blur(10px);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-primary);
   padding: var(--spacing-md);
   border-radius: var(--radius-md);
   font-family: var(--font-mono);
   font-size: 0.625rem;
-  color: rgba(143, 245, 255, 0.4);
+  color: var(--color-primary);
 }
 
-.stat-line { margin-bottom: 4px; }
+.stat-line {
+  margin-bottom: 4px;
+}
 
 .stat-progress {
   width: 80px;
@@ -178,16 +183,23 @@
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.5em;
-  color: rgba(143, 245, 255, 0.2);
+  color: var(--color-primary);
   align-self: center;
 }
 
 /* Visibility Utilities */
 @media (min-width: 769px) {
-  .mobile-only { display: none !important; }
+  .mobile-only {
+    display: none !important;
+  }
 }
 
 @media (max-width: 768px) {
-  .desktop-only { display: none !important; }
-  .desktop-nav { display: none !important; }
+  .desktop-only {
+    display: none !important;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
 }

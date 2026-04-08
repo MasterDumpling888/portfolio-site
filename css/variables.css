@@ -10,15 +10,16 @@
   --color-primary-glow: rgba(143, 245, 255, 0.6);
   --color-primary-dim: #00deec;
   --color-bg: #0b0e14;
-  --color-surface: #161a21;
-  --color-surface-variant: #22262f;
-  
+  --color-surface: #161a2139;
+  --color-surface-variant: #22262f50;
+  --color-stats-bg: rgba(9, 148, 161, 0.277);
+
   /* Art/Narrative (Magenta/Gold) */
   --color-secondary: #ff59e3;
   --color-secondary-glow: rgba(255, 89, 227, 0.6);
   --color-tertiary: #fdd400;
   --color-tertiary-glow: rgba(253, 212, 0, 0.6);
-  
+
   /* System/Neutral */
   --color-text: #ecedf6;
   --color-text-muted: #a9abb3;
@@ -29,7 +30,7 @@
   /* --- Fonts --- */
   --font-headline: 'Space Grotesk', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'Space Grotesk', monospace; /* Using Space Grotesk for mono feel */
+  --font-mono: 'Space Grotesk', monospace;
 
   /* --- Spacing --- */
   --spacing-xs: 0.25rem;
@@ -49,14 +50,14 @@
   --shadow-glow-primary: 0 0 15px var(--color-primary-glow);
   --shadow-glow-secondary: 0 0 15px var(--color-secondary-glow);
   --shadow-glow-tertiary: 0 0 15px var(--color-tertiary-glow);
-  
+
   /* --- Radius --- */
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 8px;
   --radius-xl: 12px;
   --radius-full: 9999px;
-  
+
   /* --- Z-Index --- */
   --z-background: -10;
   --z-starfield: -5;
@@ -69,20 +70,21 @@
 /* --- Light Theme Overrides --- */
 [data-theme="light"] {
   --color-bg: #f5f7fa;
-  --color-surface: #ffffff;
-  --color-surface-variant: #e1e4e8;
+  --color-surface: #ffffff43;
+  --color-surface-variant: #f4fdffaa;
   --color-text: #1a1c22;
   --color-text-muted: #586069;
   --color-border: rgba(0, 0, 0, 0.1);
-  
+  --color-stats-bg: rgba(9, 148, 161, 0.277);
+
+
   /* Primary becomes a bit more saturated for light bg */
   --color-primary: #008fa0;
   --color-primary-glow: rgba(0, 143, 160, 0.2);
-  
+
   --color-primary-dim: #007a8a;
 
   /* Secondary/Tertiary adjustments */
   --color-secondary: #d112b3;
   --color-tertiary: #b39600;
 }
-
