@@ -8,9 +8,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: var(--spacing-xl) var(--spacing-l);
   position: relative;
-  margin-top: 64px; /* Approximate header height */
+  margin-top: 64px;
+  /* Approximate header height */
   min-height: calc(100vh - 64px);
 }
 
@@ -24,40 +25,43 @@
 .narrator-sprite {
   display: flex;
   justify-content: center;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-l);
 }
 
 .sprite-pulse {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: rgba(143, 245, 255, 0.1);
-  border: 1px solid rgba(143, 245, 255, 0.2);
+  background: var(--color-surface-variant);
+  border: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  box-shadow: 0 0px 30px var(--color-primary-glow);
 }
 
 .sprite-pulse::before {
   content: '';
   position: absolute;
   inset: -10px;
-  background: rgba(143, 245, 255, 0.05);
-  filter: blur(15px);
+  background: var(--color-surface);
+  filter: blur(5px);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
 
 .dialogue-box {
-  background: rgba(34, 38, 47, 0.6);
-  backdrop-filter: blur(20px);
+  background: var(--color-surface);
+  backdrop-filter: blur(5px);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  border-bottom-right-radius: 4rem;
-  padding: var(--spacing-lg);
+  border-bottom-right-radius: var(--font-size-5);
+  padding: var(--spacing-l);
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0px 40px var(--color-primary-glow);
+  display: block;
+  width: 100%;
 }
 
 .dialogue-tag {
@@ -67,7 +71,7 @@
   background: var(--color-primary);
   color: var(--color-bg);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--font-size--2);
   font-weight: 700;
   padding: 4px 12px;
   border-radius: var(--radius-sm);
@@ -76,7 +80,7 @@
 
 .dialogue-text {
   font-family: var(--font-mono);
-  font-size: 1.25rem;
+  font-size: var(--font-size-0);
   color: var(--color-primary);
   line-height: 1.6;
 }
@@ -84,7 +88,7 @@
 .dialogue-next {
   display: flex;
   justify-content: flex-end;
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-m);
   color: var(--color-secondary);
   animation: bounce 1.5s infinite;
 }
@@ -93,16 +97,16 @@
 .avatar-selection {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-lg);
+  gap: var(--spacing-l);
   width: 100%;
   max-width: 1000px;
 }
 
 .avatar-card {
-  background: rgba(16, 19, 26, 0.4);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-l);
   text-align: center;
   cursor: pointer;
   transition: all 0.5s var(--transition-cubic);
@@ -113,13 +117,13 @@
 .avatar-card:hover {
   border-color: var(--color-primary);
   transform: translateY(-10px);
-  box-shadow: 0 0 40px rgba(143, 245, 255, 0.1);
+  box-shadow: 0 0 40px var(--color-primary-glow);
 }
 
 .avatar-sprite-container {
   width: 200px;
   height: 200px;
-  margin: 0 auto var(--spacing-lg);
+  margin: 0 auto var(--spacing-l);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,12 +139,15 @@
   transition: opacity 0.5s ease;
 }
 
-.avatar-card:hover .avatar-glow { opacity: 0.2; }
+.avartar-glow.onigiri {
+  background: var(--color-secondary);
+}
+
+.avatar-card:hover .avatar-glow {
+  opacity: 0.2;
+}
 
 .avatar-img {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
   position: relative;
   z-index: 1;
   transition: transform 0.5s ease;
@@ -148,22 +155,22 @@
 
 .avatar-name {
   font-family: var(--font-headline);
-  font-size: 1.5rem;
+  font-size: var(--font-size-1);
   color: var(--color-primary);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-s);
   letter-spacing: 0.05em;
 }
 
 .avatar-desc {
-  font-size: 0.875rem;
+  font-size: var(--font-size--1);
   color: var(--color-text-muted);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-m);
 }
 
 .avatar-stats {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-s);
 }
 
 .stat-badge {
@@ -171,17 +178,17 @@
   padding: 4px 10px;
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--font-size--2);
   text-transform: uppercase;
 }
 
 .select-btn {
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-l);
   padding: 8px 24px;
   background: var(--color-primary);
   color: var(--color-bg);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--font-size--2);
   font-weight: 700;
   border-radius: var(--radius-md);
   opacity: 0;
@@ -194,12 +201,23 @@
   transform: translateY(0);
 }
 
-.avatar-card.onigiri:hover { border-color: var(--color-secondary); }
-.avatar-card.onigiri .avatar-name { color: var(--color-secondary); }
-.avatar-card.onigiri .select-btn { background: var(--color-secondary); }
+.avatar-card.onigiri:hover {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 40px var(--color-secondary-glow);
+}
+
+.avatar-card.onigiri .avatar-name {
+  color: var(--color-secondary);
+}
+
+.avatar-card.onigiri .select-btn {
+  background: var(--color-secondary);
+}
 
 .journey-content {
   width: 100%;
+  padding-right: var(--spacing-m);
+  padding-left: var(--spacing-m);
 }
 
 .journey-hero {
@@ -215,15 +233,16 @@
 .character-vessel {
   width: 150px;
   height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 10;
   filter: drop-shadow(0 0 20px var(--color-primary-glow));
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-l);
 }
 
 .journey-sprite {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  position: relative;
 }
 
 .hero-titles {
@@ -232,7 +251,7 @@
 }
 
 .journey-title {
-  font-size: 4rem;
+  font-size: var(--font-size-5);
   letter-spacing: -0.05em;
   background: linear-gradient(to bottom, var(--color-text), var(--color-primary));
   -webkit-background-clip: text;
@@ -243,7 +262,7 @@
 
 .journey-subtitle {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: var(--font-size--1);
   letter-spacing: 0.5em;
   color: var(--color-text-muted);
 }
@@ -251,13 +270,13 @@
 /* --- Content Sections --- */
 .section-heading {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: var(--font-size--2);
   color: var(--color-primary);
   letter-spacing: 0.3em;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-l);
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-m);
 }
 
 .section-heading::after {
@@ -268,13 +287,13 @@
 }
 
 .about-journey {
-  padding: var(--spacing-xxl) 0;
+  padding: var(--spacing-3xl) 0;
 }
 
 .narrative-p {
-  font-size: 1.25rem;
+  font-size: var(--font-size-0);
   color: var(--color-text);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-l);
   max-width: 800px;
   opacity: 0.8;
 }
@@ -311,5 +330,28 @@
 
   50% {
     transform: translateY(-20px);
+  }
+}
+/* --- Mobile Fixes for Avatar Selection --- */
+@media (max-width: 768px) {
+  .avatar-selection {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-m);
+    padding: 0 var(--spacing-m);
+  }
+
+  .avatar-card {
+    padding: var(--spacing-m);
+  }
+
+  .avatar-sprite-container {
+    width: 140px;
+    height: 140px;
+    margin-bottom: var(--spacing-m);
+  }
+
+  .avatar-img {
+    width: 100px;
+    height: 100px;
   }
 }

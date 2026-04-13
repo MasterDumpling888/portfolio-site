@@ -5,6 +5,7 @@
    ======================================== */
 
 import Component from './Component.js';
+import narratorService from '../services/NarratorService.js';
 import { log } from '../config.js';
 
 class Page extends Component {
@@ -134,6 +135,10 @@ class Page extends Component {
    */
   onActivate() {
     log(`Page activated: ${this.pageName}`);
+    
+    // Set narrator message for the page
+    narratorService.setPageMessage(this.pageName, 'guide');
+
     this.animate();
     this.setupScrollAnimations();
     this.mountComponents();

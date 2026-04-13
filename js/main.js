@@ -33,12 +33,17 @@ class App {
       const contentService = (await import('./services/ContentService.js')).default;
       await contentService.init();
 
+      // Initialize Narrator service
+      const narratorService = (await import('./services/NarratorService.js')).default;
+      await narratorService.init();
+
       // Update page metadata from content
       this.updatePageMetadata(contentService);
 
       // Initialize global components
       log('Initializing global components...');
       await this.initNavigationComponent();
+      await this.initNarratorComponent();
       await this.initFooterComponent();
       log('Global components initialization complete');
 
@@ -112,6 +117,24 @@ class App {
       log('Navigation component initialized');
     } catch (error) {
       console.error('Failed to initialize Navigation:', error);
+    }
+  }
+
+  /**
+   * Initialize Narrator component
+   */
+  async initNarratorComponent() {
+    try {
+      log('Loading Narrator component...');
+      const { default: Narrator } = await import('./components/Narrator.js');
+
+      const narrator = new Narrator();
+      await narrator.init();
+
+      this.registerComponent('narrator', narrator);
+      log('Narrator component initialized');
+    } catch (error) {
+      console.error('Failed to initialize Narrator:', error);
     }
   }
 

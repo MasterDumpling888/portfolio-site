@@ -48,12 +48,12 @@ class Navigation extends Component {
         </nav>
 
         <div class="header-actions">
+          <button id="avatar-switcher" class="text-secondary glow-text-secondary" aria-label="Change Avatar" title="Change Avatar">
+            RESET
+          </button>
           <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
             <i data-lucide="sun" class="theme-icon light"></i>
             <i data-lucide="moon" class="theme-icon dark"></i>
-          </button>
-          <button id="mobile-menu-toggle" class="icon-btn mobile-only">
-            <i data-lucide="setting-2"></i>
           </button>
         </div>
       </div>
@@ -67,7 +67,7 @@ class Navigation extends Component {
         <i data-lucide="database"></i><span>DATA</span>
       </a>
       <a href="skills.html" class="nav-link ${this.activePage === 'skills' ? 'active' : ''}">
-        <i data-lucide="palette"></i><span>ART</span>
+        <i data-lucide="too-case"></i><span>STATS</span>
       </a>
       <a href="contact.html" class="nav-link ${this.activePage === 'contact' ? 'active' : ''}">
         <i data-lucide="turtle"></i><span>COMMS</span>
@@ -82,6 +82,7 @@ class Navigation extends Component {
   afterMount() {
     this.setupThemeToggle();
     this.setupMobileMenu();
+    this.setupAvatarSwitcher();
 
     if (window.lucide) {
       window.lucide.createIcons();
@@ -100,6 +101,27 @@ class Navigation extends Component {
     themeToggle.addEventListener('click', () => {
       const newTheme = themeManager.toggle();
       log('Theme toggled to:', newTheme);
+    });
+  }
+
+  /**
+   * Set up avatar switcher
+   */
+  setupAvatarSwitcher() {
+    const switcher = domHelper.$('#avatar-switcher', this.element);
+    if (!switcher) return;
+
+    switcher.addEventListener('click', () => {
+      localStorage.removeItem('portfolio-avatar');
+      sessionStorage.setItem('skip-intro', 'true');
+      log('Avatar reset, redirecting to selection (skipping intro)');
+
+      // Navigate back to home to trigger selection
+      if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+        window.location.reload();
+      } else {
+        window.location.href = 'index.html';
+      }
     });
   }
 

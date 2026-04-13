@@ -144,7 +144,7 @@
   }
 
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-15px);
   }
 }
 
@@ -223,6 +223,48 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ===== Sprite Animations ===== */
+@keyframes sprite-dino {
+  from {
+    background-position: 0% 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes sprite-onigiri {
+  from {
+    background-position: 0% 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
+}
+
+.sprite-animated {
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  display: block;
+  background-size: 300% 100%; /* 3 frames */
+}
+
+.sprite-dino {
+  width: 145px;
+  height: 157px;
+  background-image: url('../assets/images/dino sprite.png');
+  animation: sprite-dino 0.8s steps(2) infinite;
+}
+
+.sprite-onigiri {
+  width: 140px;
+  height: 137px;
+  background-image: url('../assets/images/onigiri sprite.png');
+  animation: sprite-onigiri 0.8s steps(2) infinite;
 }
 
 /* ===== Utility Animation Classes ===== */

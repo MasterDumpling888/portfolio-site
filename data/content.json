@@ -12,6 +12,29 @@
       "You seem lost in the vastness of the internet space.",
       "Choose your companion to begin your journey through the digital nebula."
     ],
+    "pages": {
+      "home": {
+        "intro": [
+          "Welcome to the DECK! I've been waiting for you.",
+          "I'll be your guide through this digital sector.",
+          "I'll stay down here in the corner if you need any info or lore. Let's explore!"
+        ],
+        "guide": "We've arrived at the central hub, the DECK. From here, we can chart our course to any sector.",
+        "lore": "Rachel's journey started in the intersection of two worlds. The binary and the brushstroke."
+      },
+      "projects": {
+        "guide": "This is the DATA_VOID. It contains the logs of past missions and engineered constructs.",
+        "lore": "Each project is a fragment of a larger quest. Some were built for logic, others for soul."
+      },
+      "skills": {
+        "guide": "Behold the MODULE_PROFICIENCY. Here you can see the stats and upgrades of the pilot.",
+        "lore": "Knowledge is the ultimate weapon in this nebula. We are constantly upgrading our cores."
+      },
+      "contact": {
+        "guide": "We've reached the SIGNAL_RELAY. Input the correct coordinates to establish a direct link.",
+        "lore": "Communication is key to any successful alliance. Don't be shy, initiate the ping."
+      }
+    },
     "tech_path": "You've entered the Sector of Logic. Every pixel here obeys the laws of the machine.",
     "art_path": "You've drifted into the Nebula of Expression. Here, rules are merely suggestions.",
     "contact": "Transmission incoming... Dial the coordinates to reach the source."

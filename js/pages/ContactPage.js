@@ -5,6 +5,7 @@
 
 import Page from '../core/Page.js';
 import contentService from '../services/ContentService.js';
+import narratorService from '../services/NarratorService.js';
 import { log } from '../config.js';
 import domHelper from '../utils/DOMHelper.js';
 
@@ -41,8 +42,13 @@ class ContactPage extends Page {
    */
   renderNarrator() {
     const container = domHelper.$('#contact-narrator');
-    if (container && this.state.narrative.contact) {
-      container.textContent = this.state.narrative.contact;
+    if (container) {
+      // Use the global narrator service
+      narratorService.setPageMessage('contact', 'guide');
+      
+      // Keep the local box synced for style
+      const contactMsg = this.state.narrative.contact || "INITIATING_TRANSMISSION...";
+      container.textContent = contactMsg;
     }
   }
 

@@ -10,17 +10,17 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  padding: var(--space-sm);
+  padding: var(--spacing-sm);
   border-radius: var(--radius-full);
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   transition: all var(--transition-base);
   cursor: pointer;
 }
 
 .theme-toggle:hover {
-  background-color: var(--color-hover);
-  border-color: var(--color-border-light);
+  background-color: var(--color-primary-glow);
+  border-color: var(--color-border);
   transform: scale(1.05);
 }
 
@@ -34,6 +34,7 @@
   width: 20px;
   height: 20px;
   transition: all var(--transition-base);
+  color: var(--color-primary);
 }
 
 /* Dark theme - show sun icon */
@@ -60,12 +61,12 @@
 
 /* Glow effect on hover */
 .theme-toggle:hover .theme-icon {
-  filter: drop-shadow(0 0 8px var(--color-accent-1));
+  filter: drop-shadow(0 0 8px var(--color-primary-glow));
 }
 
 /* Focus state */
 .theme-toggle:focus-visible {
-  outline: 2px solid var(--color-accent-1);
+  outline: 2px solid var(--color-primary-glow);
   outline-offset: 2px;
 }
 

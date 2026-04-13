@@ -5,6 +5,8 @@
 
 import Page from '../core/Page.js';
 import contentService from '../services/ContentService.js';
+import narratorService from '../services/NarratorService.js';
+import eventBus from '../core/EventBus.js';
 import { log } from '../config.js';
 import domHelper from '../utils/DOMHelper.js';
 
@@ -13,6 +15,7 @@ class HomePage extends Page {
     super('home');
     this.avatar = localStorage.getItem('portfolio-avatar') || null;
     this.narratorStep = 0;
+    this.heroIntroStep = 0;
   }
 
   /**
@@ -33,9 +36,18 @@ class HomePage extends Page {
    * Set up page components
    */
   setupComponents() {
+    const skipIntro = sessionStorage.getItem('skip-intro') === 'true';
+    
     if (!this.avatar) {
-      this.startIntro();
+      if (skipIntro) {
+        sessionStorage.removeItem('skip-intro');
+        this.showAvatarSelection();
+      } else {
+        this.startIntro();
+      }
     } else {
+      // Re-enable scrolling just in case (for returning users)
+      document.body.classList.remove('no-scroll');
       this.startJourney();
     }
   }
@@ -52,7 +64,7 @@ class HomePage extends Page {
     container.innerHTML = `
       <div class="narrator-sprite">
         <div class="sprite-pulse">
-          <i data-lucide="auto-awesome" class="text-primary"></i>
+          <i data-lucide="person-standing" class="text-primary"></i>
         </div>
       </div>
       <div class="dialogue-box">
@@ -99,7 +111,7 @@ class HomePage extends Page {
       <div class="avatar-card dino" data-avatar="dino">
         <div class="avatar-sprite-container">
           <div class="avatar-glow"></div>
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAqBea91XN1O0DpsH7EoAVHJRURn5YsBA00SeH3ynjuvRZTiKctlcxiGUihLMYhXavEZiDR3_wOkXa9uIvWTAUtdcAWDUwlLmi4-VU4xerAC45Rmg_fI4ERoBv0Sp4QnuSnzxcqlLaQSYOZ6gFnCIA1kUxxGVD0LmO1KDicxk2BGhsFtSL8T1rtOFxsAqS_DS-HLq6y8gApA-LesZXDu8GkhmKtqfnBrrpKNRs-7s41IH_mnBsWuJrO688UZZtirocbDfDa3aE-Gk" alt="Dino" class="avatar-img">
+          <div class="sprite-animated sprite-dino avatar-img"></div>
         </div>
         <h3 class="avatar-name">DINO_EXPLORER</h3>
         <p class="avatar-desc">A robust data-scavenger. Specialized in logic and architecture.</p>
@@ -113,8 +125,8 @@ class HomePage extends Page {
 
       <div class="avatar-card onigiri" data-avatar="onigiri">
         <div class="avatar-sprite-container">
-          <div class="avatar-glow"></div>
-          <img src="assets/images/onigiri sprite.png" alt="Onigiri" class="avatar-img">
+          <div class="avatar-glow onigiri"></div>
+          <div class="sprite-animated sprite-onigiri avatar-img"></div>
         </div>
         <h3 class="avatar-name">ONIGIRI_NODE</h3>
         <p class="avatar-desc">A lightweight signal-relay. Optimized for swift communication and art.</p>
@@ -143,6 +155,10 @@ class HomePage extends Page {
     this.avatar = choice;
     localStorage.setItem('portfolio-avatar', choice);
 
+    // Update narrator immediately
+    narratorService.setAvatar(choice);
+    narratorService.setPageMessage('home', 'guide');
+
     // Jump to hyperspace animation
     document.body.classList.add('hyperspace');
 
@@ -160,30 +176,74 @@ class HomePage extends Page {
     domHelper.show('#journey-content');
     log('Journey started as:', this.avatar);
 
+    // Disable scrolling for cinematic intro
+    document.body.classList.add('no-scroll');
+
+    // Set hero mode for initial welcome
+    narratorService.setHeroMode(true);
+    
+    // We listen for dialogue box clicks to advance the intro
+    const advanceIntro = () => {
+      this.nextHeroIntroStep(advanceIntro);
+    };
+
+    // Use a slightly different approach for the first message
+    this.nextHeroIntroStep(advanceIntro);
+
+    // Listen for events from Narrator component via EventBus
+    eventBus.on('narrator:dialogue_clicked', advanceIntro);
+
     // Update side stats with choice
     const coordX = domHelper.$('#coord-x');
     if (coordX) coordX.textContent = this.avatar === 'dino' ? 'D_01' : 'O_01';
 
-    this.renderJourneySections();
+    // Initially render only the hero section
+    this.renderJourneySections(true);
     this.setupParallax();
   }
 
   /**
-   * Render sections for the journey
+   * Handle the sequence of messages when avatar is in hero mode
    */
-  renderJourneySections() {
+  nextHeroIntroStep(clickCallback) {
+    const introText = contentService.getContent()?.narrative?.pages?.home?.intro || [];
+    
+    if (this.heroIntroStep < introText.length) {
+      narratorService.setMessage(introText[this.heroIntroStep]);
+      this.heroIntroStep++;
+    } else {
+      // Transition to HUD
+      narratorService.setHeroMode(false);
+      narratorService.setPageMessage('home', 'guide');
+      
+      // Re-enable scrolling
+      document.body.classList.remove('no-scroll');
+
+      // Render the full content now
+      this.renderJourneySections(false);
+      
+      // Remove the event listener so clicks on corner narrator don't re-trigger this
+      eventBus.off('narrator:dialogue_clicked', clickCallback);
+    }
+  }
+
+  /**
+   * Render sections for the journey
+   * @param {boolean} heroOnly - If true, only render the top hero section
+   */
+  renderJourneySections(heroOnly = false) {
     const container = domHelper.$('#journey-content');
-    container.innerHTML = `
+
+    const heroHTML = `
       <section class="journey-hero">
-        <div class="character-vessel animate-float">
-          <img src="${this.avatar === 'dino' ? 'https://lh3.googleusercontent.com/aida-public/AB6AXuCAqBea91XN1O0DpsH7EoAVHJRURn5YsBA00SeH3ynjuvRZTiKctlcxiGUihLMYhXavEZiDR3_wOkXa9uIvWTAUtdcAWDUwlLmi4-VU4xerAC45Rmg_fI4ERoBv0Sp4QnuSnzxcqlLaQSYOZ6gFnCIA1kUxxGVD0LmO1KDicxk2BGhsFtSL8T1rtOFxsAqS_DS-HLq6y8gApA-LesZXDu8GkhmKtqfnBrrpKNRs-7s41IH_mnBsWuJrO688UZZtirocbDfDa3aE-Gk' : 'assets/images/onigiri sprite.png'}" class="journey-sprite">
-        </div>
         <div class="hero-titles">
           <h1 class="journey-title">RACHEL_LIM</h1>
           <p class="journey-subtitle">CS_STUDENT // ART_ENTHUSIAST</p>
         </div>
       </section>
+    `;
 
+    const contentHTML = `
       <section class="parallax-divider">
         <div class="divider-line"></div>
       </section>
@@ -195,6 +255,12 @@ class HomePage extends Page {
         </div>
       </section>
     `;
+
+    container.innerHTML = heroOnly ? heroHTML : heroHTML + contentHTML;
+    
+    if (!heroOnly) {
+      this.setupScrollAnimations();
+    }
   }
 
   /**
@@ -219,6 +285,16 @@ class HomePage extends Page {
       const coordY = domHelper.$('#coord-y');
       if (coordY) coordY.textContent = Math.floor(scrolled);
     });
+  }
+
+  /**
+   * Set up page event listeners
+   */
+  setupEventListeners() {
+    // Narrator guide for home
+    if (this.avatar) {
+      narratorService.setPageMessage('home', 'guide');
+    }
   }
 
   /**

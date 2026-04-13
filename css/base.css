@@ -18,12 +18,17 @@ html {
 
 body {
   font-family: var(--font-body);
+  font-size: var(--font-size-0);
   color: var(--color-text);
   background-color: transparent;
-  /* Transparent to see particles */
-  line-height: 1.6;
+  line-height: 1.5;
   overflow-x: hidden;
   min-height: 100vh;
+}
+
+body.no-scroll {
+  overflow: hidden !important;
+  height: 100vh !important;
 }
 
 /* --- Global Background Effects --- */
@@ -74,6 +79,30 @@ section {
 
 /* --- Typography --- */
 
+h1 {
+  font-size: var(--font-size-4);
+}
+
+h2 {
+  font-size: var(--font-size-3);
+}
+
+h3 {
+  font-size: var(--font-size-2);
+}
+
+h4 {
+  font-size: var(--font-size-1);
+}
+
+h5 {
+  font-size: var(--font-size-0);
+}
+
+h6 {
+  font-size: var(--font-size-0);
+}
+
 h1,
 h2,
 h3,
@@ -82,7 +111,11 @@ h5,
 h6 {
   font-family: var(--font-headline);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.1;
+}
+
+p {
+  margin-bottom: var(--spacing-s);
 }
 
 a {
@@ -95,12 +128,22 @@ ul {
   list-style: none;
 }
 
+button {
+  font-family: var(--font-body);
+  font-size: var(--font-size--1);
+  color: var(--color-text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
 /* --- Utility Classes --- */
 
 .container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-s-l);
 }
 
 .text-primary {

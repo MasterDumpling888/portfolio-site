@@ -27,7 +27,7 @@
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-m) var(--spacing-l);
 }
 
 .terminal-logo {
@@ -38,7 +38,7 @@
 
 .terminal-title {
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: var(--font-size--1);
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--color-primary-dim);
@@ -47,12 +47,12 @@
 
 .nav-menu {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-l);
 }
 
 .nav-link {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: var(--font-size--2);
   letter-spacing: 0.2em;
   color: var(--color-text-muted);
   padding: var(--spacing-xs) 0;
@@ -78,7 +78,7 @@
 
 .header-actions {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--spacing-2xs);
 }
 
 .icon-btn {
@@ -109,11 +109,11 @@
   border-top: 1px solid var(--color-border);
   display: flex;
   justify-content: space-around;
-  padding: var(--spacing-sm) 0 calc(var(--spacing-sm) + env(safe-area-inset-bottom));
+  padding: var(--spacing-2xs) 0 calc(var(--spacing-2xs) + env(safe-area-inset-bottom));
 }
 
 [data-theme="dark"] .bottom-nav {
-  background: rgba(10, 14, 20, 0.9);
+  background: var(--color-surface-variant);
 }
 
 
@@ -138,23 +138,23 @@
 /* Side Stats (Desktop Decoration) */
 .side-stats {
   position: fixed;
-  left: var(--spacing-lg);
+  left: var(--spacing-m);
   top: 50%;
   transform: translateY(-50%);
   z-index: 50;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-m);
 }
 
 .stats-box {
   background: var(--color-stats-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-primary);
-  padding: var(--spacing-md);
+  padding: var(--spacing-s);
   border-radius: var(--radius-md);
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: var(--font-size--2);
   color: var(--color-primary);
 }
 
@@ -181,7 +181,7 @@
 .session-label {
   writing-mode: vertical-lr;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: var(--font-size--1);
   letter-spacing: 0.5em;
   color: var(--color-primary);
   align-self: center;

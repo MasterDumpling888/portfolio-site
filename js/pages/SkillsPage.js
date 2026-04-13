@@ -48,7 +48,7 @@ class SkillsPage extends Page {
       dino: {
         name: 'DINO_EXPLORER',
         class: 'DATA_SCAVENGER_V1',
-        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCAqBea91XN1O0DpsH7EoAVHJRURn5YsBA00SeH3ynjuvRZTiKctlcxiGUihLMYhXavEZiDR3_wOkXa9uIvWTAUtdcAWDUwlLmi4-VU4xerAC45Rmg_fI4ERoBv0Sp4QnuSnzxcqlLaQSYOZ6gFnCIA1kUxxGVD0LmO1KDicxk2BGhsFtSL8T1rtOFxsAqS_DS-HLq6y8gApA-LesZXDu8GkhmKtqfnBrrpKNRs-7s41IH_mnBsWuJrO688UZZtirocbDfDa3aE-Gk'
+        img: 'assets/images/dino sprite.png'
       },
       onigiri: {
         name: 'ONIGIRI_NODE',
@@ -58,11 +58,16 @@ class SkillsPage extends Page {
     };
 
     const active = characterData[this.avatar] || characterData.dino;
+    const spriteClass = this.avatar === 'onigiri' ? 'sprite-onigiri' : 'sprite-dino';
+    container.innerHTML = `
+      <div class="animate-float">
+        <div class="sprite-animated ${spriteClass}"></div>
+      </div>
+    `;
 
-    container.innerHTML = `<img src="${active.img}" alt="${active.name}">`;
     nameEl.textContent = active.name;
     classEl.textContent = active.class;
-    
+
     // Apply theme color
     if (this.avatar === 'onigiri') {
       nameEl.style.color = 'var(--color-secondary)';
@@ -83,7 +88,7 @@ class SkillsPage extends Page {
     categories.forEach(category => {
       const categoryBlock = document.createElement('div');
       categoryBlock.className = 'skill-category-block';
-      
+
       categoryBlock.innerHTML = `
         <div class="category-label">
           ${domHelper.getIconHTML(category.icon || 'box')}
