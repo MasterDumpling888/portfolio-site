@@ -34,16 +34,16 @@ class Navigation extends Component {
       <div class="header-container">
         <div class="terminal-logo">
           <a href="index.html" class="terminal-logo ${this.activePage === 'home' ? 'active' : ''}">
-            <i data-lucide="terminal" class="text-primary"></i>
-            <h1 class="terminal-title">RACHEL_S_LOG_835</h1>
+            <i data-lucide="egg" class="text-primary"></i>
+            <h1 class="terminal-title">TAMAGO_OS</h1>
         </div>
 
         <nav class="desktop-nav">
           <ul class="nav-menu" id="nav-menu">
-            <li><a href="index.html" class="nav-link ${this.activePage === 'home' ? 'active' : ''}">SYSTEM_BOOT</a></li>
-            <li><a href="projects.html" class="nav-link ${this.activePage === 'projects' ? 'active' : ''}">EXPLORE_VOID</a></li>
-            <li><a href="skills.html" class="nav-link ${this.activePage === 'skills' ? 'active' : ''}">SKILL_LOG</a></li>
-            <li><a href="contact.html" class="nav-link ${this.activePage === 'contact' ? 'active' : ''}">SIGNAL_LOG</a></li>
+            <li><a href="index.html" class="nav-link ${this.activePage === 'home' ? 'active' : ''}">DECK</a></li>
+            <li><a href="projects.html" class="nav-link ${this.activePage === 'projects' ? 'active' : ''}">PROJECT_LOG</a></li>
+            <li><a href="skills.html" class="nav-link ${this.activePage === 'skills' ? 'active' : ''}">SKILL_TREE</a></li>
+            <li><a href="contact.html" class="nav-link ${this.activePage === 'contact' ? 'active' : ''}">CONTACT_NODE</a></li>
           </ul>
         </nav>
 
@@ -57,20 +57,21 @@ class Navigation extends Component {
           </button>
         </div>
       </div>
-    </header>
+      
+      </header>
 
     <nav class="bottom-nav mobile-only">
       <a href="index.html" class="nav-link ${this.activePage === 'home' ? 'active' : ''}">
-        <i data-lucide="rocket"></i><span>DECK</span>
+        <i data-lucide="turtle"></i><span>DECK</span>
       </a>
       <a href="projects.html" class="nav-link ${this.activePage === 'projects' ? 'active' : ''}">
-        <i data-lucide="database"></i><span>DATA</span>
+        <i data-lucide="database"></i><span>PROJECT_LOG</span>
       </a>
       <a href="skills.html" class="nav-link ${this.activePage === 'skills' ? 'active' : ''}">
-        <i data-lucide="too-case"></i><span>STATS</span>
+        <i data-lucide="network"></i><span>SKILL_TREE</span>
       </a>
       <a href="contact.html" class="nav-link ${this.activePage === 'contact' ? 'active' : ''}">
-        <i data-lucide="turtle"></i><span>COMMS</span>
+        <i data-lucide="keyboard"></i><span>CONTACT_NODE</span>
       </a>
     </nav>
     `;

@@ -28,6 +28,7 @@ class HomePage extends Page {
 
     this.state.narrative = contentService.getContent()?.narrative || {};
     this.state.featuredProjects = contentService.getFeaturedProjects(3);
+    this.state.author = contentService.getContent()?.author || {};
 
     log('HomePage data loaded');
   }
@@ -37,7 +38,7 @@ class HomePage extends Page {
    */
   setupComponents() {
     const skipIntro = sessionStorage.getItem('skip-intro') === 'true';
-    
+
     if (!this.avatar) {
       if (skipIntro) {
         sessionStorage.removeItem('skip-intro');
@@ -68,7 +69,7 @@ class HomePage extends Page {
         </div>
       </div>
       <div class="dialogue-box">
-        <div class="dialogue-tag">VOID_NARRATOR</div>
+        <div class="dialogue-tag">TORTOISE_OS</div>
         <p id="dialogue-text" class="dialogue-text"></p>
         <div class="dialogue-next">
           <i data-lucide="chevron-down"></i>
@@ -181,7 +182,7 @@ class HomePage extends Page {
 
     // Set hero mode for initial welcome
     narratorService.setHeroMode(true);
-    
+
     // We listen for dialogue box clicks to advance the intro
     const advanceIntro = () => {
       this.nextHeroIntroStep(advanceIntro);
@@ -194,8 +195,8 @@ class HomePage extends Page {
     eventBus.on('narrator:dialogue_clicked', advanceIntro);
 
     // Update side stats with choice
-    const coordX = domHelper.$('#coord-x');
-    if (coordX) coordX.textContent = this.avatar === 'dino' ? 'D_01' : 'O_01';
+    const coordX = domHelper.$('#nav-sys');
+    if (coordX) coordX.textContent = this.avatar === 'dino' ? 'DINO_01' : 'ONIGIRI_01';
 
     // Initially render only the hero section
     this.renderJourneySections(true);
@@ -207,7 +208,7 @@ class HomePage extends Page {
    */
   nextHeroIntroStep(clickCallback) {
     const introText = contentService.getContent()?.narrative?.pages?.home?.intro || [];
-    
+
     if (this.heroIntroStep < introText.length) {
       narratorService.setMessage(introText[this.heroIntroStep]);
       this.heroIntroStep++;
@@ -215,13 +216,13 @@ class HomePage extends Page {
       // Transition to HUD
       narratorService.setHeroMode(false);
       narratorService.setPageMessage('home', 'guide');
-      
+
       // Re-enable scrolling
       document.body.classList.remove('no-scroll');
 
       // Render the full content now
       this.renderJourneySections(false);
-      
+
       // Remove the event listener so clicks on corner narrator don't re-trigger this
       eventBus.off('narrator:dialogue_clicked', clickCallback);
     }
@@ -233,12 +234,13 @@ class HomePage extends Page {
    */
   renderJourneySections(heroOnly = false) {
     const container = domHelper.$('#journey-content');
+    const author = this.state.author || {};
 
     const heroHTML = `
       <section class="journey-hero">
         <div class="hero-titles">
-          <h1 class="journey-title">RACHEL_LIM</h1>
-          <p class="journey-subtitle">CS_STUDENT // ART_ENTHUSIAST</p>
+          <h1 class="journey-title">${author.name || 'Unknown'}</h1>
+          <p class="journey-subtitle">${author.subtitle || 'Unknown'}</p>
         </div>
       </section>
     `;
@@ -257,7 +259,7 @@ class HomePage extends Page {
     `;
 
     container.innerHTML = heroOnly ? heroHTML : heroHTML + contentHTML;
-    
+
     if (!heroOnly) {
       this.setupScrollAnimations();
     }
@@ -284,6 +286,13 @@ class HomePage extends Page {
       // Update coords
       const coordY = domHelper.$('#coord-y');
       if (coordY) coordY.textContent = Math.floor(scrolled);
+
+      // Update Progress Bar
+      const progressBar = domHelper.$('.progress-bar');
+      if (progressBar) {
+        const progress = Math.min(100, (scrolled / (document.body.scrollHeight - window.innerHeight)) * 100);
+        progressBar.style.width = `${progress}%`;
+      }
     });
   }
 

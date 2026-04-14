@@ -62,6 +62,19 @@
   }
 }
 
+@keyframes warp {
+  0% {
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  100% {
+    transform: scale(5);
+    filter: blur(10px);
+    opacity: 0;
+  }
+}
+
 /* ===== Scale Animations ===== */
 @keyframes scaleIn {
   from {
@@ -250,7 +263,8 @@
   background-repeat: no-repeat;
   image-rendering: pixelated;
   display: block;
-  background-size: 300% 100%; /* 3 frames */
+  background-size: 300% 100%;
+  /* 3 frames */
 }
 
 .sprite-dino {

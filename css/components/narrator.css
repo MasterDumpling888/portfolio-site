@@ -24,11 +24,12 @@
 .narrator-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-m);
   cursor: pointer;
   transition: all 0.8s var(--transition-cubic);
-  position: relative; /* Base for absolute positioning */
+  position: relative;
+  padding: var(--spacing-m);
 }
 
 .hero-mode .narrator-container {
@@ -40,15 +41,18 @@
 /* --- Avatar Portrait --- */
 .narrator-portrait {
   flex-shrink: 0;
-  width: 80px; /* Reduced size */
-  height: 80px; /* Reduced size */
+  width: 80px;
+  /* Reduced size */
+  height: 80px;
+  /* Reduced size */
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute; /* Position relative to container */
+  position: absolute;
+  /* Position relative to container */
   left: -20px;
   bottom: -10px;
   z-index: 10;
@@ -58,7 +62,8 @@
 }
 
 .hero-mode .narrator-portrait {
-  position: relative; /* Reset for hero mode */
+  position: relative;
+  /* Reset for hero mode */
   left: auto;
   bottom: auto;
   width: 220px;
@@ -79,8 +84,10 @@
 
 /* Scale down the 145px sprite to fit container */
 .narrator-portrait .sprite-animated {
-  width: 60px; /* Reduced size */
-  height: 60px; /* Reduced size */
+  width: 60px;
+  /* Reduced size */
+  height: 60px;
+  /* Reduced size */
   transition: all 0.8s var(--transition-cubic);
 }
 
@@ -97,9 +104,8 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-m);
-  padding-left: 50px; /* Make room for the overlapping portrait */
   position: relative;
-
+  left: var(--spacing-xl);
   display: flex;
   flex-direction: column;
   min-height: 100px;
@@ -109,7 +115,8 @@
 .hero-mode .narrator-dialogue {
   width: 100%;
   border-width: 2px;
-  padding-left: var(--spacing-m); /* Reset padding in hero mode */
+  padding-left: var(--spacing-m);
+  left: 0;
 }
 
 .dialogue-header {
@@ -229,7 +236,7 @@
     bottom: calc(var(--spacing-m) + 50px);
   }
 
-  .narrator-wrapper.hero-mode {
+  .narrator-wrapper .hero-mode {
     left: 50%;
     right: auto;
     bottom: 50%;
@@ -246,8 +253,8 @@
   .narrator-portrait {
     width: 60px;
     height: 60px;
-    left: -10px;
-    bottom: -5px;
+    left: 10px;
+    bottom: 20px;
   }
 
   .narrator-portrait .sprite-animated {
@@ -261,9 +268,15 @@
   }
 
   .narrator-dialogue {
-    min-height: 80px;
-    padding: var(--spacing-s);
-    padding-left: 40px; /* Room for smaller mobile portrait */
+    min-height: 50px;
+    padding: var(--spacing-2xs);
+    /* Room for smaller mobile portrait */
+  }
+
+  .hero-mode .narrator-dialogue {
+    width: 100%;
+    left: 0;
+    padding: var(--spacing-xs);
   }
 
   .lore-hint {

@@ -17,6 +17,7 @@
   /* Art/Narrative (Magenta/Gold) */
   --color-secondary: #ff59e3;
   --color-secondary-glow: rgba(255, 89, 227, 0.6);
+  --color-secondary-dim: #a0318f;
   --color-tertiary: #fdd400;
   --color-tertiary-glow: rgba(253, 212, 0, 0.6);
 
@@ -113,4 +114,21 @@
   /* Secondary/Tertiary adjustments */
   --color-secondary: #d112b3;
   --color-tertiary: #b39600;
+}
+
+/* Visibility Utilities */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
 }

@@ -23,6 +23,7 @@ class SkillsPage extends Page {
     }
 
     this.state.skills = contentService.getSkills();
+    this.state.author = contentService.getContent()?.author || {};
     log('Skills data loaded');
   }
 
@@ -30,49 +31,28 @@ class SkillsPage extends Page {
    * Set up page components
    */
   setupComponents() {
-    this.renderCharacterPreview();
+    this.renderAuthorPreview();
     this.renderSkillModules();
   }
 
   /**
    * Render the chosen character preview
    */
-  renderCharacterPreview() {
-    const container = domHelper.$('#active-character');
-    const nameEl = domHelper.$('#character-name');
-    const classEl = domHelper.$('#character-class');
+  renderAuthorPreview() {
+    const container = domHelper.$('#author-container');
+    const author = this.state.author;
 
-    if (!container || !nameEl || !classEl) return;
 
-    const characterData = {
-      dino: {
-        name: 'DINO_EXPLORER',
-        class: 'DATA_SCAVENGER_V1',
-        img: 'assets/images/dino sprite.png'
-      },
-      onigiri: {
-        name: 'ONIGIRI_NODE',
-        class: 'SIGNAL_RELAY_V2',
-        img: 'assets/images/onigiri sprite.png'
-      }
-    };
+    if (!container) return;
 
-    const active = characterData[this.avatar] || characterData.dino;
-    const spriteClass = this.avatar === 'onigiri' ? 'sprite-onigiri' : 'sprite-dino';
     container.innerHTML = `
-      <div class="animate-float">
-        <div class="sprite-animated ${spriteClass}"></div>
-      </div>
+        <i data-lucide="ghost" class="user-icon"></i>
+        <h2 id="author-name" class="author-name">${author.name || 'Unknown'}</h2>
+        <p id="author-class" class="author-class">${author.subtitle || 'Unknown'}</p>
     `;
 
-    nameEl.textContent = active.name;
-    classEl.textContent = active.class;
 
-    // Apply theme color
-    if (this.avatar === 'onigiri') {
-      nameEl.style.color = 'var(--color-secondary)';
-      container.style.filter = 'drop-shadow(0 0 15px var(--color-secondary-glow))';
-    }
+    if (window.lucide) window.lucide.createIcons();
   }
 
   /**
@@ -102,7 +82,7 @@ class SkillsPage extends Page {
                 <span class="module-level">${this.formatLevel(skill.level)}</span>
               </div>
               <div class="module-bar-container">
-                <div class="module-bar level-${skill.level.toLowerCase()}" style="width: 0;"></div>
+                <div class="module-bar level-${skill.level.toLowerCase()}" ></div>
               </div>
             </div>
           `).join('')}

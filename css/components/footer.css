@@ -1,6 +1,6 @@
 /* --- Footer --- */
 .site-footer {
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-l);
   border-top: 1px solid var(--color-border);
   background: var(--color-surface);
   backdrop-filter: blur(5px);
@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-m);
+  gap: var(--spacing-s);
   text-align: center;
 }
 
@@ -35,10 +35,15 @@
   opacity: 0.6;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
+    padding: 0;
+  }
+
+  .site-footer {
+    padding-bottom: var(--spacing-3xl);
   }
 }

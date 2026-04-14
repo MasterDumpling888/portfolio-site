@@ -114,9 +114,6 @@ h6 {
   line-height: 1.1;
 }
 
-p {
-  margin-bottom: var(--spacing-s);
-}
 
 a {
   text-decoration: none;
