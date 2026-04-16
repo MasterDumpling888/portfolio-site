@@ -63,16 +63,15 @@ class HomePage extends Page {
     const introText = this.state.narrative.intro || [];
 
     container.innerHTML = `
-      <div class="narrator-sprite">
-        <div class="sprite-pulse">
-          <i data-lucide="person-standing" class="text-primary"></i>
-        </div>
+    <div class="narrator-null-vessel">
+      <div class="narrator-null-sprite sprite-pulse">
+        <i data-lucide="person-standing" class="text-primary"></i>
       </div>
-      <div class="dialogue-box">
+        <div class="dialogue-box">
         <div class="dialogue-tag">TORTOISE_OS</div>
         <p id="dialogue-text" class="dialogue-text"></p>
         <div class="dialogue-next">
-          <i data-lucide="chevron-down"></i>
+          <i data-lucide="chevron-right"></i>
         </div>
       </div>
     `;
