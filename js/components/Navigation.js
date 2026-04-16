@@ -1,147 +1,151 @@
 /* ========================================
    Navigation Component
-   Reusable navigation bar for all pages
+   Manages global navigation bar and menu
    ======================================== */
 
 import Component from '../core/Component.js';
-import { log } from '../config.js';
 import domHelper from '../utils/DOMHelper.js';
+import themeManager from '../services/ThemeManager.js';
+import { log } from '../config.js';
 
 class Navigation extends Component {
-  constructor(currentPage = 'home') {
-    super('main-navigation');
-    this.currentPage = currentPage;
+  constructor(activePage = 'home') {
+    super('header-root');
+    this.activePage = activePage;
   }
 
   /**
-   * Initialize component
+   * Initialize navigation
    */
   init() {
-    // Navigation already exists in HTML, so we just need to enhance it
-    this.element = document.getElementById(this.elementId);
+    const success = super.init();
+    if (!success) return false;
 
-    if (!this.element) {
-      log('Navigation element not found, will be created');
-      return false;
-    }
-
-    this.setupEventListeners();
-    this.setActivePage(this.currentPage);
+    this.mount();
     return true;
   }
 
   /**
-   * Set up event listeners
+   * Render the navigation HTML
    */
-  setupEventListeners() {
-    // Mobile menu toggle
-    this.setupMobileMenu();
+  render() {
+    return `
+    <header class="fixed-header">
+      <div class="header-container">
+        <div class="terminal-logo">
+          <a href="index.html" class="terminal-logo ${this.activePage === 'home' ? 'active' : ''}">
+            <i data-lucide="egg" class="text-primary"></i>
+            <h1 class="terminal-title">TAMAGO_OS</h1>
+        </div>
 
-    // Scroll effects
-    this.setupScrollEffects();
+        <nav class="desktop-nav">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="index.html" class="nav-link ${this.activePage === 'home' ? 'active' : ''}">DECK</a></li>
+            <li><a href="projects.html" class="nav-link ${this.activePage === 'projects' ? 'active' : ''}">PROJECT_LOG</a></li>
+            <li><a href="skills.html" class="nav-link ${this.activePage === 'skills' ? 'active' : ''}">SKILL_TREE</a></li>
+            <li><a href="contact.html" class="nav-link ${this.activePage === 'contact' ? 'active' : ''}">CONTACT_NODE</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <button id="avatar-switcher" class="text-secondary glow-text-secondary" aria-label="Change Avatar" title="Change Avatar">
+            RESET
+          </button>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+            <i data-lucide="sun" class="theme-icon light"></i>
+            <i data-lucide="moon" class="theme-icon dark"></i>
+          </button>
+        </div>
+      </div>
+      
+      </header>
+
+    <nav class="bottom-nav mobile-only">
+      <a href="index.html" class="nav-link ${this.activePage === 'home' ? 'active' : ''}">
+        <i data-lucide="turtle"></i><span>DECK</span>
+      </a>
+      <a href="projects.html" class="nav-link ${this.activePage === 'projects' ? 'active' : ''}">
+        <i data-lucide="database"></i><span>PROJECT_LOG</span>
+      </a>
+      <a href="skills.html" class="nav-link ${this.activePage === 'skills' ? 'active' : ''}">
+        <i data-lucide="network"></i><span>SKILL_TREE</span>
+      </a>
+      <a href="contact.html" class="nav-link ${this.activePage === 'contact' ? 'active' : ''}">
+        <i data-lucide="keyboard"></i><span>CONTACT_NODE</span>
+      </a>
+    </nav>
+    `;
   }
 
   /**
-   * Set up mobile menu functionality
+   * Setup event listeners after mounting
+   */
+  afterMount() {
+    this.setupThemeToggle();
+    this.setupMobileMenu();
+    this.setupAvatarSwitcher();
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+
+    log('Navigation mounted and initialized');
+  }
+
+  /**
+   * Set up theme toggle
+   */
+  setupThemeToggle() {
+    const themeToggle = domHelper.$('#theme-toggle', this.element);
+    if (!themeToggle) return;
+
+    themeToggle.addEventListener('click', () => {
+      const newTheme = themeManager.toggle();
+      log('Theme toggled to:', newTheme);
+    });
+  }
+
+  /**
+   * Set up avatar switcher
+   */
+  setupAvatarSwitcher() {
+    const switcher = domHelper.$('#avatar-switcher', this.element);
+    if (!switcher) return;
+
+    switcher.addEventListener('click', () => {
+      localStorage.removeItem('portfolio-avatar');
+      sessionStorage.setItem('skip-intro', 'true');
+      log('Avatar reset, redirecting to selection (skipping intro)');
+
+      // Navigate back to home to trigger selection
+      if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+        window.location.reload();
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+  }
+
+  /**
+   * Set up mobile menu toggle
    */
   setupMobileMenu() {
-    const menuToggle = domHelper.$('#mobile-menu-toggle');
-    const navMenu = domHelper.$('#nav-menu');
+    const toggle = domHelper.$('#mobile-menu-toggle', this.element);
+    const menu = domHelper.$('#nav-menu', this.element);
 
-    if (!menuToggle || !navMenu) return;
+    if (!toggle || !menu) return;
 
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      const isOpen = navMenu.classList.contains('active');
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      const isMenuOpen = menu.classList.contains('active');
+      const iconName = isMenuOpen ? 'x' : 'menu';
 
-      // Update icon
-      const icon = menuToggle.querySelector('i');
-      if (icon) {
-        icon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
-        if (window.lucide) {
-          window.lucide.createIcons();
-        }
-      }
+      toggle.innerHTML = `<i data-lucide="${iconName}"></i>`;
 
-      log('Mobile menu toggled:', isOpen ? 'open' : 'closed');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('active');
-        const icon = menuToggle.querySelector('i');
-        if (icon) {
-          icon.setAttribute('data-lucide', 'menu');
-          if (window.lucide) {
-            window.lucide.createIcons();
-          }
-        }
+      if (window.lucide) {
+        window.lucide.createIcons();
       }
     });
-
-    // Close menu when nav link is clicked
-    const navLinks = navMenu.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
-    });
-  }
-
-  /**
-   * Set up scroll effects
-   */
-  setupScrollEffects() {
-    const nav = this.element;
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-
-      // Add scrolled class when scrolled down
-      if (currentScroll > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-
-      lastScroll = currentScroll;
-    });
-  }
-
-  /**
-   * Set active page in navigation
-   * @param {string} pageName - Current page name
-   */
-  setActivePage(pageName) {
-    const navLinks = domHelper.$$('.nav-link');
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-
-      const href = link.getAttribute('href');
-      const linkPage = this.getPageFromHref(href);
-
-      if (linkPage === pageName) {
-        link.classList.add('active');
-      }
-    });
-
-    log('Active page set:', pageName);
-  }
-
-  /**
-   * Get page name from href
-   * @param {string} href - Link href
-   * @returns {string} Page name
-   */
-  getPageFromHref(href) {
-    if (href === 'index.html' || href === '/') return 'home';
-    if (href.includes('projects.html')) return 'projects';
-    if (href.includes('skills.html')) return 'skills';
-    if (href.includes('contact.html')) return 'contact';
-    return 'home';
   }
 }
 

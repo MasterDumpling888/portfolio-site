@@ -1,118 +1,66 @@
 /* ========================================
    Projects Page Styles
-   Projects page specific styles
+   Cosmic Terminal Data Query
    ======================================== */
 
 .projects-page {
-  background-color: var(--color-bg-primary);
+  padding-top: var(--spacing-3xl);
 }
 
-/* Filter Section */
 .projects-filter {
-  padding: var(--space-3xl) var(--container-padding);
-  background-color: var(--color-bg-secondary);
-  border-bottom: 1px solid var(--color-border);
-  position: sticky;
-  top: var(--nav-height);
-  z-index: var(--z-fixed);
-  backdrop-filter: blur(10px);
+  margin-bottom: var(--spacing-l);
 }
 
 .filter-container {
-  max-width: var(--container-max-width);
-  margin: 0 auto;
+  background: var(--color-surface-variant);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xs);
+  overflow-x: auto;
 }
 
 .filter-buttons {
   display: flex;
-  gap: var(--space-md);
-  justify-content: center;
-  flex-wrap: wrap;
+  gap: var(--spacing-m);
+  min-width: max-content;
 }
 
 .filter-btn {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-md) var(--space-xl);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-  background-color: var(--color-bg-tertiary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
+  background: none;
+  border: 1px solid transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size--1);
+  padding: 6px 16px;
   cursor: pointer;
-  transition: all var(--transition-base);
-}
-
-.filter-btn i {
-  width: 18px;
-  height: 18px;
+  transition: var(--transition-base);
+  letter-spacing: 0.1em;
 }
 
 .filter-btn:hover {
-  color: var(--color-text-primary);
-  background-color: var(--color-hover);
-  border-color: var(--color-border-light);
-  transform: translateY(-2px);
+  color: var(--color-primary);
+  background: var(--color-primary-glow);
 }
 
 .filter-btn.active {
-  color: var(--color-text-primary);
-  background: linear-gradient(135deg,
-      rgba(0, 240, 255, 0.2),
-      rgba(255, 0, 128, 0.2));
-  border-color: var(--color-accent-1);
-  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: var(--color-stats-bg);
+  box-shadow: inset 0 0 10px var(--color-primary-glow);
 }
 
-.filter-btn:focus-visible {
-  outline: 2px solid var(--color-accent-1);
-  outline-offset: 2px;
+/* --- Projects Grid --- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-l);
+  padding-bottom: var(--spacing-3xl);
 }
 
-/* Projects Section */
-.projects-section {
-  min-height: 60vh;
-}
-
-/* Filter Animation */
-.project-card.filtering {
-  animation: scaleIn 0.4s var(--transition-cubic);
-}
-
-.project-card.hidden {
-  display: none;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .projects-filter {
-    padding: var(--space-2xl) var(--space-lg);
-    z-index: var(--z-fixed);
-  }
-
-  .filter-buttons {
-    gap: var(--space-sm);
-  }
-
-  .filter-btn {
-    padding: var(--space-sm) var(--space-lg);
-    font-size: var(--font-size-xs);
-  }
-
-  .filter-btn span {
-    display: none;
-  }
-
-  .filter-btn i {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .filter-btn {
-    padding: var(--space-sm) var(--space-md);
-  }
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-3xl) 0;
+  font-family: var(--font-mono);
+  color: var(--color-error);
+  letter-spacing: 0.2em;
 }

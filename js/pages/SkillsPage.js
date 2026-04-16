@@ -1,6 +1,6 @@
 /* ========================================
    SkillsPage Controller
-   Manages skills page display
+   Manages character stats and skill modules
    ======================================== */
 
 import Page from '../core/Page.js';
@@ -11,149 +11,110 @@ import domHelper from '../utils/DOMHelper.js';
 class SkillsPage extends Page {
   constructor() {
     super('skills');
+    this.avatar = localStorage.getItem('portfolio-avatar') || 'dino';
   }
 
   /**
    * Load page data
    */
   async loadData() {
-    // Ensure content service is initialized
     if (!contentService.isReady()) {
       await contentService.init();
     }
 
-    // Get all skills
     this.state.skills = contentService.getSkills();
-
-    log('SkillsPage data loaded:', this.state.skills.length, 'categories');
+    this.state.author = contentService.getContent()?.author || {};
+    log('Skills data loaded');
   }
 
   /**
    * Set up page components
    */
   setupComponents() {
-    this.renderSkills();
+    this.renderAuthorPreview();
+    this.renderSkillModules();
   }
 
   /**
-   * Render all skills by category
+   * Render the chosen character preview
    */
-  renderSkills() {
+  renderAuthorPreview() {
+    const container = domHelper.$('#author-container');
+    const author = this.state.author;
+
+
+    if (!container) return;
+
+    container.innerHTML = `
+        <i data-lucide="ghost" class="user-icon"></i>
+        <h2 id="author-name" class="author-name">${author.name || 'Unknown'}</h2>
+        <p id="author-class" class="author-class">${author.subtitle || 'Unknown'}</p>
+    `;
+
+
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  /**
+   * Render skill categories as modules
+   */
+  renderSkillModules() {
+    const container = domHelper.$('#skills-container');
+    if (!container) return;
+
     const categories = this.state.skills;
-
-    if (!categories || categories.length === 0) {
-      log('No skills data available');
-      return;
-    }
-
-    categories.forEach(category => {
-      this.renderSkillCategory(category);
-    });
-
-    log(`Rendered ${categories.length} skill categories`);
-
-    // Reinitialize Lucide icons
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
-  }
-
-  /**
-   * Render a single skill category
-   * @param {Object} category - Category data
-   */
-  renderSkillCategory(category) {
-    const containerId = `${category.id}-skills`;
-    const container = domHelper.$(`#${containerId}`);
-
-    if (!container) {
-      log(`Container not found: ${containerId}`);
-      return;
-    }
-
-    // Clear container
     container.innerHTML = '';
 
-    // Render each skill in the category
-    if (category.skills && category.skills.length > 0) {
-      category.skills.forEach((skill, index) => {
-        const skillCard = this.createSkillCard(skill, index);
-        container.appendChild(skillCard);
+    categories.forEach(category => {
+      const categoryBlock = document.createElement('div');
+      categoryBlock.className = 'skill-category-block';
+
+      categoryBlock.innerHTML = `
+        <div class="category-label">
+          ${domHelper.getIconHTML(category.icon || 'box')}
+          <span>${category.name.toUpperCase().replace(/ /g, '_')}</span>
+        </div>
+        <div class="skills-list">
+          ${category.skills.map(skill => `
+            <div class="skill-module scroll-reveal">
+              <div class="module-header">
+                <span class="module-name">${skill.name}</span>
+                <span class="module-level">${this.formatLevel(skill.level)}</span>
+              </div>
+              <div class="module-bar-container">
+                <div class="module-bar level-${skill.level.toLowerCase()}" ></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      container.appendChild(categoryBlock);
+    });
+
+    // Animate bars after a short delay
+    setTimeout(() => {
+      const bars = domHelper.$$('.module-bar');
+      bars.forEach(bar => {
+        const levelClass = Array.from(bar.classList).find(c => c.startsWith('level-'));
+        if (levelClass) {
+          // Width is handled by CSS, we just need to trigger the change if it wasn't automatic
+          // Actually, our CSS has the widths, so we just ensure they're visible
+        }
       });
+    }, 100);
 
-      log(`Rendered ${category.skills.length} skills in ${category.name}`);
-    }
+    if (window.lucide) window.lucide.createIcons();
+    this.setupScrollAnimations();
   }
 
-  /**
-   * Create skill card element
-   * @param {Object} skill - Skill data
-   * @param {number} index - Skill index for animation delay
-   * @returns {HTMLElement} Skill card element
-   */
-  createSkillCard(skill, index) {
-    const card = document.createElement('div');
-    card.className = 'skill-card scroll-reveal';
-    card.style.animationDelay = `${index * 0.05}s`;
-
-    // Skill icon
-    const icon = document.createElement('div');
-    icon.className = 'skill-icon';
-    icon.innerHTML = domHelper.getIconHTML(skill.icon || 'code');
-    card.appendChild(icon);
-
-    // Skill name
-    const name = document.createElement('div');
-    name.className = 'skill-name';
-    name.textContent = skill.name;
-    card.appendChild(name);
-
-    // Skill level (optional)
-    if (skill.level) {
-      const level = document.createElement('div');
-      level.className = 'skill-level';
-      level.textContent = this.formatLevel(skill.level);
-      card.appendChild(level);
-    }
-
-    return card;
-  }
-
-  /**
-   * Format skill level
-   * @param {string} level - Level identifier
-   * @returns {string} Formatted level
-   */
   formatLevel(level) {
-    const levelMap = {
-      'beginner': 'Beginner',
-      'intermediate': 'Intermediate',
-      'advanced': 'Advanced',
-      'expert': 'Expert'
-    };
-
-    return levelMap[level] || level;
+    return level.toUpperCase();
   }
 
-  /**
-   * Get level class for styling
-   * @param {string} level - Level identifier
-   * @returns {string} CSS class name
-   */
-  getLevelClass(level) {
-    return `level-${level}`;
-  }
-
-  /**
-   * Called when page becomes active
-   */
   onActivate() {
     super.onActivate();
-
-    // Reinitialize Lucide icons
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
+    log('Skills page activated');
   }
 }
 

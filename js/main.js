@@ -5,6 +5,8 @@
 
 import { CONFIG, log } from './config.js';
 import eventBus from './core/EventBus.js';
+import themeManager from './services/ThemeManager.js';
+import { getParticlesConfig } from './utils/ParticlesConfig.js';
 
 class App {
   constructor() {
@@ -24,9 +26,16 @@ class App {
     log('Initializing application...');
 
     try {
+      // Initialize theme early
+      themeManager.init();
+
       // Initialize content service first
       const contentService = (await import('./services/ContentService.js')).default;
       await contentService.init();
+
+      // Initialize Narrator service
+      const narratorService = (await import('./services/NarratorService.js')).default;
+      await narratorService.init();
 
       // Update page metadata from content
       this.updatePageMetadata(contentService);
@@ -34,8 +43,8 @@ class App {
       // Initialize global components
       log('Initializing global components...');
       await this.initNavigationComponent();
+      await this.initNarratorComponent();
       await this.initFooterComponent();
-      this.setupThemeToggle();
       log('Global components initialization complete');
 
       // Set up global event listeners
@@ -44,8 +53,7 @@ class App {
       // Initialize Lucide icons
       this.initIcons();
 
-      // Set initial theme
-      this.initTheme();
+      this.initParticles();
 
       // Initialize current page
       await this.initCurrentPage();
@@ -113,6 +121,24 @@ class App {
   }
 
   /**
+   * Initialize Narrator component
+   */
+  async initNarratorComponent() {
+    try {
+      log('Loading Narrator component...');
+      const { default: Narrator } = await import('./components/Narrator.js');
+
+      const narrator = new Narrator();
+      await narrator.init();
+
+      this.registerComponent('narrator', narrator);
+      log('Narrator component initialized');
+    } catch (error) {
+      console.error('Failed to initialize Narrator:', error);
+    }
+  }
+
+  /**
    * Initialize Footer component
    */
   async initFooterComponent() {
@@ -131,49 +157,6 @@ class App {
   }
 
   /**
-   * Set up theme toggle
-   */
-  setupThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle) return;
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.body.getAttribute('data-theme') || 'dark';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-      this.setTheme(newTheme);
-      log('Theme toggled to:', newTheme);
-    });
-  }
-
-  /**
-   * Initialize theme
-   */
-  initTheme() {
-    // Try to load saved theme from localStorage
-    const savedTheme = localStorage.getItem(CONFIG.theme.storageKey);
-    const theme = savedTheme || CONFIG.theme.default;
-
-    this.setTheme(theme, false);
-    log('Theme initialized:', theme);
-  }
-
-  /**
-   * Set theme
-   * @param {string} theme - Theme name ('dark' or 'light')
-   * @param {boolean} save - Whether to save to localStorage
-   */
-  setTheme(theme, save = true) {
-    document.body.setAttribute(CONFIG.theme.attribute, theme);
-
-    if (save) {
-      localStorage.setItem(CONFIG.theme.storageKey, theme);
-    }
-
-    eventBus.emit('theme:changed', { theme });
-  }
-
-  /**
    * Initialize Lucide icons
    */
   initIcons() {
@@ -184,9 +167,29 @@ class App {
   }
 
   /**
+   * Initialize particles.js
+   */
+  initParticles() {
+    if (window.particlesJS) {
+      const currentTheme = themeManager.getCurrentTheme();
+      const config = getParticlesConfig(currentTheme);
+      window.particlesJS('particles-js', config);
+      log('Particles.js initialized with config for:', currentTheme);
+    } else {
+      log('Particles.js not found on window, retrying in 100ms...');
+      setTimeout(() => this.initParticles(), 100);
+    }
+  }
+
+  /**
    * Set up global event listeners
    */
   setupGlobalEvents() {
+    // Handle theme changes
+    eventBus.on('theme:changed', ({ theme }) => {
+      this.initParticles();
+    });
+
     // Handle window resize
     let resizeTimeout;
     window.addEventListener('resize', () => {

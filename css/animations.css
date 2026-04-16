@@ -62,6 +62,19 @@
   }
 }
 
+@keyframes warp {
+  0% {
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  100% {
+    transform: scale(5);
+    filter: blur(10px);
+    opacity: 0;
+  }
+}
+
 /* ===== Scale Animations ===== */
 @keyframes scaleIn {
   from {
@@ -91,16 +104,16 @@
   0%,
   100% {
     text-shadow:
-      0 0 10px var(--color-neon-blue-glow),
-      0 0 20px var(--color-neon-blue-glow),
-      0 0 30px var(--color-neon-blue-glow);
+      0 0 10px var(--color-primary-glow),
+      0 0 20px var(--color-primary-glow),
+      0 0 30px var(--color-primary-glow);
   }
 
   50% {
     text-shadow:
-      0 0 20px var(--color-neon-blue-glow),
-      0 0 30px var(--color-neon-blue-glow),
-      0 0 40px var(--color-neon-blue-glow);
+      0 0 20px var(--color-primary-glow),
+      0 0 30px var(--color-primary-glow),
+      0 0 40px var(--color-primary-glow);
   }
 }
 
@@ -109,15 +122,15 @@
   0%,
   100% {
     box-shadow:
-      0 0 10px var(--color-neon-blue-glow),
-      0 0 20px var(--color-neon-blue-glow);
+      0 0 10px var(--color-primary-glow),
+      0 0 20px var(--color-primary-glow);
   }
 
   50% {
     box-shadow:
-      0 0 20px var(--color-neon-blue-glow),
-      0 0 30px var(--color-neon-blue-glow),
-      0 0 40px var(--color-neon-blue-glow);
+      0 0 20px var(--color-primary-glow),
+      0 0 30px var(--color-primary-glow),
+      0 0 40px var(--color-primary-glow);
   }
 }
 
@@ -144,7 +157,7 @@
   }
 
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-15px);
   }
 }
 
@@ -223,6 +236,49 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ===== Sprite Animations ===== */
+@keyframes sprite-dino {
+  from {
+    background-position: 0% 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes sprite-onigiri {
+  from {
+    background-position: 0% 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
+}
+
+.sprite-animated {
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  display: block;
+  background-size: 300% 100%;
+  /* 3 frames */
+}
+
+.sprite-dino {
+  width: 145px;
+  height: 157px;
+  background-image: url('../assets/images/dino sprite.png');
+  animation: sprite-dino 0.8s steps(2) infinite;
+}
+
+.sprite-onigiri {
+  width: 140px;
+  height: 137px;
+  background-image: url('../assets/images/onigiri sprite.png');
+  animation: sprite-onigiri 0.8s steps(2) infinite;
 }
 
 /* ===== Utility Animation Classes ===== */
@@ -318,7 +374,7 @@
 }
 
 .hover-glow:hover {
-  box-shadow: var(--shadow-neon-blue);
+  box-shadow: var(--shadow-glow-primary);
 }
 
 /* ===== Loading Animation ===== */
@@ -332,7 +388,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid var(--color-border);
-  border-top-color: var(--color-accent-1);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -354,9 +410,9 @@
 
 .animate-gradient {
   background: linear-gradient(-45deg,
-      var(--color-neon-blue),
-      var(--color-neon-magenta),
-      var(--color-accent-3));
+      var(--color-primary),
+      var(--color-secondary),
+      var(--color-tertiary));
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
 }
