@@ -301,6 +301,20 @@
   padding: var(--spacing-3xl) 0;
 }
 
+.lore-cta {
+  margin-top: var(--spacing-l);
+}
+
+.featured-projects {
+  padding: var(--spacing-3xl) 0;
+}
+
+.section-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-2xl);
+}
+
 .narrative-p {
   font-size: var(--font-size-0);
   color: var(--color-text);

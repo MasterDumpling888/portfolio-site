@@ -80,9 +80,7 @@ class ProjectsPage extends Page {
     this.setupScrollAnimations();
 
     // Reinitialize Lucide icons
-    if (window.lucide) {
-      window.lucide.createIcons();
-    }
+    if (window.lucide) window.lucide.createIcons();
   }
 
   /**

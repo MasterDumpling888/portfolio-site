@@ -249,10 +249,27 @@ class HomePage extends Page {
         <div class="divider-line"></div>
       </section>
 
-      <section class="about-journey container">
+      <section class="about-journey container scroll-reveal animate-fade-in-up">
         <h2 class="section-heading">LORE_ENTRY</h2>
         <div class="about-text-grid">
           ${contentService.getAboutContent().paragraphs.map(p => `<p class="narrative-p">${p}</p>`).join('')}
+        </div>
+        <div class="section-actions lore-cta">
+          <a href="assets/resume/LIM - Resume.pdf" download class="btn btn-primary">
+            <i data-lucide="download"></i> DOWNLOAD_RESUME
+          </a>
+        </div>
+      </section>
+
+      <section class="featured-projects container scroll-reveal animate-fade-in-up">
+        <h2 class="section-heading">FEATURED_LOGS</h2>
+        <div class="projects-preview-grid">
+          ${this.state.featuredProjects.map(project => this.createProjectCard(project)).join('')}
+        </div>
+        <div class="section-actions">
+          <a href="projects.html" class="btn btn-secondary">
+            <i data-lucide="arrow-right"></i> VIEW_ALL_LOGS
+          </a>
         </div>
       </section>
     `;
@@ -262,6 +279,44 @@ class HomePage extends Page {
     if (!heroOnly) {
       this.setupScrollAnimations();
     }
+  }
+
+  /**
+   * Helper: Create project card HTML
+   */
+
+
+  createProjectCard(project) {
+    return `
+      <article class="project-card scroll-reveal">
+        ${project.featured ? '<span class="featured-badge">FEATURED</span>' : ''}
+        <div class="project-image">
+          ${project.image
+        ? `<img src="${project.image}" alt="${project.title}" loading="lazy">`
+        : '<div class="project-image-placeholder"><i data-lucide="folder"></i></div>'
+      }
+        </div>
+        <div class="project-content">
+          <div class="project-category">${project.category || 'misc'}</div>
+          <h3 class="project-title">${project.title}</h3>
+          <p class="project-description">${project.description}</p>
+          <div class="project-tech">
+            ${(project.technologies || []).slice(0, 3).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+            ${project.technologies?.length > 3 ? `<span class="tech-tag">+${project.technologies.length - 3}</span>` : ''}
+          </div>
+          <div class="project-links">
+            ${project.links?.github
+        ? `<a href="${project.links.github}" target="_blank" class="project-link"><i data-lucide="github"></i> GITHUB</a>`
+        : ''
+      }
+            ${project.links?.demo
+        ? `<a href="${project.links.demo}" target="_blank" class="project-link"><i data-lucide="external-link"></i> DEMO</a>`
+        : ''
+      }
+          </div>
+        </div>
+      </article>
+    `;
   }
 
   /**
