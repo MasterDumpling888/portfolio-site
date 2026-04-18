@@ -86,12 +86,9 @@
   --radius-full: 9999px;
 
   /* --- Z-Index --- */
-  --z-background: -10;
-  --z-starfield: -5;
   --z-base: 1;
   --z-nav: 100;
   --z-overlay: 200;
-  --z-scanline: 300;
 }
 
 /* --- Light Theme Overrides --- */

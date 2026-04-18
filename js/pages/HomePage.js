@@ -4,6 +4,7 @@
    ======================================== */
 
 import Page from '../core/Page.js';
+import ProjectCard from '../components/ProjectCard.js';
 import contentService from '../services/ContentService.js';
 import narratorService from '../services/NarratorService.js';
 import eventBus from '../core/EventBus.js';
@@ -174,6 +175,7 @@ class HomePage extends Page {
    */
   startJourney() {
     domHelper.show('#journey-content');
+    domHelper.hide('#hero');
     log('Journey started as:', this.avatar);
 
     // Disable scrolling for cinematic intro
@@ -199,7 +201,7 @@ class HomePage extends Page {
 
     // Initially render only the hero section
     this.renderJourneySections(true);
-    this.setupParallax();
+    this.setupScrollTracker();
   }
 
   /**
@@ -237,7 +239,10 @@ class HomePage extends Page {
 
     const heroHTML = `
       <section class="journey-hero">
-        <div class="hero-titles">
+        <div class="hero-titles ${heroOnly ? 'hidden-opacity' : 'animate-dissolve'}">
+         
+          <i data-lucide="ghost" class="hero-ghost-icon animate-float"></i>
+         
           <h1 class="journey-title">${author.name || 'Unknown'}</h1>
           <p class="journey-subtitle">${author.subtitle || 'Unknown'}</p>
         </div>
@@ -245,10 +250,6 @@ class HomePage extends Page {
     `;
 
     const contentHTML = `
-      <section class="parallax-divider">
-        <div class="divider-line"></div>
-      </section>
-
       <section class="about-journey container scroll-reveal animate-fade-in-up">
         <h2 class="section-heading">LORE_ENTRY</h2>
         <div class="about-text-grid">
@@ -264,7 +265,7 @@ class HomePage extends Page {
       <section class="featured-projects container scroll-reveal animate-fade-in-up">
         <h2 class="section-heading">FEATURED_LOGS</h2>
         <div class="projects-preview-grid">
-          ${this.state.featuredProjects.map(project => this.createProjectCard(project)).join('')}
+          ${this.state.featuredProjects.map((project, index) => new ProjectCard(project, { index }).render()).join('')}
         </div>
         <div class="section-actions">
           <a href="projects.html" class="btn btn-secondary">
@@ -279,63 +280,18 @@ class HomePage extends Page {
     if (!heroOnly) {
       this.setupScrollAnimations();
     }
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
   }
 
   /**
-   * Helper: Create project card HTML
+   * Setup HUD updates based on scroll
    */
-
-
-  createProjectCard(project) {
-    return `
-      <article class="project-card scroll-reveal">
-        ${project.featured ? '<span class="featured-badge">FEATURED</span>' : ''}
-        <div class="project-image">
-          ${project.image
-        ? `<img src="${project.image}" alt="${project.title}" loading="lazy">`
-        : '<div class="project-image-placeholder"><i data-lucide="folder"></i></div>'
-      }
-        </div>
-        <div class="project-content">
-          <div class="project-category">${project.category || 'misc'}</div>
-          <h3 class="project-title">${project.title}</h3>
-          <p class="project-description">${project.description}</p>
-          <div class="project-tech">
-            ${(project.technologies || []).slice(0, 3).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-            ${project.technologies?.length > 3 ? `<span class="tech-tag">+${project.technologies.length - 3}</span>` : ''}
-          </div>
-          <div class="project-links">
-            ${project.links?.github
-        ? `<a href="${project.links.github}" target="_blank" class="project-link"><i data-lucide="github"></i> GITHUB</a>`
-        : ''
-      }
-            ${project.links?.demo
-        ? `<a href="${project.links.demo}" target="_blank" class="project-link"><i data-lucide="external-link"></i> DEMO</a>`
-        : ''
-      }
-          </div>
-        </div>
-      </article>
-    `;
-  }
-
-  /**
-   * Setup parallax effects
-   */
-  setupParallax() {
+  setupScrollTracker() {
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY;
-      const sprite = domHelper.$('.character-vessel');
-      const particles = domHelper.$('#particles-js');
-
-      if (sprite) {
-        sprite.style.transform = `translateY(${scrolled * 0.1}px) rotate(${scrolled * 0.05}deg)`;
-      }
-
-      if (particles) {
-        // Subtle shift effect for particles
-        particles.style.transform = `translateY(${scrolled * 0.02}px)`;
-      }
 
       // Update coords
       const coordY = domHelper.$('#coord-y');

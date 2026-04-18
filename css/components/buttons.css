@@ -38,16 +38,13 @@
 
 /* Primary Button */
 .btn-primary {
-  background: linear-gradient(135deg,
-      var(--color-primary),
-      var(--color-secondary));
+  background: var(--color-primary);
   color: var(--color-bg);
   box-shadow: 0 4px 15px var(--color-primary-glow);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 6px 20px var(--color-primary-glow),
-    0 0 30px var(--color-secondary-glow);
+  box-shadow: 0 6px 20px var(--color-primary-glow);
   transform: translateY(-2px);
 }
 
@@ -60,7 +57,7 @@
   height: 100%;
   background: linear-gradient(90deg,
       transparent,
-      rgba(255, 255, 255, 0.2),
+      var(--color-surface),
       transparent);
   transition: left 0.5s;
 }

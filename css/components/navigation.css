@@ -8,7 +8,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: var(--z-nav);
+  z-index: var(--z-overlay);
   background: var(--color-surface);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
@@ -103,7 +103,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: var(--z-nav);
+  z-index: var(--z-overlay);
   background: var(--color-surface);
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--color-border);
