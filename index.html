@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/components/buttons.css" />
     <link rel="stylesheet" href="css/components/narrator.css" />
     <link rel="stylesheet" href="css/pages/home.css" />
+    <link rel="stylesheet" href="css/components/project-card.css" />
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -28,7 +29,6 @@
     <!-- Global Effects -->
     <div class="global-bg"></div>
     <div id="particles-js"></div>
-    <div class="scanline"></div>
 
     <!-- Navigation Root -->
     <div id="header-root"></div>
@@ -55,8 +55,8 @@
       </div>
     </main>
 
-    <!-- Side Stats (Desktop Decoration) -->
-    <div class="side-stats desktop-only">
+    <!-- Side Stats -->
+    <div class="side-stats">
       <div class="stats-box">
         <div class="session-label">SESSION_ACTIVE</div>
         <div class="stat-line">NAV_SYS: <span id="nav-sys">NULL</span></div>
@@ -65,6 +65,18 @@
         </div>
         <div class="stat-line">STABILITY: 98%</div>
         <div class="stat-progress"><div class="progress-bar"></div></div>
+      </div>
+      <div class="stats-cta">
+        <div class="session-label">QUICK_ACCESS</div>
+        <a href="assets/resume/Lim, Rachel - CV.pdf" download class="stat-link">
+          <i data-lucide="download"></i>DOWNLOAD_RESUME
+        </a>
+        <a href="projects.html" class="stat-link">
+          <i data-lucide="database"></i>VIEW_PROJECTS
+        </a>
+        <a href="contact.html" class="stat-link">
+          <i data-lucide="keyboard"></i>CONTACT_NODE
+        </a>
       </div>
     </div>
 

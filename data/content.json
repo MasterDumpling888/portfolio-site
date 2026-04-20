@@ -19,10 +19,10 @@
       "INITIALIZING MISSION BRIEFING...",
       "Hello, Explorer 853...",
       "You were chosen among the many to man TORTOISE.",
-      "You mission is to navigate the digital nebula and FIND Tamago.",
+      "Your mission is to navigate the digital nebula and FIND Tamago.",
       "In the vastness of the internet space, there has been a phenomenon that caused data fragments to scatter across the sectors. We have not been able to uncover the cause. Our only hope is to find out about the ancient forms that may hold the key to restoring balance.",
       "Tamago was our first prototype under Project RESTORE, sent on a mission to explore the nebula, 10111001, and retrieve data from high-density signal clusters that contains information on one of our Subjects of Interest (SOI), Ancient Form: Rachel.",
-      "Tamago's last known coordinates were in the vicinity Base 16, the central hub of nebula, 10111001. We have reason to believe that Tamago may have encounterd a burst of high-density data that may have caused a system failure and resulted in the loss of communication.",
+      "Tamago's last known coordinates were in the vicinity Base 16, the central hub of nebula, 10111001, before we lost connection. We have reason to believe that Tamago may have encounterd a burst of high-density data that may have caused a system failure and resulted in the loss of communication.",
       "But recently, our researchers have detected faint signals from Tamago's data core 4864, suggesting that it may have survived and collected valuable data fragments from the nebula.",
       "Your task is to locate Tamago and retrieve the data fragments it has collected, allowing us to study the ancient forms, bringing us closer to restoring balance.",
       "MISSION BRIEFING COMPLETE.",
@@ -37,7 +37,7 @@
         "intro": [
           "Welcome! I've been waiting for you.",
           "I'll be your guide through Tamago's data core, where I have created a LORE from the data fragments I've collected!",
-          "I'll stay down here in the corner. Let's explore!"
+          "I'll stay down here in the corner. Scroll down to explore!"
         ],
         "guide": "We've arrived at the central hub, the DECK. From here, you can access the lore from Ancient Form: Rachel.",
         "lore": "Based on the fragments I've collected, Ancient Form: Rachel was a dual-class form. I wonder what that means..."

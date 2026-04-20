@@ -318,6 +318,24 @@
   animation: rotate 2s linear infinite;
 }
 
+@keyframes dissolveAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-dissolve {
+  animation: dissolveAppear 1.2s var(--transition-cubic) forwards;
+}
+
 /* Animation Delays */
 .animate-delay-100 {
   animation-delay: 100ms;

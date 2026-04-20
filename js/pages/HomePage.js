@@ -4,6 +4,7 @@
    ======================================== */
 
 import Page from '../core/Page.js';
+import ProjectCard from '../components/ProjectCard.js';
 import contentService from '../services/ContentService.js';
 import narratorService from '../services/NarratorService.js';
 import eventBus from '../core/EventBus.js';
@@ -63,16 +64,15 @@ class HomePage extends Page {
     const introText = this.state.narrative.intro || [];
 
     container.innerHTML = `
-      <div class="narrator-sprite">
-        <div class="sprite-pulse">
-          <i data-lucide="person-standing" class="text-primary"></i>
-        </div>
+    <div class="narrator-null-vessel">
+      <div class="narrator-null-sprite sprite-pulse">
+        <i data-lucide="person-standing" class="text-primary"></i>
       </div>
-      <div class="dialogue-box">
+        <div class="dialogue-box">
         <div class="dialogue-tag">TORTOISE_OS</div>
         <p id="dialogue-text" class="dialogue-text"></p>
         <div class="dialogue-next">
-          <i data-lucide="chevron-down"></i>
+          <i data-lucide="chevron-right"></i>
         </div>
       </div>
     `;
@@ -175,6 +175,7 @@ class HomePage extends Page {
    */
   startJourney() {
     domHelper.show('#journey-content');
+    domHelper.hide('#hero');
     log('Journey started as:', this.avatar);
 
     // Disable scrolling for cinematic intro
@@ -200,7 +201,7 @@ class HomePage extends Page {
 
     // Initially render only the hero section
     this.renderJourneySections(true);
-    this.setupParallax();
+    this.setupScrollTracker();
   }
 
   /**
@@ -238,7 +239,10 @@ class HomePage extends Page {
 
     const heroHTML = `
       <section class="journey-hero">
-        <div class="hero-titles">
+        <div class="hero-titles ${heroOnly ? 'hidden-opacity' : 'animate-dissolve'}">
+         
+          <i data-lucide="ghost" class="hero-ghost-icon animate-float"></i>
+         
           <h1 class="journey-title">${author.name || 'Unknown'}</h1>
           <p class="journey-subtitle">${author.subtitle || 'Unknown'}</p>
         </div>
@@ -246,14 +250,27 @@ class HomePage extends Page {
     `;
 
     const contentHTML = `
-      <section class="parallax-divider">
-        <div class="divider-line"></div>
-      </section>
-
-      <section class="about-journey container">
+      <section class="about-journey container scroll-reveal animate-fade-in-up">
         <h2 class="section-heading">LORE_ENTRY</h2>
         <div class="about-text-grid">
           ${contentService.getAboutContent().paragraphs.map(p => `<p class="narrative-p">${p}</p>`).join('')}
+        </div>
+        <div class="section-actions lore-cta">
+          <a href="assets/resume/LIM - Resume.pdf" download class="btn btn-primary">
+            <i data-lucide="download"></i> DOWNLOAD_RESUME
+          </a>
+        </div>
+      </section>
+
+      <section class="featured-projects container scroll-reveal animate-fade-in-up">
+        <h2 class="section-heading">FEATURED_LOGS</h2>
+        <div class="projects-preview-grid">
+          ${this.state.featuredProjects.map((project, index) => new ProjectCard(project, { index }).render()).join('')}
+        </div>
+        <div class="section-actions">
+          <a href="projects.html" class="btn btn-secondary">
+            <i data-lucide="arrow-right"></i> VIEW_ALL_LOGS
+          </a>
         </div>
       </section>
     `;
@@ -263,25 +280,18 @@ class HomePage extends Page {
     if (!heroOnly) {
       this.setupScrollAnimations();
     }
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
   }
 
   /**
-   * Setup parallax effects
+   * Setup HUD updates based on scroll
    */
-  setupParallax() {
+  setupScrollTracker() {
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY;
-      const sprite = domHelper.$('.character-vessel');
-      const particles = domHelper.$('#particles-js');
-
-      if (sprite) {
-        sprite.style.transform = `translateY(${scrolled * 0.1}px) rotate(${scrolled * 0.05}deg)`;
-      }
-
-      if (particles) {
-        // Subtle shift effect for particles
-        particles.style.transform = `translateY(${scrolled * 0.02}px)`;
-      }
 
       // Update coords
       const coordY = domHelper.$('#coord-y');
