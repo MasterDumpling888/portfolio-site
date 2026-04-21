@@ -256,7 +256,7 @@ class HomePage extends Page {
           ${contentService.getAboutContent().paragraphs.map(p => `<p class="narrative-p">${p}</p>`).join('')}
         </div>
         <div class="section-actions lore-cta">
-          <a href="assets/resume/LIM - Resume.pdf" download class="btn btn-primary">
+          <a href="assets/resume/Lim, Rachel - CV.pdf" download class="btn btn-primary">
             <i data-lucide="download"></i> DOWNLOAD_RESUME
           </a>
         </div>

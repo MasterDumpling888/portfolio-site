@@ -122,8 +122,19 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  font-size: 0.625rem;
+  font-size: var(--font-size--3);
   opacity: 0.6;
+  padding: var(--spacing-2xs);
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+  letter-spacing: 0.05em;
+}
+
+.bottom-nav .nav-link span {
+  display: block;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 .bottom-nav .nav-link.active {

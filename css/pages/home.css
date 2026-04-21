@@ -105,49 +105,56 @@
 }
 
 /* Side Stats (Desktop Decoration) */
+/* Side Stats (Now Bottom Right HUD) */
 .side-stats {
   position: fixed;
-  top: 10%;
-  width: 100%;
+  bottom: var(--spacing-m);
+  right: var(--spacing-m);
+  width: 160px;
   z-index: var(--z-nav);
   display: flex;
-  flex-direction: row;
-  gap: var(--spacing-xl);
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-xs);
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0;
+  pointer-events: none;
 }
 
 .stats-box,
 .stats-cta {
+  pointer-events: auto;
   background: var(--color-stats-bg);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
   border: 1px solid var(--color-primary);
-  padding: var(--spacing-s);
-  border-radius: var(--radius-md);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: var(--font-size--2);
+  font-size: 0.7rem;
   color: var(--color-primary);
   flex-direction: column;
   display: flex;
-  gap: var(--spacing-2xs);
-  width: fit-content;
-  box-shadow: 0 0 20px var(--color-primary-glow);
+  gap: 4px;
+  width: 100%;
+  box-shadow: 0 0 15px var(--color-primary-glow);
 }
 
 
 .stat-line,
 .stat-link {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  align-items: baseline;
   gap: var(--spacing-2xs);
   color: var(--color-primary);
   text-decoration: none;
-  font-size: var(--font-size--2);
+  font-size: var(--font-size--3);
   transition: all var(--transition-fast);
   padding: 4px 8px;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
+  word-break: break-word;
 }
 
 .stat-link i {
@@ -184,12 +191,13 @@
 
 .session-label {
   font-family: var(--font-mono);
-  font-size: var(--font-size--2);
-  letter-spacing: 0.5em;
+  font-size: var(--font-size--3);
+  letter-spacing: var(--spacing-3xs);
   color: var(--color-primary);
-  text-align: center;
+  text-align: left;
   align-self: center;
   grid-column: span 3;
+  word-break: break-word;
 }
 
 

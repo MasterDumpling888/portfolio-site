@@ -58,6 +58,7 @@ body.no-scroll {
   min-height: 100vh;
   width: 100%;
   display: flex;
+  top: 100px;
   flex-direction: column;
 }
 

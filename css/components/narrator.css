@@ -14,11 +14,12 @@
 }
 
 .narrator-wrapper.hero-mode {
-  bottom: 50%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 100%);
   max-width: 650px;
   width: 90%;
+  position: relative;
 }
 
 .narrator-container {
@@ -54,7 +55,7 @@
   position: absolute;
   /* Position relative to container */
   left: -20px;
-  bottom: -10px;
+  bottom: -20px;
   z-index: 10;
   overflow: visible;
   transition: all 0.8s var(--transition-cubic);
