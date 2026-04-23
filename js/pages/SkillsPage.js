@@ -49,6 +49,11 @@ class SkillsPage extends Page {
         <i data-lucide="ghost" class="user-icon"></i>
         <h2 id="author-name" class="author-name">${author.name || 'Unknown'}</h2>
         <p id="author-class" class="author-class">${author.subtitle || 'Unknown'}</p>
+        <div class="author-actions" style="margin-top: var(--spacing-m);">
+          <a href="assets/resume/Lim, Rachel - CV.pdf" download class="btn btn-primary btn-sm">
+            <i data-lucide="download"></i> DOWNLOAD_RESUME
+          </a>
+        </div>
     `;
 
 

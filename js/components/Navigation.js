@@ -33,7 +33,7 @@ class Navigation extends Component {
     <header class="fixed-header">
       <div class="header-container">
         <div class="terminal-logo">
-          <a href="index.html" class="terminal-logo ${this.activePage === 'home' ? 'active' : ''}">
+          <a href="index.html" class="terminal-logo ${this.activePage === 'home' ? 'active' : ''}"></a>
             <i data-lucide="egg" class="text-primary"></i>
             <h1 class="terminal-title">TAMAGO_OS</h1>
         </div>
@@ -44,6 +44,7 @@ class Navigation extends Component {
             <li><a href="projects.html" class="nav-link ${this.activePage === 'projects' ? 'active' : ''}">PROJECT_LOG</a></li>
             <li><a href="skills.html" class="nav-link ${this.activePage === 'skills' ? 'active' : ''}">SKILL_TREE</a></li>
             <li><a href="contact.html" class="nav-link ${this.activePage === 'contact' ? 'active' : ''}">CONTACT_NODE</a></li>
+            <li><a href="assets/resume/Lim, Rachel - CV.pdf" download class="nav-link">RESUME</a></li>
           </ul>
         </nav>
 
@@ -65,13 +66,16 @@ class Navigation extends Component {
         <i data-lucide="turtle"></i><span>DECK</span>
       </a>
       <a href="projects.html" class="nav-link ${this.activePage === 'projects' ? 'active' : ''}">
-        <i data-lucide="database"></i><span>PROJECT_LOG</span>
+        <i data-lucide="database"></i><span>PROJECT LOG</span>
       </a>
       <a href="skills.html" class="nav-link ${this.activePage === 'skills' ? 'active' : ''}">
-        <i data-lucide="network"></i><span>SKILL_TREE</span>
+        <i data-lucide="network"></i><span>SKILL TREE</span>
       </a>
       <a href="contact.html" class="nav-link ${this.activePage === 'contact' ? 'active' : ''}">
-        <i data-lucide="keyboard"></i><span>CONTACT_NODE</span>
+        <i data-lucide="keyboard"></i><span>CONTACT NODE</span>
+      </a>
+      <a href="assets/resume/Lim, Rachel - CV.pdf" download class="nav-link">
+        <i data-lucide="download"></i><span>RESUME</span>
       </a>
     </nav>
     `;
