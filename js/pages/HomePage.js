@@ -28,6 +28,7 @@ class HomePage extends Page {
     }
 
     this.state.narrative = contentService.getContent()?.narrative || {};
+    this.state.projects = contentService.getProjects(); // Ensure all projects are loaded
     this.state.featuredProjects = contentService.getFeaturedProjects(3);
     this.state.author = contentService.getContent()?.author || {};
 
@@ -273,12 +274,46 @@ class HomePage extends Page {
           </a>
         </div>
       </section>
+<section class="digital-rift">
+  <div class="dual-cores-container container scroll-reveal">
+    <div class="rift-discovery-text" data-text="${this.state.narrative.pages.glitchNarrative.discovery}">
+      <span class="rift-discovery-text-inner">${this.state.narrative.pages.glitchNarrative.discovery}</span>
+      <div class="discovery-line"></div>
+    </div>
+    <p class="rift-subtitle animate-flicker">
+      &gt; SELECT_CLASS TO ANALYZE ANCIENT_FORM: RACHEL
+    </p>
+    <div class="cores-grid">
+            <div class="core-node tech" data-type="tech">
+              <h3>[ TECH_SECTOR ]</h3>
+              <p>LOGIC_GATEWAY // SYSTEM_ARCH</p>
+            </div>
+            <div class="core-node art" data-type="art">
+              <h3>[ ART_NEBULA ]</h3>
+              <p>EXPRESSION_CORE // VISUAL_MOD</p>
+            </div>
+          </div>
+
+          <div id="slot-machine-reveal" class="slot-machine-reveal">
+            <div class="slot-machine-container">
+              <div id="slot-track" class="slot-machine-track">
+                <!-- Slot items will be injected -->
+              </div>
+            </div>
+            <div id="subfield-summary" class="subfield-summary"></div>
+            <a id="view-projects-btn" href="projects.html" class="btn btn-primary">
+              <i data-lucide="eye"></i> VIEW_LOGS
+            </a>
+          </div>
+        </div>
+      </section>
     `;
 
     container.innerHTML = heroOnly ? heroHTML : heroHTML + contentHTML;
 
     if (!heroOnly) {
       this.setupScrollAnimations();
+      this.setupRiftInteractions();
     }
 
     if (window.lucide) {
@@ -286,6 +321,70 @@ class HomePage extends Page {
     }
   }
 
+  /**
+   * Set up interactions for the Digital Rift
+   */
+  setupRiftInteractions() {
+    const cores = domHelper.$$('.core-node');
+    const slotTrack = domHelper.$('#slot-track');
+    const summary = domHelper.$('#subfield-summary');
+    const reveal = domHelper.$('#slot-machine-reveal');
+    const viewBtn = domHelper.$('#view-projects-btn');
+
+    if (!cores.length || !slotTrack) return;
+
+    cores.forEach(core => {
+      core.addEventListener('click', () => {
+        const type = core.getAttribute('data-type');
+        this.handleCoreSelection(type, slotTrack, summary, reveal, viewBtn);
+      });
+    });
+  }
+
+  /**
+   * Handle core selection and vertical carousel animation
+   */
+  handleCoreSelection(type, slotTrack, summary, reveal, viewBtn) {
+    const glitchContent = this.state.narrative.pages.glitchNarrative;
+    const summaryText = type === 'tech' ? glitchContent.techSummary : glitchContent.artSummary;
+
+    // Filter projects based on the selected core (tech or art)
+    const filteredProjects = this.state.projects.filter(p => p.type === type);
+
+    // Reset and show reveal section
+    reveal.classList.remove('active');
+
+    // Set theme for the button
+    if (type === 'art') {
+      viewBtn.className = 'btn btn-secondary theme-art';
+      viewBtn.href = 'projects.html?type=art';
+    } else {
+      viewBtn.className = 'btn btn-primary';
+      viewBtn.href = 'projects.html?type=tech';
+    }
+
+    // Populate slot track with project bars
+    slotTrack.innerHTML = filteredProjects.map((project, index) => 
+      new ProjectCard(project, { index }).renderBar()
+    ).join('');
+
+    // Reinitialize Lucide icons for new elements
+    if (window.lucide) window.lucide.createIcons();
+
+    // Trigger animation
+    setTimeout(() => {
+      reveal.classList.add('active');
+
+      // Carousel initial state
+      slotTrack.style.transition = 'none';
+      slotTrack.style.transform = 'translateY(0)';
+
+      // Slight delay before typewriter summary
+      setTimeout(() => {
+        this.typeWriter(summaryText, '#subfield-summary');
+      }, 500);
+    }, 100);
+  }
   /**
    * Setup HUD updates based on scroll
    */

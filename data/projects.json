@@ -3,6 +3,7 @@
     {
       "id": "project-1",
       "title": "ULAA-Net: Unsupervised Organ Anomaly Detection",
+      "type": "tech",
       "category": "medtech",
       "categories": ["ai", "medtech"],
       "description": "Developed an unsupervised anomlay detection model for organ-specific medical imaging.",
@@ -21,6 +22,7 @@
     {
       "id": "project-2",
       "title": "Arbor: Financial Adviser Bot",
+      "type": "tech",
       "category": "fintech",
       "categories": ["webdev", "fintech", "ai"],
       "description": "Built a full-stack financial adviser bot platform to improve financial literacy with real-time market data visualization, AI-powered insights, and financial learning features.",
@@ -39,6 +41,7 @@
     {
       "id": "project-3",
       "title": "Nota: AI-Powered Note-taking App",
+      "type": "tech",
       "category": "ai",
       "categories": ["mobiledev", "ai"],
       "description": "Created a Markdown-base note taking app that integrate AI for review/quizing based on the users notes.",
@@ -57,6 +60,7 @@
     {
       "id": "project-4",
       "title": "Image Processing App",
+      "type": "tech",
       "category": "image-processing",
       "categories": ["image-processing", "webdev"],
       "description": "Created an image processing app that allows users to play around with different types of legacy image filters.",
@@ -75,6 +79,7 @@
     {
       "id": "project-5",
       "title": "Interactive Data Visualisation Platform",
+      "type": "tech",
       "category": "webdev",
       "categories": ["webdev", "datavis"],
       "description": "Developed a web-based platform for creating interactive data visualisations.",
@@ -88,6 +93,63 @@
       },
       "featured": false,
       "date": "2023-24-03",
+      "status": "completed"
+    },
+    {
+      "id": "project-art-1",
+      "title": "EchoPhoto Branding & UI",
+      "type": "art",
+      "category": "web-design",
+      "categories": ["web-design", "branding"],
+      "description": "A comprehensive branding and web design project for a premium photography studio.",
+      "longDescription": "Designed a minimalist yet impactful brand identity for EchoPhoto, including logo design, color palette, and a full-responsive website prototype that emphasizes visual storytelling.",
+      "technologies": ["Figma", "Adobe Illustrator", "Web Design", "UI/UX"],
+      "image": "assets/images/projects/echophoto/echophoto-homepage.png",
+      "links": {
+        "github": "",
+        "demo": "",
+        "case_study": ""
+      },
+      "featured": true,
+      "date": "2025-01-15",
+      "status": "completed"
+    },
+    {
+      "id": "project-art-2",
+      "title": "Digital Illustration Series: Nebula",
+      "type": "art",
+      "category": "drawing",
+      "categories": ["drawing", "digital-art"],
+      "description": "A series of digital illustrations exploring themes of identity and the cosmos.",
+      "longDescription": "A personal project that blends East Asian artistic styles with futuristic sci-fi elements, reflecting my heritage and passion for speculative design.",
+      "technologies": ["Procreate", "Digital Illustration", "Character Design"],
+      "image": "assets/images/projects/ulaa-net.jpg",
+      "links": {
+        "github": "",
+        "demo": "",
+        "case_study": ""
+      },
+      "featured": false,
+      "date": "2024-12-10",
+      "status": "completed"
+    },
+    {
+      "id": "project-art-3",
+      "title": "Urban Exploration Photography",
+      "type": "art",
+      "category": "photography",
+      "categories": ["photography"],
+      "description": "A collection of urban photography focusing on the intersection of nature and architecture.",
+      "longDescription": "Captured various cityscapes and architectural details that showcase the 'messy but professional' aesthetic I strive for in my work.",
+      "technologies": ["Lightroom", "DSLR", "Composition"],
+      "image": "assets/images/projects/arbor.jpg",
+      "links": {
+        "github": "",
+        "demo": "",
+        "case_study": ""
+      },
+      "featured": true,
+      "date": "2024-10-20",
       "status": "completed"
     }
   ]

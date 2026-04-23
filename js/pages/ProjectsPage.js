@@ -35,7 +35,99 @@ class ProjectsPage extends Page {
    * Set up page components
    */
   setupComponents() {
+    this.checkUrlParams();
+    this.renderCoreSwitcher();
     this.renderProjects();
+  }
+
+  /**
+   * Check for URL parameters to set initial filter
+   */
+  checkUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get('type');
+    if (type) {
+      this.currentCore = type;
+      this.state.filteredProjects = this.state.projects.filter(p => p.type === type);
+      
+      // Apply theme if art
+      if (type === 'art') {
+        document.body.classList.add('theme-art');
+      }
+    } else {
+      this.currentCore = 'tech';
+      this.state.filteredProjects = this.state.projects.filter(p => p.type === 'tech');
+      document.body.classList.remove('theme-art');
+    }
+  }
+
+  /**
+   * Render the core switcher (Tech vs Art)
+   */
+  renderCoreSwitcher() {
+    const switcherContainer = domHelper.$('#core-switcher-container');
+    if (!switcherContainer) return;
+
+    switcherContainer.innerHTML = `
+      <div class="core-switcher">
+        <button class="core-btn tech ${this.currentCore === 'tech' ? 'active' : ''}" data-core="tech">
+          [ TECH_LOGS ]
+        </button>
+        <button class="core-btn art ${this.currentCore === 'art' ? 'active' : ''}" data-core="art">
+          [ ART_LOGS ]
+        </button>
+      </div>
+    `;
+
+    const buttons = domHelper.$$('.core-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const core = btn.getAttribute('data-core');
+        this.switchCore(core);
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  }
+
+  /**
+   * Switch between Tech and Art logs
+   * @param {string} core - 'tech' or 'art'
+   */
+  switchCore(core) {
+    this.currentCore = core;
+    this.currentFilter = 'all';
+    
+    // Apply theme to body
+    if (core === 'art') {
+      document.body.classList.add('theme-art');
+    } else {
+      document.body.classList.remove('theme-art');
+    }
+
+    this.state.filteredProjects = this.state.projects.filter(p => p.type === core);
+    this.renderProjects();
+    this.updateFilterButtons();
+  }
+
+  /**
+   * Update filter buttons based on active core
+   */
+  updateFilterButtons() {
+    const filterContainer = domHelper.$('#filter-buttons');
+    if (!filterContainer) return;
+
+    const categories = this.currentCore === 'tech'
+      ? ['all', 'ai', 'medtech', 'webdev', 'fintech']
+      : ['all', 'web-design', 'graphics', 'photography', 'drawing'];
+
+    filterContainer.innerHTML = categories.map(cat => `
+      <button class="filter-btn ${cat === 'all' ? 'active' : ''}" data-filter="${cat}">
+        ${cat.toUpperCase().replace(/-/g, '_')}
+      </button>
+    `).join('');
+
+    this.setupFilterButtons();
   }
 
   /**
@@ -103,13 +195,17 @@ class ProjectsPage extends Page {
   filterProjects(category) {
     this.currentFilter = category;
 
+    const coreProjects = this.state.projects.filter(p => p.type === this.currentCore);
+
     if (category === 'all') {
-      this.state.filteredProjects = this.state.projects;
+      this.state.filteredProjects = coreProjects;
     } else {
-      this.state.filteredProjects = contentService.getProjectsByCategory(category);
+      this.state.filteredProjects = coreProjects.filter(p => 
+        p.categories.includes(category) || p.category === category
+      );
     }
 
-    log(`Filtered projects by ${category}:`, this.state.filteredProjects.length);
+    log(`Filtered ${this.currentCore} projects by ${category}:`, this.state.filteredProjects.length);
 
     // Re-render projects
     this.renderProjects();

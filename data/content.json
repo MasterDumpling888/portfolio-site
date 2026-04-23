@@ -53,6 +53,12 @@
       "contact": {
         "guide": "This is the CONTECT_NODE. I was able to log the contact information, but Tamago's communication system is broken...if only we can find a communation module to send a ping...",
         "lore": "WAIT! What if we can use TORTOISE to send a ping to the contact information? Maybe we can establish communication and reach out to the ancient form."
+      },
+      "glitchNarrative": {
+        "discovery": "WARNING: DATA COLLISION DETECTED. A FRACTURED NEBULA IS FORMING...",
+        "techSummary": "The Sector of Logic. Here, Ancient Form: Rachel engineered solutions using AI, Full-Stack Architecture, and MedTech protocols. Every line of code is a structural beam.",
+        "artSummary": "The Nebula of Expression. A hidden layer of data fragments revealing expertise in Web Design, Photography, and Graphic Arts. Here, the laws of the machine are mere suggestions.",
+        "dualClass": "IDENTIFIED: DUAL-CLASS FORM. Logic and Expression in perfect, albeit unstable, balance."
       }
     },
     "tech_path": "You've entered the Sector of Logic. Every pixel here obeys the laws of the machine.",

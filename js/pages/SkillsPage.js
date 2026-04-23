@@ -71,8 +71,9 @@ class SkillsPage extends Page {
     container.innerHTML = '';
 
     categories.forEach(category => {
+      const isArt = category.id === 'art';
       const categoryBlock = document.createElement('div');
-      categoryBlock.className = 'skill-category-block';
+      categoryBlock.className = `skill-category-block ${isArt ? 'theme-art' : ''}`;
 
       categoryBlock.innerHTML = `
         <div class="category-label">

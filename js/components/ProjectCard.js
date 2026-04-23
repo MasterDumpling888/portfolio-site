@@ -72,6 +72,31 @@ class ProjectCard extends Component {
   }
 
   /**
+   * Render the project in a bar/row layout for carousels
+   * @returns {string} HTML string
+   */
+  renderBar() {
+    const { project } = this;
+    const categories = project.categories || (project.category ? [project.category] : ['misc']);
+    const primaryCategory = categories[0]?.toUpperCase().replace(/-/g, '_');
+
+    return `
+      <div class="project-bar-item ${project.type}" data-project-id="${project.id}">
+        <div class="bar-type-tag">${primaryCategory}</div>
+        <div class="bar-info">
+          <h4 class="bar-title">${project.title}</h4>
+          <div class="bar-tech">
+            ${(project.technologies || []).slice(0, 2).map(tech => `<span class="bar-tech-tag">${tech}</span>`).join('')}
+          </div>
+        </div>
+        <div class="bar-action">
+          <i data-lucide="chevron-right"></i>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
    * Format category ID into display name
    * @param {string} category - Category ID
    * @returns {string} Display name

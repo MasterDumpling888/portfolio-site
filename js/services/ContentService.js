@@ -227,6 +227,16 @@ class ContentService {
   }
 
   /**
+   * Get projects by type (tech or art)
+   * @param {string} type - Project type
+   * @returns {Array} Filtered projects
+   */
+  getProjectsByType(type) {
+    if (!type) return this.projects;
+    return this.projects.filter(project => project.type === type);
+  }
+
+  /**
    * Get project statistics
    * @returns {Object} Project stats
    */
@@ -234,11 +244,15 @@ class ContentService {
     return {
       total: this.projects.length,
       featured: this.projects.filter(p => p.featured).length,
+      tech: this.getProjectsByType('tech').length,
+      art: this.getProjectsByType('art').length,
       byCategory: {
         webdev: this.getProjectsByCategory('webdev').length,
         ai: this.getProjectsByCategory('ai').length,
         fintech: this.getProjectsByCategory('fintech').length,
-        medtech: this.getProjectsByCategory('medtech').length
+        medtech: this.getProjectsByCategory('medtech').length,
+        'web-design': this.getProjectsByCategory('web-design').length,
+        photography: this.getProjectsByCategory('photography').length
       },
       completed: this.projects.filter(p => p.status === 'completed').length
     };
