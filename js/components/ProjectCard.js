@@ -31,7 +31,7 @@ class ProjectCard extends Component {
     const categoryDisplay = categories.map(cat => this.formatCategory(cat)).join(' • ');
 
     return `
-      <article class="project-card scroll-reveal" 
+      <article class="project-card scroll-reveal clickable" 
                data-project-id="${project.id}" 
                style="animation-delay: ${delay}s">
         ${project.featured ? '<span class="featured-badge">FEATURED</span>' : ''}
@@ -43,6 +43,9 @@ class ProjectCard extends Component {
           }
           <div class="project-image-placeholder" style="${project.image ? 'display: none;' : 'display: flex;'}">
             ${domHelper.getIconHTML('folder')}
+          </div>
+          <div class="project-overlay">
+            <span class="overlay-text">VIEW_LOG</span>
           </div>
         </div>
         
@@ -56,13 +59,13 @@ class ProjectCard extends Component {
             ${project.technologies?.length > 3 ? `<span class="tech-tag">+${project.technologies.length - 3}</span>` : ''}
           </div>
           
-          <div class="project-links">
+          <div class="project-links" onclick="event.stopPropagation()">
             ${project.links?.github
               ? `<a href="${project.links.github}" target="_blank" class="project-link" rel="noopener noreferrer">${domHelper.getIconHTML('github')} <span>GITHUB</span></a>`
               : ''
             }
             ${project.links?.demo
-              ? `<a href="${project.links.demo}" target="_blank" class="project-link" rel="noopener noreferrer">${domHelper.getIconHTML('external-link')} <span>DEMO</span></a>`
+              ? `<a href="${project.links.demo}" target="_blank" class="project-link" rel="noopener noreferrer">${domHelper.getIconHTML('external-link')} <span>${project.type === 'art' ? 'VISIT' : 'DEMO'}</span></a>`
               : ''
             }
           </div>

@@ -5,6 +5,7 @@
 
 import Page from '../core/Page.js';
 import ProjectCard from '../components/ProjectCard.js';
+import ProjectModal from '../components/ProjectModal.js';
 import contentService from '../services/ContentService.js';
 import narratorService from '../services/NarratorService.js';
 import eventBus from '../core/EventBus.js';
@@ -17,6 +18,7 @@ class HomePage extends Page {
     this.avatar = localStorage.getItem('portfolio-avatar') || null;
     this.narratorStep = 0;
     this.heroIntroStep = 0;
+    this.modal = null;
   }
 
   /**
@@ -31,6 +33,10 @@ class HomePage extends Page {
     this.state.projects = contentService.getProjects(); // Ensure all projects are loaded
     this.state.featuredProjects = contentService.getFeaturedProjects(3);
     this.state.author = contentService.getContent()?.author || {};
+
+    // Initialize modal
+    this.modal = new ProjectModal();
+    this.modal.init();
 
     log('HomePage data loaded');
   }
@@ -314,6 +320,7 @@ class HomePage extends Page {
     if (!heroOnly) {
       this.setupScrollAnimations();
       this.setupRiftInteractions();
+      this.setupProjectClickListeners();
     }
 
     if (window.lucide) {
@@ -385,6 +392,36 @@ class HomePage extends Page {
       }, 500);
     }, 100);
   }
+
+  /**
+   * Set up click listeners for project cards and bars to open modal
+   */
+  setupProjectClickListeners() {
+    // For standard cards
+    const cards = domHelper.$$('.project-card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const projectId = card.getAttribute('data-project-id');
+        const project = this.state.projects.find(p => p.id === projectId);
+        if (project && this.modal) {
+          this.modal.show(project);
+        }
+      });
+    });
+
+    // For slot machine bars
+    const bars = domHelper.$$('.project-bar-item');
+    bars.forEach(bar => {
+      bar.addEventListener('click', () => {
+        const projectId = bar.getAttribute('data-project-id');
+        const project = this.state.projects.find(p => p.id === projectId);
+        if (project && this.modal) {
+          this.modal.show(project);
+        }
+      });
+    });
+  }
+
   /**
    * Setup HUD updates based on scroll
    */

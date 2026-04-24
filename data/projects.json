@@ -10,6 +10,7 @@
       "longDescription": "A medical anomaly detection model utilising deep learning models trained on medical imaging data. The system assists healthcare professionals in identifying potential health issues early, improving patient outcomes through timely intervention.",
       "technologies": ["Python", "TensorFlow", "Keras", "React", "Node.js", "Docker"],
       "image": "assets/images/projects/ulaa-net.jpg",
+      "images": ["assets/images/projects/ulaa-net.jpg"],
       "links": {
         "github": "",
         "demo": "",
@@ -26,16 +27,17 @@
       "category": "fintech",
       "categories": ["webdev", "fintech", "ai"],
       "description": "Built a full-stack financial adviser bot platform to improve financial literacy with real-time market data visualization, AI-powered insights, and financial learning features.",
-      "longDescription": "A financial dashboard that aims to integrate AI and seemless UI/UX to improve financial literacy.",
+      "longDescription": "A financial dashboard that aims to integrate AI and seemless UI/UX to improve financial literacy. It provides users with personalized financial advice, expense tracking, and investment insights using advanced LLM technology.",
       "technologies": ["Next.js", "React.js", "Firebase", "Python", "Vercel", "Jest", "Cypress"],
       "image": "assets/images/projects/arbor.jpg",
+      "images": ["assets/images/projects/arbor.jpg"],
       "links": {
         "github": "https://github.com/MasterDumpling888/CM3070-Financial-Adviser-Bot-Arbor",
         "demo": "https://youtu.be/xbelIAHU4bI",
         "case_study": ""
       },
       "featured": true,
-      "date": "2025-19-09",
+      "date": "2025-09-19",
       "status": "completed"
     },
     {
@@ -45,9 +47,10 @@
       "category": "ai",
       "categories": ["mobiledev", "ai"],
       "description": "Created a Markdown-base note taking app that integrate AI for review/quizing based on the users notes.",
-      "longDescription": "A app geared towards improving the efficiency of note-taking by utlising modern technologies like, Markdown and AI.",
+      "longDescription": "An app geared towards improving the efficiency of note-taking by utlising modern technologies like Markdown and AI. It features smart tagging, AI-generated summaries, and a spaced-repetition quizzing system.",
       "technologies": ["React", "Expo", "Firebase", "Tailwind CSS", "Jest"],
       "image": "assets/images/projects/nota-app.jpg",
+      "images": ["assets/images/projects/nota-app.jpg"],
       "links": {
         "github": "https://github.com/MasterDumpling888/nota2",
         "demo": "https://youtu.be/IZ_bilhgM-I",
@@ -58,56 +61,26 @@
       "status": "completed"
     },
     {
-      "id": "project-4",
-      "title": "Image Processing App",
-      "type": "tech",
-      "category": "image-processing",
-      "categories": ["image-processing", "webdev"],
-      "description": "Created an image processing app that allows users to play around with different types of legacy image filters.",
-      "longDescription": "A image processing project that utilises varying mathematical algorithms that adjusts and interacts with RGB and other types of colour channels.",
-      "technologies": ["ml5.js", "p5.js", "JavaScript", "HTML", "CSS"],
-      "image": "assets/images/projects/image-processing.jpg",
-      "links": {
-        "github": "https://github.com/MasterDumpling888/image-processing-app",
-        "demo": "https://youtu.be/qyrPNHkUKgU",
-        "case_study": ""
-      },
-      "featured": true,
-      "date": "2024-09-03",
-      "status": "completed"
-    },
-    {
-      "id": "project-5",
-      "title": "Interactive Data Visualisation Platform",
-      "type": "tech",
-      "category": "webdev",
-      "categories": ["webdev", "datavis"],
-      "description": "Developed a web-based platform for creating interactive data visualisations.",
-      "longDescription": "A data visualisation project that helps users interact with varying types of data visualisations.",
-      "technologies": ["Vanilla JS", "HTML"],
-      "image": "assets/images/projects/data-viz.jpg",
-      "links": {
-        "github": "https://github.com/MasterDumpling888/data-visualisation",
-        "demo": "",
-        "case_study": ""
-      },
-      "featured": false,
-      "date": "2023-24-03",
-      "status": "completed"
-    },
-    {
       "id": "project-art-1",
       "title": "EchoPhoto Branding & UI",
       "type": "art",
       "category": "web-design",
       "categories": ["web-design", "branding"],
       "description": "A comprehensive branding and web design project for a premium photography studio.",
-      "longDescription": "Designed a minimalist yet impactful brand identity for EchoPhoto, including logo design, color palette, and a full-responsive website prototype that emphasizes visual storytelling.",
-      "technologies": ["Figma", "Adobe Illustrator", "Web Design", "UI/UX"],
+      "longDescription": "Designed a minimalist yet impactful brand identity for EchoPhoto. The project involved creating a cohesive visual language, including logo design, typography, and a fully responsive website prototype that focuses on high-quality visual presentation and user experience.",
+      "technologies": ["Figma", "Adobe Illustrator", "UI/UX", "Branding"],
       "image": "assets/images/projects/echophoto/echophoto-homepage.png",
+      "images": [
+        "assets/images/projects/echophoto/echophoto-homepage.png",
+        "assets/images/projects/echophoto/echophoto-brand-collection.png",
+        "assets/images/projects/echophoto/echophoto-about-page.png",
+        "assets/images/projects/echophoto/echophoto-brands-page.png",
+        "assets/images/projects/echophoto/echophoto-collection-page.png",
+        "assets/images/projects/echophoto/echophoto-faq.png"
+      ],
       "links": {
         "github": "",
-        "demo": "",
+        "demo": "https://www.figma.com/proto/your-figma-link",
         "case_study": ""
       },
       "featured": true,
@@ -116,40 +89,118 @@
     },
     {
       "id": "project-art-2",
-      "title": "Digital Illustration Series: Nebula",
+      "title": "Order of Otakus: Community Hub",
       "type": "art",
-      "category": "drawing",
-      "categories": ["drawing", "digital-art"],
-      "description": "A series of digital illustrations exploring themes of identity and the cosmos.",
-      "longDescription": "A personal project that blends East Asian artistic styles with futuristic sci-fi elements, reflecting my heritage and passion for speculative design.",
-      "technologies": ["Procreate", "Digital Illustration", "Character Design"],
-      "image": "assets/images/projects/ulaa-net.jpg",
-      "links": {
-        "github": "",
-        "demo": "",
-        "case_study": ""
-      },
-      "featured": false,
-      "date": "2024-12-10",
-      "status": "completed"
-    },
-    {
-      "id": "project-art-3",
-      "title": "Urban Exploration Photography",
-      "type": "art",
-      "category": "photography",
-      "categories": ["photography"],
-      "description": "A collection of urban photography focusing on the intersection of nature and architecture.",
-      "longDescription": "Captured various cityscapes and architectural details that showcase the 'messy but professional' aesthetic I strive for in my work.",
-      "technologies": ["Lightroom", "DSLR", "Composition"],
-      "image": "assets/images/projects/arbor.jpg",
+      "category": "web-design",
+      "categories": ["web-design", "community"],
+      "description": "Web design for a vibrant anime and manga community hub.",
+      "longDescription": "A UI/UX exploration for a community-driven platform. The design focuses on dark-mode aesthetics, bold typography, and intuitive navigation for browsing content, community forums, and user profiles.",
+      "technologies": ["Figma", "UI/UX", "Web Design"],
+      "image": "assets/images/projects/order-of-otakus/order-of-otakus-homepage.png",
+      "images": [
+        "assets/images/projects/order-of-otakus/order-of-otakus-homepage.png",
+        "assets/images/projects/order-of-otakus/order-of-otakus-homepage-light.png",
+        "assets/images/projects/order-of-otakus/order-of-otakus-about.png",
+        "assets/images/projects/order-of-otakus/order-of-otakus-browse.png",
+        "assets/images/projects/order-of-otakus/order-of-otakus-register.png"
+      ],
       "links": {
         "github": "",
         "demo": "",
         "case_study": ""
       },
       "featured": true,
-      "date": "2024-10-20",
+      "date": "2024-11-20",
+      "status": "completed"
+    },
+    {
+      "id": "project-art-3",
+      "title": "GDSC UoL: Portfolio Showcase",
+      "type": "art",
+      "category": "graphics",
+      "categories": ["graphics", "social-media"],
+      "description": "Graphic design and branding materials for GDSC UoL events.",
+      "longDescription": "A collection of social media graphics, posters, and presentation slides designed for the Google Developer Student Club at the University of London. The designs follow Google's brand guidelines while adding a unique community flair.",
+      "technologies": ["Canva", "Graphic Design", "Branding"],
+      "image": "assets/images/projects/gdsc-uol/Portfolio - Danica Lim.jpg",
+      "images": [
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-1.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-2.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-3.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-4.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-5.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-6.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-7.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-8.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-9.jpg",
+        "assets/images/projects/gdsc-uol/Portfolio - Danica Lim-10.jpg"
+      ],
+      "links": {
+        "github": "",
+        "demo": "",
+        "case_study": ""
+      },
+      "featured": false,
+      "date": "2024-10-05",
+      "status": "completed"
+    },
+    {
+      "id": "project-art-4",
+      "title": "MGC: Marketing Graphics",
+      "type": "art",
+      "category": "graphics",
+      "categories": ["graphics", "marketing"],
+      "description": "Marketing and social media content for MGC initiatives.",
+      "longDescription": "Developed a series of marketing materials, including Instagram posts, LinkedIn banners, and event flyers. The goal was to maintain a consistent brand voice across all digital platforms while increasing user engagement.",
+      "technologies": ["Adobe Express", "Canva", "Marketing Design"],
+      "image": "assets/images/projects/mgc/Portfolio - Danica Lim.jpg",
+      "images": [
+        "assets/images/projects/mgc/Portfolio - Danica Lim.jpg",
+        "assets/images/projects/mgc/Portfolio - Danica Lim-1.jpg",
+        "assets/images/projects/mgc/Portfolio - Danica Lim-2.jpg",
+        "assets/images/projects/mgc/Portfolio - Danica Lim-3.jpg",
+        "assets/images/projects/mgc/Portfolio - Danica Lim-4.jpg",
+        "assets/images/projects/mgc/Portfolio - Danica Lim-5.jpg",
+        "assets/images/projects/mgc/Portfolio - Danica Lim-6.jpg"
+      ],
+      "links": {
+        "github": "",
+        "demo": "",
+        "case_study": ""
+      },
+      "featured": false,
+      "date": "2024-08-12",
+      "status": "completed"
+    },
+    {
+      "id": "project-art-5",
+      "title": "Urban Photography Collection",
+      "type": "art",
+      "category": "photography",
+      "categories": ["photography"],
+      "description": "A collection of urban photography focusing on architecture and light.",
+      "longDescription": "Explored the intersection of geometry and urban life. This series captures the often-overlooked beauty in industrial structures, street scenes, and the play of shadows in modern cityscapes.",
+      "technologies": ["Photography", "Adobe Lightroom"],
+      "image": "assets/images/projects/photography/Portfolio - Danica Lim.jpg",
+      "images": [
+        "assets/images/projects/photography/Portfolio - Danica Lim.jpg",
+        "assets/images/projects/photography/Portfolio - Danica Lim 1.jpg",
+        "assets/images/projects/photography/Portfolio - Danica Lim-1.jpg",
+        "assets/images/projects/photography/Portfolio - Danica Lim-2.jpg",
+        "assets/images/projects/photography/Portfolio - Danica Lim-3.jpg",
+        "assets/images/projects/photography/Portfolio - Danica Lim-4.jpg",
+        "assets/images/projects/photography/Portfolio - Danica Lim-5.jpg",
+        "assets/images/projects/photography/Portfolio - Danica Lim-6.jpg",
+        "assets/images/projects/photography/Portfolio - Danica Lim-7.jpg"
+      ],
+      "links": {
+        "github": "",
+        "demo": "",
+        "case_study": ""
+      },
+      "featured": true,
+      "date": "2024-06-30",
       "status": "completed"
     }
   ]

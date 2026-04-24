@@ -5,6 +5,7 @@
 
 import Page from '../core/Page.js';
 import ProjectCard from '../components/ProjectCard.js';
+import ProjectModal from '../components/ProjectModal.js';
 import contentService from '../services/ContentService.js';
 import { log } from '../config.js';
 import domHelper from '../utils/DOMHelper.js';
@@ -13,6 +14,7 @@ class ProjectsPage extends Page {
   constructor() {
     super('projects');
     this.currentFilter = 'all';
+    this.modal = null;
   }
 
   /**
@@ -27,6 +29,10 @@ class ProjectsPage extends Page {
     // Get all projects
     this.state.projects = contentService.getProjects();
     this.state.filteredProjects = this.state.projects;
+
+    // Initialize modal
+    this.modal = new ProjectModal();
+    this.modal.init();
 
     log('ProjectsPage data loaded:', this.state.projects.length, 'projects');
   }
@@ -163,6 +169,7 @@ class ProjectsPage extends Page {
 
     // Re-initialize scroll animations for new elements
     this.setupScrollAnimations();
+    this.setupProjectClickListeners();
 
     // Reinitialize Lucide icons
     if (window.lucide) window.lucide.createIcons();
@@ -209,6 +216,22 @@ class ProjectsPage extends Page {
 
     // Re-render projects
     this.renderProjects();
+  }
+
+  /**
+   * Set up click listeners for project cards to open modal
+   */
+  setupProjectClickListeners() {
+    const cards = domHelper.$$('.project-card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const projectId = card.getAttribute('data-project-id');
+        const project = this.state.projects.find(p => p.id === projectId);
+        if (project && this.modal) {
+          this.modal.show(project);
+        }
+      });
+    });
   }
 
   /**
