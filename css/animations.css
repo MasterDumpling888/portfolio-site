@@ -435,6 +435,43 @@
   animation: gradientShift 3s ease infinite;
 }
 
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg, 0deg); }
+  48% { transform: skew(0deg, 0deg); filter: blur(0); }
+  50% { transform: skew(-20deg, 0deg); filter: blur(4px); }
+  52% { transform: skew(20deg, 0deg); }
+  54% { transform: skew(0deg, 0deg); filter: blur(0); }
+  100% { transform: skew(0deg, 0deg); }
+}
+
+@keyframes glitch-line {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* ===== Rift Animations ===== */
+@keyframes rift-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  75% { opacity: 0.9; }
+}
+
+/* ===== Tertiary Utilities ===== */
+.theme-art {
+  --color-primary: var(--color-tertiary);
+  --color-primary-glow: var(--color-tertiary-glow);
+  --color-primary-dim: #b39600;
+}
+
 /* ===== Reduce Motion Support ===== */
 @media (prefers-reduced-motion: reduce) {
 

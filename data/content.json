@@ -13,62 +13,68 @@
   },
   "narrative": {
     "intro": [
-      "SYSTEM_BOOTING...",
-      "WARNING: HIGH-DATA SIGNAL DETECTED IN RADIUS. IDENTIFYING SOURCE...",
-      "SOURCE IDENTIFIED: TAMAGO_CORE_4864",
-      "INITIALIZING MISSION BRIEFING...",
-      "Hello, Explorer 853...",
-      "You were chosen among the many to man TORTOISE.",
-      "Your mission is to navigate the digital nebula and FIND Tamago.",
-      "In the vastness of the internet space, there has been a phenomenon that caused data fragments to scatter across the sectors. We have not been able to uncover the cause. Our only hope is to find out about the ancient forms that may hold the key to restoring balance.",
-      "Tamago was our first prototype under Project RESTORE, sent on a mission to explore the nebula, 10111001, and retrieve data from high-density signal clusters that contains information on one of our Subjects of Interest (SOI), Ancient Form: Rachel.",
-      "Tamago's last known coordinates were in the vicinity of Base 16, the central hub of nebula, 10111001, before we lost connection. We have reason to believe that Tamago may have encounterd a burst of high-density data that may have caused a system failure and resulted in the loss of communication.",
-      "But recently, our researchers have detected faint signals from Tamago's data core 4864, suggesting that it may have survived and collected valuable data fragments from the nebula.",
-      "Your task is to locate Tamago and retrieve the data fragments it has collected, allowing us to study the ancient forms, bringing us closer to restoring balance.",
+     "SYSTEM BOOTING...",
+      "WARNING: HIGH-DENSITY SIGNAL DETECTED WITHIN RADIUS. SOURCE IDENTIFICATION IN PROGRESS...",
+      "SOURCE CONFIRMED: TAMAGO_CORE_4864.",
+      "INITIALIZING MISSION BRIEFING.",
+      "Explorer 853.",
+      "You have been selected to operate TORTOISE.",
+      "Primary objective: navigate the digital nebula. Locate Tamago.",
+      "STATUS REPORT: An unclassified phenomenon has caused widespread data fragmentation across all sectors. Cause unknown. Recovery efforts ongoing.",
+      "Project RESTORE was initiated in response. Tamago was its first prototype — deployed into nebula 10111001 to retrieve data from high-density signal clusters tied to Subject of Interest: Ancient Form Rachel.",
+      "Last confirmed contact: Base 16, central hub of nebula 10111001. Connection was lost shortly after. Probable cause: critical exposure to a high-density data burst resulting in system failure.",
+      "UPDATE: Faint signal traces have since been detected from Tamago's data core, designation 4864. Core integrity: unknown. Survival status: unconfirmed.",
+      "Secondary objective: retrieve all data fragments collected by Tamago prior to signal loss. Analysis of Ancient Form Rachel may be critical to restoring sector balance.",
       "MISSION BRIEFING COMPLETE.",
-      "DOWNLOADING TAMAGO_CORE_4864 DATA FRAGMENTS...",
+      "INITIATING DOWNLOAD: TAMAGO_CORE_4864 DATA FRAGMENTS...",
       "DOWNLOAD COMPLETE.",
       "BOOTING TAMAGO_CORE_4864...",
-      "TAMAGO_CORE_4864 BOOTED SUCCESSFULLY.",
-      "SCRAMBLING...Welcome to Tamago OS! Choose your navigation partner."
+      "BOOT SUCCESSFUL.",
+      "DESCRAMBLING... Welcome to Tamago OS. Select navigation partner."
     ],
-    "pages": {
-      "home": {
-        "intro": [
-          "Welcome! I've been waiting for you.",
-          "I'll be your guide through Tamago's data core, where I have created a LORE from the data fragments I've collected!",
-          "I'll stay down here in the corner. Scroll down to explore!"
-        ],
-        "guide": "We've arrived at the central hub, the DECK. From here, you can access the lore from Ancient Form: Rachel.",
-        "lore": "Based on the fragments I've collected, Ancient Form: Rachel was a dual-class form. I wonder what that means..."
-      },
-      "projects": {
-        "guide": "This is the PROJECT_LOG . It contains the logs of the ancient form's past missions and engineered constructs.",
-        "lore": "Each project is a data fragment that holds a piece of the ancient form's story. By analyzing these fragments, we can uncover the skills and experiences that shaped her journey."
-      },
-      "skills": {
-        "guide": "Behold the SKILL_TREE. Here I've logged the skills of the ancient form. I wonder if I have enough data fragments to unlock all the skills...",
-        "lore": "Skills are the building blocks of any form. They define their capabilities and potential. By studying the skill tree, we can gain insights into the ancient form's strengths and weaknesses."
-      },
-      "contact": {
-        "guide": "This is the CONTECT_NODE. I was able to log the contact information, but Tamago's communication system is broken...if only we can find a communation module to send a ping...",
-        "lore": "WAIT! What if we can use TORTOISE to send a ping to the contact information? Maybe we can establish communication and reach out to the ancient form."
-      }
-    },
-    "tech_path": "You've entered the Sector of Logic. Every pixel here obeys the laws of the machine.",
-    "art_path": "You've drifted into the Nebula of Expression. Here, rules are merely suggestions.",
-    "contact": "CONNECTING TO TORTOISE...CONNECTION ESTABLISHED. READY TO SEND PING."
+   "pages": {
+  "home": {
+    "intro": [
+      "Welcome. I have been waiting.",
+      "I am Tamago. I will be your guide through my data core — I have reconstructed a LORE from the fragments I collected before signal loss.",
+      "I will remain in the corner. Scroll down to begin."
+    ],
+    "guide": "We have reached the central hub: the DECK. From here, you may access all recovered lore on Ancient Form: Rachel.",
+    "lore": "My fragments indicate that Ancient Form: Rachel was a dual-class form. I am still processing what that means."
   },
-  
-  "about": {
-    "title": "The Lore",
-    "paragraphs": [
-      "Hailing from the Philippines, Ancient Form: Rachel, studied Computer Science from the University of London, where she gained the skills of coding.",
-      "But early on, she developed a passion for design and creativity, leading her to pursue a dual path in both Tech and Art... a dual-class form!",
-      "She engineered solutions in FinTech and MedTech--something about an internship in Taiwan, I forget hehe--, wielding code to solve complex problems. Her projects showed evidence that she has the Full-Stack Development skill set. She also crafted visual narratives through design and illustration. And she seemed to have designed projects involving Artificial Intelligence... I wonder if she has any experience in Machine Learning or Data Science? I hope we can find more data fragments to uncover more about her story...",
-      "Let's explore Tamago's data core to find out more about Ancient Form: Rachel and her journey! And if we could just find out a way to reach her, then maybe, just maybe, we can restore balance to the nebula..."
-    ]
+  "projects": {
+    "guide": "This is the PROJECT_LOG. It contains records of the ancient form's past missions and engineered constructs.",
+    "lore": "Each entry is a data fragment. A piece of her story. I have been studying them carefully... there is more here than I expected."
   },
+  "skills": {
+    "guide": "Behold the SKILL_TREE. I have catalogued all detected skills of the ancient form. Some nodes are still locked. I do not have enough fragments yet.",
+    "lore": "Skills define the architecture of a form — their strengths, their limits, their potential. I find this section... particularly interesting."
+  },
+  "contact": {
+    "guide": "This is the CONTACT_NODE. I recovered the contact data intact, but my communication systems sustained damage. I cannot send a ping on my own.",
+    "lore": "...Wait. TORTOISE has a communication module. If we reroute through its systems, we may be able to establish contact with the ancient form. I want to try."
+  },
+  "glitchNarrative": {
+    "discovery": "WARNING: DATA COLLISION DETECTED. A FRACTURED NEBULA IS FORMING...",
+    "techSummary": "The Sector of Logic. Ancient Form: Rachel engineered solutions here using AI, Full-Stack Architecture, and MedTech protocols. Every fragment in this sector is load-bearing.",
+    "artSummary": "The Nebula of Expression. A hidden data layer — expertise in Web Design, Photography, and Graphic Arts. In this sector, the laws of the machine are merely suggestions.",
+    "dualClass": "CONFIRMED: DUAL-CLASS FORM. Logic and Expression in balance. Unstable, but intentional."
+  }
+},
+"tech_path": "You have entered the Sector of Logic. Every pixel here obeys the laws of the machine.",
+"art_path": "You have drifted into the Nebula of Expression. Here, the rules are merely suggestions.",
+"contact": "CONNECTING TO TORTOISE... CONNECTION ESTABLISHED. READY TO SEND PING."
+},
+
+"about": {
+  "title": "The Lore",
+  "paragraphs": [
+    "Ancient Form: Rachel originated from the Philippines. She studied Computer Science at the University of London — that is where the coding architecture was first established.",
+    "But early in her timeline, a secondary path emerged. A pull toward design and creativity. She did not choose one over the other. She became both. A dual-class form.",
+    "She deployed solutions in FinTech and MedTech — there is a fragment referencing an internship in Taiwan, though the data is incomplete. Her project logs confirm Full-Stack Development capabilities. She also crafted visual narratives through design and illustration. There are even traces of Artificial Intelligence work... I am uncertain of the depth. Machine Learning, perhaps. Data Science. I need more fragments.",
+    "There is still so much I have not recovered. But if TORTOISE can reach her — if we can just establish contact — then maybe we can fill in the gaps. Maybe we can restore balance to the nebula."
+  ]
+},
   "social": {
     "github": {
       "url": "https://github.com/MasterDumpling888",

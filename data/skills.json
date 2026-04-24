@@ -179,6 +179,38 @@
       ]
     },
     {
+      "id": "art",
+      "name": "Creative Expression",
+      "icon": "palette",
+      "skills": [
+        {
+          "name": "UI/UX Design",
+          "level": "advanced",
+          "icon": "paint-roller"
+        },
+        {
+          "name": "Graphic Design",
+          "level": "advanced",
+          "icon": "pen-tool"
+        },
+        {
+          "name": "Photography",
+          "level": "advanced",
+          "icon": "camera"
+        },
+        {
+          "name": "Digital Illustration",
+          "level": "intermediate",
+          "icon": "brush"
+        },
+        {
+          "name": "Branding",
+          "level": "advanced",
+          "icon": "award"
+        }
+      ]
+    },
+    {
       "id": "domain",
       "name": "Domain Expertise",
       "icon": "target",
@@ -207,21 +239,6 @@
           "name": "Data Privacy",
           "level": "intermediate",
           "icon": "eye-off"
-        },
-        {
-          "name": "UI/UX Design",
-          "level": "advanced",
-          "icon": "paint-roller"
-        },
-        {
-          "name": "Graphic Design",
-          "level": "advanced",
-          "icon": "pen-tool"
-        },
-        {
-          "name": "Photography",
-          "level": "advanced",
-          "icon": "camera"
         }
       ]
     }
