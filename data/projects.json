@@ -65,10 +65,10 @@
       "title": "EchoPhoto Branding & UI",
       "type": "art",
       "category": "web-design",
-      "categories": ["web-design", "branding"],
+      "categories": ["web-design", "branding", "ui/ux", "webdev"],
       "description": "A comprehensive branding and web design project for a premium photography studio.",
-      "longDescription": "Designed a minimalist yet impactful brand identity for EchoPhoto. The project involved creating a cohesive visual language, including logo design, typography, and a fully responsive website prototype that focuses on high-quality visual presentation and user experience.",
-      "technologies": ["Figma", "Adobe Illustrator", "UI/UX", "Branding"],
+      "longDescription": "Designed a minimalist yet impactful brand identity for EchoPhoto. The project involved redesigning and developing EchoPhoto's e-commerce website on Shopify, creating a cohesive visual identity across all platforms, and enhancing the user experience to reflect the brand's premium positioning in the photography industry.",
+      "technologies": ["Figma", "Shopify", "UI/UX", "Branding", "HTML", "CSS", "Liquid"],
       "image": "assets/images/projects/echophoto/echophoto-homepage.png",
       "images": [
         "assets/images/projects/echophoto/echophoto-homepage.png",
@@ -80,11 +80,11 @@
       ],
       "links": {
         "github": "",
-        "demo": "https://www.figma.com/proto/your-figma-link",
+        "demo": "https://echophotoph.com/",
         "case_study": ""
       },
       "featured": true,
-      "date": "2025-01-15",
+      "date": "2026-04-15",
       "status": "completed"
     },
     {
@@ -92,10 +92,10 @@
       "title": "Order of Otakus: Community Hub",
       "type": "art",
       "category": "web-design",
-      "categories": ["web-design", "community"],
-      "description": "Web design for a vibrant anime and manga community hub.",
-      "longDescription": "A UI/UX exploration for a community-driven platform. The design focuses on dark-mode aesthetics, bold typography, and intuitive navigation for browsing content, community forums, and user profiles.",
-      "technologies": ["Figma", "UI/UX", "Web Design"],
+      "categories": ["web-design", "branding", "web-dev", "ui/ux" ],
+      "description": "Designed and developed a community platform for anime and manga enthusiasts.",
+      "longDescription": "A vibrant online community hub for anime and manga fans, featuring a dynamic design that captures the essence of otaku culture. The project included branding, UI/UX design, and a functional prototype showcasing user profiles, blog posts of admin memembers.",
+      "technologies": ["Figma", "UI/UX", "Web Design", "Vanilla JS", "HTML", "Vanilla CSS"],
       "image": "assets/images/projects/order-of-otakus/order-of-otakus-homepage.png",
       "images": [
         "assets/images/projects/order-of-otakus/order-of-otakus-homepage.png",
@@ -110,7 +110,7 @@
         "case_study": ""
       },
       "featured": true,
-      "date": "2024-11-20",
+      "date": "2022-10-31",
       "status": "completed"
     },
     {
@@ -118,7 +118,7 @@
       "title": "GDSC UoL: Portfolio Showcase",
       "type": "art",
       "category": "graphics",
-      "categories": ["graphics", "social-media"],
+      "categories": ["graphics", "social-media", "branding"],
       "description": "Graphic design and branding materials for GDSC UoL events.",
       "longDescription": "A collection of social media graphics, posters, and presentation slides designed for the Google Developer Student Club at the University of London. The designs follow Google's brand guidelines while adding a unique community flair.",
       "technologies": ["Canva", "Graphic Design", "Branding"],
@@ -142,7 +142,7 @@
         "case_study": ""
       },
       "featured": false,
-      "date": "2024-10-05",
+      "date": "2023-10-05",
       "status": "completed"
     },
     {
@@ -152,8 +152,8 @@
       "category": "graphics",
       "categories": ["graphics", "marketing"],
       "description": "Marketing and social media content for MGC initiatives.",
-      "longDescription": "Developed a series of marketing materials, including Instagram posts, LinkedIn banners, and event flyers. The goal was to maintain a consistent brand voice across all digital platforms while increasing user engagement.",
-      "technologies": ["Adobe Express", "Canva", "Marketing Design"],
+      "longDescription": "Developed a series of marketing materials, including Instagram posts, banners, and event presentations. The designs were created to promote MGC's events and initiatives, focusing on vibrant visuals and clear messaging to engage the target audience effectively.",
+      "technologies": ["Figma", "Canva", "Marketing Design"],
       "image": "assets/images/projects/mgc/Portfolio - Danica Lim.jpg",
       "images": [
         "assets/images/projects/mgc/Portfolio - Danica Lim.jpg",
@@ -170,8 +170,8 @@
         "case_study": ""
       },
       "featured": false,
-      "date": "2024-08-12",
-      "status": "completed"
+      "date": "2019-08-12",
+      "status": "on-going"
     },
     {
       "id": "project-art-5",
@@ -179,7 +179,7 @@
       "type": "art",
       "category": "photography",
       "categories": ["photography"],
-      "description": "A collection of urban photography focusing on architecture and light.",
+      "description": "A collection of street and urban photography exploring the beauty of everyday cityscapes.",
       "longDescription": "Explored the intersection of geometry and urban life. This series captures the often-overlooked beauty in industrial structures, street scenes, and the play of shadows in modern cityscapes.",
       "technologies": ["Photography", "Adobe Lightroom"],
       "image": "assets/images/projects/photography/Portfolio - Danica Lim.jpg",
